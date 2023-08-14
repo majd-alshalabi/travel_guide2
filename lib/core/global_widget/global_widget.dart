@@ -13,9 +13,9 @@ class CustomTextField extends StatelessWidget {
       required this.color,
       required this.controllerName,
       required this.label,
-      required this.valedate});
+      this.valedate});
   final Color color;
-  final String? Function(String?) valedate;
+  final String? Function(String?)? valedate;
   final String label;
   final Icon prefix;
   final TextEditingController controllerName;
@@ -66,23 +66,25 @@ class CustomBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {
-          onPress();
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: height,
-          decoration: BoxDecoration(
-            border: Border.all(color: borderColor, width: 3),
-            color: buttonColor,
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-          child: Center(
-              child: Text(
+      onPressed: () {
+        onPress();
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: height,
+        decoration: BoxDecoration(
+          border: Border.all(color: borderColor, width: 3),
+          color: buttonColor,
+          borderRadius: BorderRadius.circular(50.0),
+        ),
+        child: Center(
+          child: Text(
             text,
             style: textStyleForButton,
-          )),
-        ));
+          ),
+        ),
+      ),
+    );
   }
 }
 
