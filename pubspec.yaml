@@ -43,6 +43,7 @@ flutter:
 
   assets:
     - lang/
+    - asset/images/
   fonts:
     - family: DMSans-Bold
       fonts:
