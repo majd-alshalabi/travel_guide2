@@ -1,5 +1,5 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
@@ -9,21 +9,18 @@ import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/them
 import 'package:travel_guide/injection.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  HomePage({Key? key}) : super(key: key);
   final TextEditingController searchController = TextEditingController();
-
-  int _page = 0;
-
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.only(bottom: 8.h),
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -96,25 +93,6 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: CurvedNavigationBar(
-          key: _bottomNavigationKey,
-          index: _page,
-          height: 60.0,
-          items: <Widget>[
-            Icon(Icons.home, size: 32),
-            Icon(Icons.search_sharp, size: 30),
-            Icon(Icons.location_searching, size: 30),
-            Icon(Icons.favorite_border, size: 30),
-            Icon(Icons.perm_identity, size: 30),
-          ],
-          color: theme.white,
-          buttonBackgroundColor: theme.white,
-          backgroundColor: Colors.transparent,
-          animationCurve: Curves.easeInOutCirc,
-          animationDuration: Duration(milliseconds: 500),
-          onTap: (index) {},
-          letIndexChange: (index) => true,
         ),
       ),
     );

@@ -4,7 +4,7 @@ import 'package:travel_guide/core/constants/enums.dart';
 import 'package:travel_guide/feature/account/presentation/login_page/presentation/login_page.dart';
 import 'package:travel_guide/feature/account/presentation/onboarding_page/presentation/onBoarding_page.dart';
 import 'package:travel_guide/feature/account/presentation/splash_screen/bloc/splash_screen_bloc/splash_screen_cubit.dart';
-import 'package:travel_guide/feature/home_page/presentation/screen/home_page.dart';
+import 'package:travel_guide/feature/home_page/presentation/screen/toggle_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HomePage(),
+                    builder: (context) => TogglePage(),
                   ),
                   (route) => false,
                 );

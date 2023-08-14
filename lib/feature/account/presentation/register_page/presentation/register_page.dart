@@ -7,7 +7,7 @@ import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/account/presentation/register_page/presentation/blocs/register_cubit/register_cubit.dart';
-import 'package:travel_guide/feature/home_page/presentation/screen/home_page.dart';
+import 'package:travel_guide/feature/home_page/presentation/screen/toggle_page.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -51,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HomePage(),
+                    builder: (context) => TogglePage(),
                   ),
                   (route) => false,
                 );

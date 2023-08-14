@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/presentation/blocs/home_bloc.dart';
+import 'package:travel_guide/feature/home_page/presentation/screen/map_page/map_screen.dart';
 import 'package:travel_guide/feature/home_page/presentation/widgets/home_widgets.dart';
-import 'package:travel_guide/feature/map/presentation/map_screen.dart';
 
 class TestWidget extends StatelessWidget {
   const TestWidget({super.key});
