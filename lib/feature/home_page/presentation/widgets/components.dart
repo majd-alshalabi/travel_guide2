@@ -51,8 +51,8 @@ class CustomText extends StatelessWidget {
   }
 }
 
-class searchWithNotifcations extends StatelessWidget {
-  const searchWithNotifcations({
+class searchWithNotifications extends StatelessWidget {
+  const searchWithNotifications({
     super.key,
     required this.width,
     required this.searchController,
