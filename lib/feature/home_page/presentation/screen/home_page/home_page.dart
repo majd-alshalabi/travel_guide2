@@ -18,14 +18,17 @@ class HomePage extends StatelessWidget {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       body: Padding(
-        padding: EdgeInsets.only(bottom: 8.h),
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom != 0 ? 0 : 8.h),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Stack(
+                alignment: Alignment.bottomCenter,
                 children: [
                   Container(
                     width: double.infinity,
@@ -39,10 +42,12 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  searchWithNotifcations(
-                    width: width,
-                    searchController: searchController,
-                    theme: theme,
+                  Container(
+                    child: searchWithNotifications(
+                      width: width,
+                      searchController: searchController,
+                      theme: theme,
+                    ),
                   ),
                 ],
               ),
