@@ -113,28 +113,35 @@ class Corners {
   static const double xll = 40;
   static const double xxl = 60;
 }
-class StylesText{
 
-  static TextStyle textStyleForButton =const TextStyle(
-    fontWeight:  FontWeight.w700,
-    fontSize: 16.0,
-    fontFamily: "DMSans-Regular",
-    color:  Color(0xffFFFFFF)
-
-  );
-  static TextStyle textStyleForTitle =const TextStyle(
+class StylesText {
+  static TextStyle textStyleForButton = const TextStyle(
+      fontWeight: FontWeight.w700,
+      fontSize: 16.0,
+      fontFamily: "DMSans-Regular",
+      color: Color(0xffFFFFFF));
+  static TextStyle textStyleForTitle = const TextStyle(
     fontWeight: FontWeight.w700,
-    fontSize:30.0,
+    fontSize: 30.0,
     fontFamily: "DMSans-Regular",
-
-    // fontFamily: "DMSans-Regular",
   );
-  static TextStyle textStyleForDescription =TextStyle();
-  static TextStyle defaultTextStyle =const TextStyle(
+  static TextStyle textStyleForDescription = TextStyle();
+  static TextStyle textStyleForTextTilte = TextStyle(
+    color: Colors.black87,
+    fontWeight: FontWeight.bold,
+    fontFamily: "DMSans-Regular",
+    fontSize: 22.0,
+  );
+  static TextStyle defaultTextStyle = const TextStyle(
     color: Colors.grey,
     fontFamily: "DMSans-Regular",
     fontWeight: FontWeight.w400,
-    fontSize:16.0,
-
+    fontSize: 16.0,
+  );
+  static TextStyle textStyleForTextFormTilte = const TextStyle(
+    color: Colors.black,
+    fontFamily: "DMSans-Regular",
+    fontWeight: FontWeight.w600,
+    fontSize: 18.0,
   );
 }
