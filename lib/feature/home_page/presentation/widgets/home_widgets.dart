@@ -30,7 +30,7 @@ class HomeLoadingWidget extends StatelessWidget {
               lineType: ContentLineType.twoLines,
             ),
             SizedBox(height: 16.0),
-            TitlePlaceholder(width: 200.0),
+            TitlePlaceholder(width: 201.0),
             SizedBox(height: 16.0),
             ContentPlaceholder(
               lineType: ContentLineType.twoLines,

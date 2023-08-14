@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
   final TextEditingController searchController = TextEditingController();
 
   int _page = 0;
+
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
@@ -27,9 +28,6 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                height: height * 0.03,
-              ),
               Stack(
                 children: [
                   Container(
