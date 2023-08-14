@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_constant.dart';
-import 'package:travel_guide/feature/account/presentation/splash_screen/screen/splash_screen.dart';
+import 'package:travel_guide/feature/home_page/presentation/screen/home_page.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 
 class SettAlKolMaterialApp extends StatelessWidget {
@@ -50,7 +50,7 @@ class SettAlKolMaterialApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   title: AppConstant.appName,
                   theme: state.theme,
-                  home: const SplashScreen(),
+                  home: HomePage(),
                 );
               }
               return const Offstage();
