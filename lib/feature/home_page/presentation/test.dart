@@ -5,8 +5,8 @@ import 'package:travel_guide/feature/home_page/presentation/blocs/home_bloc.dart
 import 'package:travel_guide/feature/home_page/presentation/widgets/home_widgets.dart';
 import 'package:travel_guide/feature/map/presentation/map_screen.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class TestWidget extends StatelessWidget {
+  const TestWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
