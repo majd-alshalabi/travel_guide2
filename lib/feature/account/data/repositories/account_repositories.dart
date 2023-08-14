@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:travel_guide/feature/account/data/data_sources/local/account_local_data_source.dart';
 import 'package:travel_guide/feature/account/data/data_sources/remote/account_remote_data_source.dart';
 import 'package:travel_guide/feature/account/data/models/local/my_identity_model.dart';
+import 'package:travel_guide/feature/account/data/models/remote/change_password_model.dart';
 import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
 import 'package:travel_guide/feature/account/data/models/remote/register_model.dart';
 import 'package:travel_guide/feature/account/domain/repositories/iaccount_repository.dart';
@@ -32,6 +33,21 @@ class AccountRepositories implements IAccountRepository {
   ) async {
     try {
       final LoginResponseModel res = await accountRemoteDataSource.login(
+        model,
+      );
+      return Right(res);
+    } catch (e) {
+      return const Left("Error while logging in");
+    }
+  }
+
+  @override
+  Future<Either<String, ChangePasswordResponseModel>> changePassword(
+    ChangePasswordParamsModel model,
+  ) async {
+    try {
+      final ChangePasswordResponseModel res =
+          await accountRemoteDataSource.changePassword(
         model,
       );
       return Right(res);
