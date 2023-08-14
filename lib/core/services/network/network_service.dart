@@ -32,7 +32,7 @@ class NetworkServices implements IRemoteDataSource {
 
   _returnResponse(Response response) async {
     var responseJson = json.decode(response.data);
-
+    print(responseJson);
     switch (response.statusCode) {
       case 200:
       case 201:
