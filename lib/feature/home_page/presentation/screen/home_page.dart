@@ -104,7 +104,7 @@ class HomePage extends StatelessWidget {
           index: _page,
           height: 60.0,
           items: <Widget>[
-            Icon(Icons.home, size: 30),
+            Icon(Icons.home, size: 32),
             Icon(Icons.search_sharp, size: 30),
             Icon(Icons.location_searching, size: 30),
             Icon(Icons.favorite_border, size: 30),
