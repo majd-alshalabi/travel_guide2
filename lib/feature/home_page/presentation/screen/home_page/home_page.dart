@@ -12,8 +12,6 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
   final TextEditingController searchController = TextEditingController();
 
-  int _page = 0;
-
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
@@ -42,7 +40,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  searchWithNotifcations(
+                  searchWithNotifications(
                     width: width,
                     searchController: searchController,
                     theme: theme,
@@ -96,25 +94,6 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        bottomNavigationBar: CurvedNavigationBar(
-          key: _bottomNavigationKey,
-          index: _page,
-          height: 60.0,
-          items: <Widget>[
-            Icon(Icons.home, size: 32),
-            Icon(Icons.search_sharp, size: 30),
-            Icon(Icons.location_searching, size: 30),
-            Icon(Icons.favorite_border, size: 30),
-            Icon(Icons.perm_identity, size: 30),
-          ],
-          color: theme.white,
-          buttonBackgroundColor: theme.white,
-          backgroundColor: Colors.transparent,
-          animationCurve: Curves.easeInOutCirc,
-          animationDuration: Duration(milliseconds: 500),
-          onTap: (index) {},
-          letIndexChange: (index) => true,
         ),
       ),
     );
