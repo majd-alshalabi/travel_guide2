@@ -11,7 +11,6 @@ import 'package:travel_guide/injection.dart';
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final TextEditingController searchController = TextEditingController();
-
   int _page = 0;
 
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
