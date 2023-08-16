@@ -5,6 +5,7 @@ import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/favorite_page/presentation/screen/favorite_page.dart';
 import 'package:travel_guide/feature/home_page/presentation/screen/home_page/home_page.dart';
 import 'package:travel_guide/feature/home_page/presentation/screen/map_page/map_screen.dart';
+import 'package:travel_guide/feature/home_page/presentation/widgets/components.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
 
@@ -31,20 +32,17 @@ class _TogglePageState extends State<TogglePage> {
 
   final List<Widget> bottomBarPages = [
     HomePage(),
-    Scaffold(),
     MapScreen(),
-    FavoritePage(),
-    Scaffold(),
   ];
 
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
-      drawer: Drawer(),
+      drawer: DrawerHome(),
       appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       extendBodyBehindAppBar: true,
-      backgroundColor: Colors.white,
+      backgroundColor: theme.darkThemeForScafold,
       extendBody: true,
       resizeToAvoidBottomInset: false,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -62,13 +60,13 @@ class _TogglePageState extends State<TogglePage> {
       bottomNavigationBar: AnimatedNotchBottomBar(
         /// Provide NotchBottomBarController
         notchBottomBarController: _controller,
-        color: theme.greyWeak,
-        notchColor: theme.greyWeak,
+        color: theme.reserveDarkScaffold,
+        notchColor: theme.reserveDarkScaffold,
         showShadow: false,
         removeMargins: false,
-        itemLabelStyle: StylesText.defaultTextStyle
-            .copyWith(fontSize: 10, color: Colors.white),
-        bottomBarWidth: 400,
+        itemLabelStyle: StylesText.newDefaultTextStyle
+            .copyWith(fontSize: 14, color: theme.darkThemeForScafold),
+        bottomBarWidth: double.infinity,
         durationInMilliSeconds: 200,
         bottomBarItems: [
           BottomBarItem(
@@ -84,17 +82,6 @@ class _TogglePageState extends State<TogglePage> {
           ),
           BottomBarItem(
             inActiveItem: Icon(
-              Icons.search_rounded,
-              color: Colors.white,
-            ),
-            activeItem: Icon(
-              Icons.search_rounded,
-              color: theme.white,
-            ),
-            itemLabel: 'text',
-          ),
-          BottomBarItem(
-            inActiveItem: Icon(
               Icons.location_searching_outlined,
               color: Colors.white,
             ),
@@ -104,28 +91,7 @@ class _TogglePageState extends State<TogglePage> {
             ),
             itemLabel: 'text',
           ),
-          BottomBarItem(
-            inActiveItem: Icon(
-              Icons.favorite_border,
-              color: Colors.white,
-            ),
-            activeItem: Icon(
-              Icons.favorite_rounded,
-              color: theme.white,
-            ),
-            itemLabel: 'text',
-          ),
-          BottomBarItem(
-            inActiveItem: Icon(
-              Icons.perm_identity_outlined,
-              color: Colors.white,
-            ),
-            activeItem: Icon(
-              Icons.perm_identity,
-              color: theme.white,
-            ),
-            itemLabel: 'text',
-          ),
+
         ],
         onTap: (index) {
           _pageController.jumpToPage(index);

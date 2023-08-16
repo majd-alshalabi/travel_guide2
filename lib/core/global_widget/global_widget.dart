@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:travel_guide/core/constants/assets.dart';
+import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
@@ -249,5 +251,174 @@ class SettAlKolUserAvatar extends StatelessWidget {
         ),
       );
     }
+  }
+}
+
+class TravelGuideUserAvatar extends StatelessWidget {
+  const TravelGuideUserAvatar({
+    Key? key,
+    required this.imageUrl,
+    required this.width,
+  }) : super(key: key);
+  final String imageUrl;
+  final double width;
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: width / 2,
+      backgroundColor: Colors.grey,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: CachedNetworkImage(
+          width: width,
+          height: width,
+          fit: BoxFit.fill,
+          progressIndicatorBuilder: (context, url, progress) => const Image(
+            image: AssetImage(Assets.userAvatarAsset),
+            fit: BoxFit.fill,
+          ),
+          imageUrl: imageUrl,
+          errorWidget: (context, url, error) => const Image(
+            image: AssetImage(Assets.userAvatarAsset),
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const CustomAppBar(
+      {super.key, required this.title, this.showBackButton = true});
+
+  final String title;
+  final bool showBackButton;
+
+  @override
+  Widget build(BuildContext context) {
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
+    return AppBar(
+      backgroundColor: theme.darkAndWhiteForAppBar,
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+          fontSize: 18,
+          color: theme.reserveDarkScaffold,
+        ),
+      ),
+      systemOverlayStyle:  SystemUiOverlayStyle(
+        statusBarColor: theme.darkAndWhiteForAppBar,
+      ),
+      leading: showBackButton && Navigator.of(context).canPop()
+          ? IconButton(
+        color: theme.reserveDarkScaffold,
+        iconSize: 20,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: const Icon(Icons.arrow_back_ios_new),
+      )
+          : null,
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(50);
+}
+
+class AppButton extends StatelessWidget {
+  const AppButton({
+    super.key,
+    required this.text,
+    this.fontSize,
+    this.widthFactor = 0.8,
+    this.heightFactor = 0.08,
+    this.borderRadius = 8,
+    this.onPressed,
+    this.style,
+    this.backgroundColor,
+    this.textColor,
+    this.fontWeight,
+  });
+
+  final FontWeight? fontWeight;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final ButtonStyle? style;
+  final String text;
+  final double widthFactor;
+  final double heightFactor;
+  final double borderRadius;
+  final double? fontSize;
+  final void Function()? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width*widthFactor,
+      height: MediaQuery.of(context).size.height*heightFactor,
+      decoration: BoxDecoration(
+        color: backgroundColor ?? Colors.orange,
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+      child: TextButton(
+        style: style,
+        onPressed: onPressed,
+        child: Center(
+          child: Text(
+            text,
+            style:StylesText.textStyleForButton
+          ),
+        ),
+      ),
+    );
+  }
+}
+class LogOutCustomBottom extends StatelessWidget {
+  final double height;
+  final double? width;
+  final String text;
+  final Function onPress;
+  final Color borderColor;
+  final TextStyle textStyleForButton;
+  const LogOutCustomBottom({
+    super.key,
+    required this.text,
+    required this.height,
+    this.width,
+    required this.onPress,
+    required this.borderColor,
+    required this.textStyleForButton,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(Colors.transparent)),
+        onPressed: () {
+          onPress();
+        },
+        child: Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            border: Border.all(color: borderColor, width: 0),
+            gradient: const LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.red,
+                Colors.redAccent,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Center(
+              child: Text(
+                text,
+                style: textStyleForButton,
+              )),
+        ));
   }
 }

@@ -5,7 +5,30 @@
   "See all": "عرض الكل",
   "Top search": "الأكثر بحثاً",
   "Top rating" : "الأعلى تقييماً",
-  "Nearby places": "الأماكن المجاورة"
+  "Nearby places": "الأماكن المجاورة",
+  "settings": "إعدادات",
+  "guides":"المرشدين",
+  "delete_Account": "حذف حسابي",
+  "delete":"حذف",
+  "Languages_Setting": "اعدادات اللغة",
+  "Languages":"اللغات",
+  "Arabic":"العربية",
+  "Color_Mode_App_Setting": "إعداد تطبيق وضع الألوان",
+  "White_dark_mode": "وضع الأبيض والظلام",
+  "select_mode":"اختر الوضع",
+  "My_Setting":"اعداداتي",
+  "Change_your_color_Mode_setting":"تغيير إعدادات وضع اللون الخاص بك",
+  "Change_your_languages_setting":"تغيير اعدادات اللغة",
+  "delete_your_account": "احذف حسابك",
+  "favorite":"المفضلة"
+
+
+
+
+
+
+
+
 
 
 }

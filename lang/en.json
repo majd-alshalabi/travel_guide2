@@ -5,7 +5,22 @@
   "See all": "See all",
   "Top search": "Top search",
   "Top rating" : "Top rating",
-  "Nearby places": "Nearby places"
+  "settings": "Settings",
+  "guides":"Guides",
+  "delete_Account": "Delete Account",
+  "delete":"delete",
+  "Languages_Setting": "Languages Setting",
+  "Languages":"Languages",
+  "Arabic":"Arabic",
+  "Color_Mode_App_Setting":"Color Mode App Setting",
+  "White_dark_mode": "White & dark mode",
+  "select_mode":"select_mode",
+  "My_Setting":"My Setting",
+  "Change_your_color_Mode_setting":"Change your color Mode Setting",
+  "Change_your_languages_setting":"Change your Languages Setting",
+  "delete_your_account": "Delete your account",
+  "favorite":"Favorite"
 
-  
+
+
 }

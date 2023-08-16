@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: height * 0.35,
+                    height: height * 0.3,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                 titleName:
                     AppLocalizations.of(context)?.translate("Places") ?? "",
                 onTap: () {},
-                textStyleForTextTilte: StylesText.textStyleForTextTilte,
+                textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
                 defaultTextStyle: StylesText.defaultTextStyle,
               ),
               ListOfImages(
@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                 titleName:
                     AppLocalizations.of(context)?.translate("Top search") ?? "",
                 onTap: () {},
-                textStyleForTextTilte: StylesText.textStyleForTextTilte,
+                textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
                 defaultTextStyle: StylesText.defaultTextStyle,
               ),
               ListOfImages(
@@ -77,7 +77,7 @@ class HomePage extends StatelessWidget {
                 titleName:
                     AppLocalizations.of(context)?.translate("Top rating") ?? "",
                 onTap: () {},
-                textStyleForTextTilte: StylesText.textStyleForTextTilte,
+                textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
                 defaultTextStyle: StylesText.defaultTextStyle,
               ),
               ListOfImages(
@@ -89,7 +89,7 @@ class HomePage extends StatelessWidget {
                     AppLocalizations.of(context)?.translate("Nearby places") ??
                         "",
                 onTap: () {},
-                textStyleForTextTilte: StylesText.textStyleForTextTilte,
+                textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
                 defaultTextStyle: StylesText.defaultTextStyle,
               ),
               ListOfImages(
