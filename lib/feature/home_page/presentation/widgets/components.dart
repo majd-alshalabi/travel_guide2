@@ -1,9 +1,21 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:like_button/like_button.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
+import 'package:travel_guide/core/global_widget/global_widget.dart';
+import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/core/utils/themes.dart';
+import 'package:travel_guide/feature/favorite_page/presentation/screen/favorite_page.dart';
+import 'package:travel_guide/feature/guides/presentation/pages/guides_page.dart';
+import 'package:travel_guide/feature/home_page/presentation/blocs/home_bloc.dart';
+import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
+import 'package:travel_guide/feature/setting_page/presentation/screens/sitting_page.dart';
+import 'package:travel_guide/injection.dart';
 
 class CustomText extends StatelessWidget {
   final String titleName;
@@ -79,23 +91,24 @@ class searchWithNotifications extends StatelessWidget {
               decoration: InputDecoration(
                 hintText:
                     AppLocalizations.of(context)?.translate('To Where') ?? "",
-                hintStyle: StylesText.textStyleForTextFormTilte,
+                hintStyle: StylesText.textStyleForDescription
+                    .copyWith(color: theme.reserveDarkScaffold, fontSize: 18),
                 border: InputBorder.none,
                 prefixIcon: Icon(
                   Icons.search,
                   size: 35,
-                  color: theme.black,
+                  color: theme.reserveDarkScaffold,
                 ),
-                enabledBorder: const OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                     borderSide: BorderSide(
-                      color: Colors.black,
+                      color: theme.reserveDarkScaffold,
                       width: 2,
                     )),
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(50)),
                   borderSide: BorderSide(
-                    color: Colors.black,
+                    color: theme.reserveDarkScaffold,
                     width: 2,
                   ),
                 ),
@@ -103,7 +116,7 @@ class searchWithNotifications extends StatelessWidget {
             ),
           ),
           CircleAvatar(
-            backgroundColor: theme.black,
+            backgroundColor: theme.darkThemeForScafold,
             radius: 25,
             child: IconButton(
               padding: EdgeInsets.zero,
@@ -111,7 +124,7 @@ class searchWithNotifications extends StatelessWidget {
                 Icons.notifications,
                 size: 25,
               ),
-              color: theme.white,
+              color: theme.reserveDarkScaffold,
               onPressed: () {},
             ),
           ),
@@ -169,21 +182,24 @@ class ListOfImages extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          top: 1,
-                          right: 1,
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.favorite_outline_sharp,
-                            ),
-                          ),
-                        ),
+                            top: 10,
+                            right: 10,
+                            child: LikeButton(
+                              size: 20,
+                              circleColor: CircleColor(
+                                  start: Color(0xffffffff),
+                                  end: Color(0xffffffff)),
+                              bubblesColor: BubblesColor(
+                                dotPrimaryColor: Color(0xff33b5e5),
+                                dotSecondaryColor: Color(0xff0099cc),
+                              ),
+                            ))
                       ],
                     ),
                   ),
                   Text(
-                    AppLocalizations.of(context)?.translate("Place Name") ?? '',
-                    style: StylesText.textStyleForTextFormTilte,
+                    'Place Name',
+                    style: StylesText.defaultTextStyleForAnotherModel,
                   ),
                   Text(AppLocalizations.of(context)?.translate("Location") ??
                       ''),
@@ -192,6 +208,101 @@ class ListOfImages extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class DrawerHome extends StatelessWidget {
+  const DrawerHome({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
+    return Drawer(
+      width: 50.w,
+      backgroundColor: theme.greyWeak,
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          Container(
+            height: 13.h,
+            padding: EdgeInsets.only(top: 3.h),
+            color: theme.white,
+            child: Center(
+              child: ListTile(
+                leading: TravelGuideUserAvatar(
+                  width: 13.w,
+                  imageUrl: 'assets/images/user_avatar/user_avatar_image.png',
+                ),
+                title: Text(
+                  AppSettings().identity?.name ?? "login",
+                  style: StylesText.newDefaultTextStyle.copyWith(
+                    color: theme.black,
+                  ),
+                ),
+                onTap: () {},
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.settings_outlined,
+              color: theme.black,
+            ),
+            title: Text(
+              AppLocalizations.of(context)?.translate('settings') ?? "",
+              style: StylesText.newDefaultTextStyle.copyWith(
+                color: theme.black,
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SettingPage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.favorite_border_outlined,
+              color: theme.black,
+            ),
+            title: Text(
+              AppLocalizations.of(context)?.translate('favorite') ?? "",
+              style: StylesText.newDefaultTextStyle.copyWith(
+                color: theme.black,
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FavoritePage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.person_pin_circle_outlined,
+              color: theme.black,
+            ),
+            title: Text(
+              AppLocalizations.of(context)?.translate('guides') ?? "",
+              style: StylesText.newDefaultTextStyle.copyWith(
+                color: theme.black,
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GuidesPage(),
+                  ));
+            },
+          ),
+        ],
       ),
     );
   }

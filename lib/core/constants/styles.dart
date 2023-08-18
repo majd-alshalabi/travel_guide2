@@ -121,27 +121,41 @@ class StylesText {
       fontFamily: "DMSans-Regular",
       color: Color(0xffFFFFFF));
   static TextStyle textStyleForTitle = const TextStyle(
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w500,
     fontSize: 30.0,
     fontFamily: "DMSans-Regular",
+
+    // fontFamily: "DMSans-Regular",
   );
-  static TextStyle textStyleForDescription = TextStyle();
-  static TextStyle textStyleForTextTilte = TextStyle(
-    color: Colors.black87,
-    fontWeight: FontWeight.bold,
-    fontFamily: "DMSans-Regular",
-    fontSize: 22.0,
-  );
+  static TextStyle textStyleForDescription = const TextStyle();
   static TextStyle defaultTextStyle = const TextStyle(
+    color: Colors.grey,
+    fontFamily: "DMSans-Bold",
+    fontWeight: FontWeight.w400,
+    fontSize: 16.0,
+  );
+  static TextStyle defaultTextStyleForAnotherModel = const TextStyle(
+    color: Colors.grey,
+    fontFamily: "Kalam",
+    fontWeight: FontWeight.w400,
+    fontSize: 16.0,
+  );
+  static TextStyle defaultHintStyle = const TextStyle(
     color: Colors.grey,
     fontFamily: "DMSans-Regular",
     fontWeight: FontWeight.w400,
     fontSize: 16.0,
   );
-  static TextStyle textStyleForTextFormTilte = const TextStyle(
-    color: Colors.black,
-    fontFamily: "DMSans-Regular",
-    fontWeight: FontWeight.w600,
-    fontSize: 18.0,
+  static TextStyle newTextStyleForAppBar = const TextStyle(
+    color: Colors.white,
+    fontFamily: "JosefinSans",
+    fontWeight: FontWeight.bold,
+    fontSize: 23.0,
+  );
+  static TextStyle newDefaultTextStyle = const TextStyle(
+    color: Colors.white,
+    fontFamily: "JosefinSans",
+    fontWeight: FontWeight.w700,
+    fontSize: 16.0,
   );
 }
