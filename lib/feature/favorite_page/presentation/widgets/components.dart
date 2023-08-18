@@ -61,7 +61,7 @@ class ListOfFavorite extends StatelessWidget {
                             icon: Icon(
                               Icons.favorite_rounded,
                               color: theme.red,
-                              size: 75,
+                              size: 74,
                             )),
                       ),
                     ],

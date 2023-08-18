@@ -22,7 +22,7 @@ class FavoritePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(11.0),
             child: Text(
               AppLocalizations.of(context)?.translate("Favorites") ?? '',
               style: StylesText.textStyleForTitle,
