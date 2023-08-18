@@ -1,7 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:like_button/like_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/app_localizations.dart';
@@ -12,7 +10,6 @@ import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/favorite_page/presentation/screen/favorite_page.dart';
 import 'package:travel_guide/feature/guides/presentation/pages/guides_page.dart';
-import 'package:travel_guide/feature/home_page/presentation/blocs/home_bloc.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/feature/setting_page/presentation/screens/sitting_page.dart';
 import 'package:travel_guide/injection.dart';
@@ -91,23 +88,21 @@ class searchWithNotifications extends StatelessWidget {
               decoration: InputDecoration(
                 hintText:
                     AppLocalizations.of(context)?.translate('To Where') ?? "",
-                hintStyle: StylesText.textStyleForDescription.copyWith(
-                  color: theme.reserveDarkScaffold,
-                  fontSize: 18
-                ),
+                hintStyle: StylesText.textStyleForDescription
+                    .copyWith(color: theme.reserveDarkScaffold, fontSize: 18),
                 border: InputBorder.none,
                 prefixIcon: Icon(
                   Icons.search,
                   size: 35,
                   color: theme.reserveDarkScaffold,
                 ),
-                enabledBorder:  OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50)),
                     borderSide: BorderSide(
                       color: theme.reserveDarkScaffold,
                       width: 2,
                     )),
-                focusedBorder:  OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(50)),
                   borderSide: BorderSide(
                     color: theme.reserveDarkScaffold,
@@ -203,7 +198,8 @@ class ListOfImages extends StatelessWidget {
                     'Place Name',
                     style: StylesText.defaultTextStyleForAnotherModel,
                   ),
-                  Text('Location'),
+                  Text(AppLocalizations.of(context)?.translate("Location") ??
+                      ''),
                 ],
               ),
             );

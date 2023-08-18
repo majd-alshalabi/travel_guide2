@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:travel_guide/core/constants/assets.dart';
+import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
@@ -226,13 +226,13 @@ class SettAlKolUserAvatar extends StatelessWidget {
             height: width,
             fit: BoxFit.fill,
             progressIndicatorBuilder: (context, url, progress) => const Image(
-              image: AssetImage(Assets.userAvatarAsset),
+              image: AssetImage(ImagesApp.userAvatarAsset),
               fit: BoxFit.fill,
             ),
             imageUrl: "",
             // "${NetworkConfigurations.BaseUrl}${NetworkConfigurations.kGetImagePath}/$imageUrl",
             errorWidget: (context, url, error) => const Image(
-              image: AssetImage(Assets.userAvatarAsset),
+              image: AssetImage(ImagesApp.userAvatarAsset),
               fit: BoxFit.fill,
             ),
           ),
@@ -245,7 +245,7 @@ class SettAlKolUserAvatar extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(50),
           child: const Image(
-            image: AssetImage(Assets.userAvatarAsset),
+            image: AssetImage(ImagesApp.userAvatarAsset),
             fit: BoxFit.fill,
           ),
         ),
@@ -274,12 +274,12 @@ class TravelGuideUserAvatar extends StatelessWidget {
           height: width,
           fit: BoxFit.fill,
           progressIndicatorBuilder: (context, url, progress) => const Image(
-            image: AssetImage(Assets.userAvatarAsset),
+            image: AssetImage(ImagesApp.userAvatarAsset),
             fit: BoxFit.fill,
           ),
           imageUrl: imageUrl,
           errorWidget: (context, url, error) => const Image(
-            image: AssetImage(Assets.userAvatarAsset),
+            image: AssetImage(ImagesApp.userAvatarAsset),
             fit: BoxFit.fill,
           ),
         ),
@@ -303,22 +303,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         title,
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-          fontSize: 18,
-          color: theme.reserveDarkScaffold,
-        ),
+              fontSize: 18,
+              color: theme.reserveDarkScaffold,
+            ),
       ),
-      systemOverlayStyle:  SystemUiOverlayStyle(
+      systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: theme.darkAndWhiteForAppBar,
       ),
       leading: showBackButton && Navigator.of(context).canPop()
           ? IconButton(
-        color: theme.reserveDarkScaffold,
-        iconSize: 20,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: const Icon(Icons.arrow_back_ios_new),
-      )
+              color: theme.reserveDarkScaffold,
+              iconSize: 20,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios_new),
+            )
           : null,
     );
   }
@@ -356,8 +356,8 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width*widthFactor,
-      height: MediaQuery.of(context).size.height*heightFactor,
+      width: MediaQuery.of(context).size.width * widthFactor,
+      height: MediaQuery.of(context).size.height * heightFactor,
       decoration: BoxDecoration(
         color: backgroundColor ?? Colors.orange,
         borderRadius: BorderRadius.circular(borderRadius),
@@ -366,15 +366,13 @@ class AppButton extends StatelessWidget {
         style: style,
         onPressed: onPressed,
         child: Center(
-          child: Text(
-            text,
-            style:StylesText.textStyleForButton
-          ),
+          child: Text(text, style: StylesText.textStyleForButton),
         ),
       ),
     );
   }
 }
+
 class LogOutCustomBottom extends StatelessWidget {
   final double height;
   final double? width;
@@ -416,9 +414,9 @@ class LogOutCustomBottom extends StatelessWidget {
           ),
           child: Center(
               child: Text(
-                text,
-                style: textStyleForButton,
-              )),
+            text,
+            style: textStyleForButton,
+          )),
         ));
   }
 }

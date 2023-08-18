@@ -1,6 +1,8 @@
 class ImagesApp {
   ImagesApp._();
-
+  
+  static const userAvatarAsset =
+      'asset/images/user_avatar/user_avatar_image.png';
   static const String images12 = "asset/images/12.jpg";
   static const String images321 = "asset/images/321.jpg";
   static const String imagesMapS = "asset/images/map_s.png";
