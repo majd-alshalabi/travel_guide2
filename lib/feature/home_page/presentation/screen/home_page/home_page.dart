@@ -1,5 +1,5 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
@@ -9,24 +9,26 @@ import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/them
 import 'package:travel_guide/injection.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  HomePage({Key? key}) : super(key: key);
   final TextEditingController searchController = TextEditingController();
-
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      body: Padding(
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom != 0 ? 0 : 8.h),
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Stack(
+                alignment: Alignment.bottomCenter,
                 children: [
                   Container(
                     width: double.infinity,
@@ -40,10 +42,12 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  searchWithNotifications(
-                    width: width,
-                    searchController: searchController,
-                    theme: theme,
+                  Container(
+                    child: searchWithNotifications(
+                      width: width,
+                      searchController: searchController,
+                      theme: theme,
+                    ),
                   ),
                 ],
               ),

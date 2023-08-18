@@ -169,20 +169,24 @@ class ListOfImages extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          top: 10,
-                          right: 10,
-                          child: Icon(
-                            Icons.favorite_outline_sharp,
+                          top: 1,
+                          right: 1,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.favorite_outline_sharp,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
                   Text(
-                    'Place Name',
+                    AppLocalizations.of(context)?.translate("Place Name") ?? '',
                     style: StylesText.textStyleForTextFormTilte,
                   ),
-                  Text('Location'),
+                  Text(AppLocalizations.of(context)?.translate("Location") ??
+                      ''),
                 ],
               ),
             );

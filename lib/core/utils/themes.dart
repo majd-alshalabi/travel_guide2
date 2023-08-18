@@ -56,7 +56,7 @@ final appThemeData = {
     // scroll over color
     accent2: const Color(0xff5bc91a),
     greyWeak: const Color(0xff909f9c),
-    error: Colors.red.shade900,
+    error: Colors.red.shade900, red: Colors.red,
   ),
   ThemeType.settAlKolDark: AppTheme(
     isDark: true,
@@ -98,6 +98,7 @@ final appThemeData = {
     accent2: const Color(0xfff19e46),
     greyWeak: const Color(0xffa8b3b0),
     error: const Color(0xffe55642),
+    red: Color.fromARGB(255, 255, 0, 0),
   ),
   ThemeType.systemMode: AppTheme.brightness == Brightness.dark
       ? AppTheme(
@@ -140,6 +141,7 @@ final appThemeData = {
           accent2: const Color(0xfff19e46),
           greyWeak: const Color(0xffa8b3b0),
           error: const Color(0xffe55642),
+          red: Colors.red,
         )
       : AppTheme(
           isDark: false,
@@ -182,7 +184,7 @@ final appThemeData = {
           // scroll over color
           accent2: const Color(0xff5bc91a),
           greyWeak: const Color(0xff909f9c),
-          error: Colors.red.shade900,
+          error: Colors.red.shade900, red: Colors.red,
         ),
 };
 
@@ -204,10 +206,13 @@ class AppTheme {
   final Color white;
   final Color black;
   final Color blue;
+  final Color red;
+
   InputDecorationTheme inputDecorationTheme;
 
   /// Default constructor
   AppTheme({
+    required this.red,
     required this.blue,
     required this.black,
     required this.background,

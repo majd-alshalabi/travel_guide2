@@ -41,7 +41,9 @@ class _TogglePageState extends State<TogglePage> {
   Widget build(BuildContext context) {
     final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
-      drawer: Drawer(),
+      drawer: Drawer(
+        backgroundColor: theme.greyWeak,
+      ),
       appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
