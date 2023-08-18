@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:travel_guide/app_localizations.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:travel_guide/core/constants/lite_rolling_switch.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
@@ -26,12 +27,10 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
-
+  bool guide = false;
   @override
   Widget build(BuildContext context) {
-    //TODO this is the way to get Theme //make it in all pages
     final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
-    //TODO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     return LoaderOverlay(
       useDefaultLoading: false,
       overlayWidget: const Center(
@@ -68,27 +67,23 @@ class _LoginPageState extends State<LoginPage> {
                   child: Form(
                     key: formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
                           height: 30.0,
                         ),
-
-                        //TODO example To make Localization ...... when you Know it delete it .......
-                        Text(
-                          AppLocalizations.of(context)?.translate('welcome') ??
-                              "",
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Text("Welcome Back! 😍",
+                              style: StylesText.textStyleForTitle),
                         ),
-
-                        //TODO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                        Text("Welcome Back! 😍",
-                            style: StylesText.textStyleForTitle),
                         const SizedBox(
                           height: 8,
                         ),
                         Text(
-                          "Happy to see you again! Please enter your email and password to login to your account.",
-                          style: StylesText.defaultTextStyle,
+                          "Happy to see you again!!! please enter your email and password to login to your account.",
+                          style: StylesText.newDefaultTextStyle
+                              .copyWith(color: Colors.grey),
                         ),
                         const SizedBox(
                           height: 30,
@@ -96,11 +91,9 @@ class _LoginPageState extends State<LoginPage> {
                         CustomTextField(
                           type: TextInputType.text,
                           prefix: const Icon(Icons.email),
-                          //TODO example To make theme color ...... when you Know it Edit it .......
                           color: theme.greyWeak,
-                          //TODO ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                           controllerName: emailController,
-                          label: "Email",
+                          label: "email",
                           valedate: (val) {
                             if (val?.isEmpty ?? true) {
                               return "email must not be empty";
@@ -109,14 +102,14 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         ),
                         const SizedBox(
-                          height: 30,
+                          height: 10,
                         ),
                         CustomTextField(
                           type: TextInputType.text,
                           prefix: const Icon(Icons.password_rounded),
                           color: Colors.black,
                           controllerName: passwordController,
-                          label: "Password",
+                          label: "password",
                           valedate: (val) {
                             if ((val?.length ?? 0) < 8) {
                               return "password must be at least 8 character";
@@ -127,14 +120,30 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 30,
                         ),
+                        LiteRollingSwitch(
+                          value: guide,
+                          textOn: 'guide',
+                          textOff: 'user',
+                          colorOn: const Color(0xffDE7254),
+                          colorOff: Colors.grey,
+                          iconOn: Icons.done,
+                          iconOff: Icons.remove_circle_outline,
+                          textSize: 16.0,
+                          width: 25.w,
+                          onChanged: (bool state) {
+                            guide = state;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
                         CustomBottom(
                             text: "Login",
-                            height: 60,
-                            //TODO Please make it color in theme App and give it name primary color
+                            height: 50,
                             buttonColor: const Color(0xffDE7254),
-                            //TODO^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                             onPress: () {
                               context.read<LoginCubit>().login(
+                                    guide: guide,
                                     email: emailController.text,
                                     password: passwordController.text,
                                   );
@@ -149,22 +158,24 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             Text(
                               "Don’t have an account?",
-                              style: StylesText.defaultTextStyle
+                              style: StylesText.newDefaultTextStyle
                                   .copyWith(color: Colors.black),
                             ),
                             TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => RegisterPage(),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  "Sign up",
-                                  style: StylesText.defaultTextStyle,
-                                ))
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RegisterPage(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Sign up",
+                                style: StylesText.newDefaultTextStyle
+                                    .copyWith(color: Colors.grey),
+                              ),
+                            )
                           ],
                         )
                       ],

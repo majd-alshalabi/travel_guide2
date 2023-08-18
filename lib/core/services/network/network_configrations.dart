@@ -1,6 +1,8 @@
 class NetworkConfigurations {
   static const kRegister = 'user/register';
+  static const kLogOut = 'user/logout';
   static const kGetAllActivity = 'getactivity';
+  static const kGetAllRegion = 'getregions';
   static const kGetTopRatedActivity = 'toprated';
   static const kRateActivity = 'addrate';
   static const kRateGuide = 'rateaguide';
@@ -10,6 +12,7 @@ class NetworkConfigurations {
   static const kGetTopGuide = 'topguides';
   static const kAddComment = 'comment';
   static const kLogin = 'user/login';
+  static const kGuideLogin = 'guide/login';
   static const kChangePassword = 'change_password';
 
   static const String BaseUrl = "http://192.168.43.85:8000/api/";

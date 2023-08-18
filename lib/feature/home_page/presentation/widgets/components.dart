@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:like_button/like_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/app_localizations.dart';
@@ -7,24 +9,26 @@ import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/services/app_settings/app_settings.dart';
+import 'package:travel_guide/core/services/network/network_configrations.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/favorite_page/presentation/screen/favorite_page.dart';
 import 'package:travel_guide/feature/guides/presentation/pages/guides_page.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
+import 'package:travel_guide/feature/main_page/presentation/blocs/main_cubit/main_cubit.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
+import 'package:travel_guide/feature/search_screen/presentation/search_screen.dart';
 import 'package:travel_guide/feature/setting_page/presentation/screens/sitting_page.dart';
 import 'package:travel_guide/injection.dart';
 
 class CustomText extends StatelessWidget {
   final String titleName;
-  final TextStyle textStyleForTextTilte;
-  final TextStyle defaultTextStyle;
   final Function onTap;
+  final bool seeAllButton;
   CustomText({
     super.key,
     required this.titleName,
     required this.onTap,
-    required this.textStyleForTextTilte,
-    required this.defaultTextStyle,
+    required this.seeAllButton,
   });
 
   @override
@@ -36,24 +40,26 @@ class CustomText extends StatelessWidget {
         children: [
           Text(
             titleName,
-            style: textStyleForTextTilte,
+            style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
           ),
-          InkWell(
-            onTap: () {
-              onTap();
-            },
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)?.translate('See all') ?? "",
-                    style: defaultTextStyle,
-                  ),
-                ],
+          if (seeAllButton)
+            InkWell(
+              onTap: () {
+                onTap();
+              },
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)?.translate('See all') ?? "",
+                      style: StylesText.newDefaultTextStyle
+                          .copyWith(color: Colors.grey),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -79,35 +85,28 @@ class searchWithNotifications extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Container(
-            width: width * 0.8,
-            height: 60,
-            child: TextField(
-              controller: searchController,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                hintText:
-                    AppLocalizations.of(context)?.translate('To Where') ?? "",
-                hintStyle: StylesText.textStyleForDescription
-                    .copyWith(color: theme.reserveDarkScaffold, fontSize: 18),
-                border: InputBorder.none,
-                prefixIcon: Icon(
-                  Icons.search,
-                  size: 35,
-                  color: theme.reserveDarkScaffold,
-                ),
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                    borderSide: BorderSide(
-                      color: theme.reserveDarkScaffold,
-                      width: 2,
-                    )),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                  borderSide: BorderSide(
-                    color: theme.reserveDarkScaffold,
-                    width: 2,
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SearchScreen(),
                   ),
+                );
+              },
+              child: Container(
+                padding: EdgeInsets.all(12),
+                margin: EdgeInsets.symmetric(horizontal: 5),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.black, width: 1),
+                ),
+                child: Text(
+                  AppLocalizations.of(context)?.translate('To Where') ?? "",
+                  style: StylesText.newDefaultTextStyle
+                      .copyWith(color: Colors.black),
                 ),
               ),
             ),
@@ -131,15 +130,89 @@ class searchWithNotifications extends StatelessWidget {
   }
 }
 
-class ListOfImages extends StatelessWidget {
-  const ListOfImages({
+class ListOfPlaces extends StatelessWidget {
+  const ListOfPlaces({
     super.key,
     required this.height,
     required this.width,
+    required this.regions,
   });
 
   final double height;
   final double width;
+  final List<RegionModel> regions;
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeIn(
+      duration: const Duration(milliseconds: 500),
+      child: SizedBox(
+        height: height * 0.20,
+        child: ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          itemCount: regions.length,
+          itemBuilder: (context, index) {
+            return Container(
+              padding: const EdgeInsets.only(right: 15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(10.0)),
+                      child: CachedNetworkImage(
+                        width: width * 0.35,
+                        height: height * 0.15,
+                        imageUrl:
+                            "${NetworkConfigurations.BaseUrl}${regions[index].images?.first.url}",
+                        fit: BoxFit.cover,
+                        errorWidget: (context, url, error) {
+                          return Image.asset(
+                            ImagesApp.imagesSyria,
+                            width: width * 0.35,
+                            height: height * 0.15,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    regions[index].name ?? "",
+                    style: StylesText.newDefaultTextStyle
+                        .copyWith(color: Colors.black),
+                  ),
+                  Text(
+                    regions[index].city?.name ?? "",
+                    style: StylesText.newDefaultTextStyle
+                        .copyWith(color: Colors.grey),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class ListActivity extends StatelessWidget {
+  const ListActivity({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.activities,
+  });
+
+  final double height;
+  final double width;
+  final List<ActivityRemoteModel> activities;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +224,7 @@ class ListOfImages extends StatelessWidget {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          itemCount: 10,
+          itemCount: activities.length,
           itemBuilder: (context, index) {
             return Container(
               padding: const EdgeInsets.only(right: 15.0),
@@ -159,29 +232,33 @@ class ListOfImages extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (BuildContext context) =>
-                      //            ),);
-                    },
+                    onTap: () {},
                     child: Stack(
                       children: [
                         ClipRRect(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(10.0)),
-                          child: Image.asset(
-                            ImagesApp.imagesSyria,
+                          child: CachedNetworkImage(
                             width: width * 0.35,
                             height: height * 0.15,
+                            imageUrl:
+                                "${NetworkConfigurations.BaseUrl}${activities[index].urls?.isNotEmpty ?? false ? activities[index].urls?.first.url : ""}",
                             fit: BoxFit.cover,
+                            errorWidget: (context, url, error) {
+                              return Image.asset(
+                                ImagesApp.imagesSyria,
+                                width: width * 0.35,
+                                height: height * 0.15,
+                                fit: BoxFit.cover,
+                              );
+                            },
                           ),
                         ),
                         Positioned(
                             top: 10,
                             right: 10,
                             child: LikeButton(
+                              animationDuration: Duration(milliseconds: 300),
                               size: 20,
                               circleColor: CircleColor(
                                   start: Color(0xffffffff),
@@ -194,12 +271,17 @@ class ListOfImages extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 5),
                   Text(
-                    'Place Name',
-                    style: StylesText.defaultTextStyleForAnotherModel,
+                    activities[index].name ?? "",
+                    style: StylesText.newDefaultTextStyle
+                        .copyWith(color: Colors.black),
                   ),
-                  Text(AppLocalizations.of(context)?.translate("Location") ??
-                      ''),
+                  Text(
+                    activities[index].region?.name ?? "",
+                    style: StylesText.newDefaultTextStyle
+                        .copyWith(color: Colors.grey),
+                  ),
                 ],
               ),
             );
@@ -230,7 +312,7 @@ class DrawerHome extends StatelessWidget {
               child: ListTile(
                 leading: TravelGuideUserAvatar(
                   width: 13.w,
-                  imageUrl: 'assets/images/user_avatar/user_avatar_image.png',
+                  imageUrl: '',
                 ),
                 title: Text(
                   AppSettings().identity?.name ?? "login",
@@ -297,6 +379,21 @@ class DrawerHome extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => GuidesPage(),
                   ));
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.person_pin_circle_outlined,
+              color: theme.black,
+            ),
+            title: Text(
+              AppLocalizations.of(context)?.translate('logout') ?? "",
+              style: StylesText.newDefaultTextStyle.copyWith(
+                color: theme.black,
+              ),
+            ),
+            onTap: () {
+              context.read<MainCubit>().logout();
             },
           ),
         ],

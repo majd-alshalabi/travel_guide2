@@ -9,12 +9,13 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
   void login({
+    required bool guide,
     required String email,
     required String password,
   }) async {
     emit(LoginLoading());
     final res = await LoginUseCase().call(
-      LoginParamsModel(email: email, password: password),
+      LoginParamsModel(email: email, password: password, guide: guide),
     );
     res.fold(
       (l) => emit(LoginError()),

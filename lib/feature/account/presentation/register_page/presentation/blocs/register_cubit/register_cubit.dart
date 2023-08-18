@@ -8,19 +8,23 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
 
-  void register(
-      {required String name,
-      required String email,
-      required String password,
-      String? number}) async {
+  void register({
+    required String name,
+    required String email,
+    required String password,
+    String? number,
+  }) async {
     emit(RegisterLoading());
     final res = await RegisterUseCase().call(
       RegisterParamsModel(
-          number: number ?? "", name: name, email: email, password: password),
+        number: number ?? "",
+        name: name,
+        email: email,
+        password: password,
+      ),
     );
-    res.fold(
-      (l) => emit(RegisterError()),
-      (r) => emit(RegisterLoaded()),
-    );
+    res.fold((l) => emit(RegisterError()), (r) {
+      emit(RegisterLoaded());
+    });
   }
 }

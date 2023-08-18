@@ -1,8 +1,10 @@
 class LoginParamsModel {
   final String email;
   final String password;
+  final bool guide;
 
   LoginParamsModel({
+    required this.guide,
     required this.email,
     required this.password,
   });

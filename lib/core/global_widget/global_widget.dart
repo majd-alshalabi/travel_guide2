@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
+import 'package:travel_guide/core/services/network/network_configrations.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
@@ -30,21 +33,24 @@ class CustomTextField extends StatelessWidget {
       validator: valedate,
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: StylesText.newDefaultTextStyle.copyWith(color: Colors.grey),
         border: InputBorder.none,
         prefixIcon: prefix,
         enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
               color: Colors.black12,
               width: 1,
             )),
         focusedBorder: const OutlineInputBorder(
-            //Outline border type for TextFeild
-            borderRadius: BorderRadius.all(Radius.circular(50)),
-            borderSide: BorderSide(
-              color: Colors.black12,
-              width: 1,
-            )),
+          //Outline border type for TextFeild
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.black12,
+            width: 1,
+          ),
+        ),
+        prefixIconColor: Colors.grey,
       ),
     );
   }
@@ -57,14 +63,15 @@ class CustomBottom extends StatelessWidget {
   final Function onPress;
   final Color borderColor;
   final TextStyle textStyleForButton;
-  const CustomBottom(
-      {super.key,
-      required this.text,
-      required this.height,
-      required this.buttonColor,
-      required this.onPress,
-      required this.borderColor,
-      required this.textStyleForButton});
+  const CustomBottom({
+    super.key,
+    required this.text,
+    required this.height,
+    required this.buttonColor,
+    required this.onPress,
+    required this.borderColor,
+    required this.textStyleForButton,
+  });
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -72,7 +79,7 @@ class CustomBottom extends StatelessWidget {
         onPress();
       },
       child: Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width / 2,
         height: height,
         decoration: BoxDecoration(
           border: Border.all(color: borderColor, width: 3),
@@ -96,9 +103,9 @@ class BannerPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: 200.0,
-      margin: const EdgeInsets.all(16.0),
+      width: 35.w,
+      height: 20.h,
+      margin: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         color: Colors.grey,
@@ -178,14 +185,14 @@ class ContentPlaceholder extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: double.infinity,
+                  width: 200,
                   height: 10.0,
                   color: Colors.grey,
                   margin: const EdgeInsets.only(bottom: 8.0),
                 ),
                 if (lineType == ContentLineType.threeLines)
                   Container(
-                    width: double.infinity,
+                    width: 200,
                     height: 10.0,
                     color: theme.white,
                     margin: const EdgeInsets.only(bottom: 8.0),
@@ -277,7 +284,7 @@ class TravelGuideUserAvatar extends StatelessWidget {
             image: AssetImage(ImagesApp.userAvatarAsset),
             fit: BoxFit.fill,
           ),
-          imageUrl: imageUrl,
+          imageUrl: "${NetworkConfigurations.BaseUrl}$imageUrl",
           errorWidget: (context, url, error) => const Image(
             image: AssetImage(ImagesApp.userAvatarAsset),
             fit: BoxFit.fill,
@@ -418,5 +425,31 @@ class LogOutCustomBottom extends StatelessWidget {
             style: textStyleForButton,
           )),
         ));
+  }
+}
+
+class HomeLoadingWidget extends StatelessWidget {
+  const HomeLoadingWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 19.h,
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
+        enabled: true,
+        child: const SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              BannerPlaceholder(),
+              BannerPlaceholder(),
+              BannerPlaceholder(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
