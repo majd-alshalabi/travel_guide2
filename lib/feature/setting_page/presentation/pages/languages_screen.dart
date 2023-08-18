@@ -3,7 +3,6 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/utils/themes.dart';
-import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
 

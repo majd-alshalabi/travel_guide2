@@ -16,7 +16,7 @@ enum ThemeType {
 
 final appThemeData = {
   ThemeType.settAlKolLight: AppTheme(
-    reserveDarkScaffold: Color.fromARGB(255, 89, 90, 95),
+    reserveDarkScaffold: const Color(0xff2A2D3E),
     reserveBlue: Colors.blue,
     //......................................
     darkAndWhiteForAppBar: const Color(0xff909f9c),
@@ -62,7 +62,7 @@ final appThemeData = {
     // scroll over color
     accent2: const Color(0xff5bc91a),
     greyWeak: const Color(0xff909f9c),
-    error: Colors.red.shade900, red: Colors.red,
+    error: Colors.red.shade900,
   ),
   ThemeType.settAlKolDark: AppTheme(
     reserveDarkScaffold: Colors.white,
@@ -108,15 +108,17 @@ final appThemeData = {
     accent2: const Color(0xfff19e46),
     greyWeak: const Color(0xffa8b3b0),
     error: const Color(0xffe55642),
-    red: Color.fromARGB(255, 255, 0, 0),
   ),
   ThemeType.systemMode: AppTheme.brightness == Brightness.dark
       ? AppTheme(
-<<<<<<< HEAD
-          isDark: true,
+          reserveDarkScaffold: Colors.white,
+          reserveBlue: Colors.deepOrange,
+          darkAndWhiteForAppBar: const Color(0xff212332),
+          darkThemeForScafold: const Color(0xff2A2D3E),
+          black: Colors.black,
           blue: Colors.blue,
           white: Colors.black,
-          black: Colors.white,
+          isDark: true,
           mainAppColor: Colors.blue,
           inputDecorationTheme: const InputDecorationTheme(
             fillColor: Color(0xffE6E6E6),
@@ -152,15 +154,19 @@ final appThemeData = {
           accent2: const Color(0xfff19e46),
           greyWeak: const Color(0xffa8b3b0),
           error: const Color(0xffe55642),
-          red: Colors.red,
         )
       : AppTheme(
-          isDark: false,
-          blue: Colors.blue,
+          reserveDarkScaffold: const Color(0xff2A2D3E),
+          reserveBlue: Colors.blue,
 
-          mainAppColor: Colors.blue,
-          white: Colors.white,
+          ///..................................
+          darkAndWhiteForAppBar: const Color(0xff909f9c),
+          darkThemeForScafold: Colors.white,
           black: Colors.black,
+          blue: Colors.blue,
+          white: Colors.white,
+          isDark: false,
+          mainAppColor: Colors.blue,
           inputDecorationTheme: const InputDecorationTheme(
             fillColor: Color(0xffE6E6E6),
             filled: true,
@@ -195,101 +201,8 @@ final appThemeData = {
           // scroll over color
           accent2: const Color(0xff5bc91a),
           greyWeak: const Color(0xff909f9c),
-          error: Colors.red.shade900, red: Colors.red,
+          error: Colors.red.shade900,
         ),
-=======
-    reserveDarkScaffold: Colors.white,
-    reserveBlue: Colors.deepOrange,
-    darkAndWhiteForAppBar: const Color(0xff212332),
-    darkThemeForScafold: const Color(0xff2A2D3E),
-    black: Colors.black,
-    blue: Colors.blue,
-    white: Colors.black,
-    isDark: true,
-    mainAppColor: Colors.blue,
-    inputDecorationTheme: const InputDecorationTheme(
-      fillColor: Color(0xffE6E6E6),
-      filled: true,
-      border: InputBorder.none,
-      disabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-      errorBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-      enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-      focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-      focusedErrorBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-    ),
-    text: Colors.white,
-    accentText: Colors.black,
-    background: const Color(0xff121212),
-    surface: const Color(0xff252525),
-    accent1: const Color(0xff00a086),
-    accent1Darker: const Color(0xff00caa5),
-    accent2: const Color(0xfff19e46),
-    greyWeak: const Color(0xffa8b3b0),
-    error: const Color(0xffe55642),
-  )
-      : AppTheme(
-    reserveDarkScaffold: const Color(0xff2A2D3E),
-    reserveBlue: Colors.blue,
-    ///..................................
-    darkAndWhiteForAppBar: const Color(0xff909f9c),
-    darkThemeForScafold: Colors.white,
-    black: Colors.black,
-    blue: Colors.blue,
-    white: Colors.white,
-    isDark: false,
-    mainAppColor: Colors.blue,
-    inputDecorationTheme: const InputDecorationTheme(
-      fillColor: Color(0xffE6E6E6),
-      filled: true,
-      border: InputBorder.none,
-      disabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-      errorBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-      enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-      focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-      focusedErrorBorder: UnderlineInputBorder(
-        borderSide: BorderSide.none,
-        borderRadius: BorderRadius.all(Radius.circular(Corners.lg)),
-      ),
-    ),
-    text: Colors.black,
-    accentText: Colors.white,
-    background: const Color(0xfff1f7f0),
-    surface: Colors.white,
-    accent1: const Color(0xff00a086),
-    accent1Darker: const Color(0xff006b5a),
-    // scroll over color
-    accent2: const Color(0xff5bc91a),
-    greyWeak: const Color(0xff909f9c),
-    error: Colors.red.shade900,
-  ),
->>>>>>> origin/main
 };
 
 class AppTheme {
@@ -313,25 +226,15 @@ class AppTheme {
   final Color greyWeak;
   final Color error;
   final Color blue;
-<<<<<<< HEAD
-  final Color red;
-
-=======
   final Color darkThemeForScafold;
->>>>>>> origin/main
   InputDecorationTheme inputDecorationTheme;
 
   /// Default constructor
   AppTheme({
-<<<<<<< HEAD
-    required this.red,
-    required this.blue,
-=======
     required this.reserveDarkScaffold,
     required this.reserveBlue,
     required this.darkAndWhiteForAppBar,
     required this.darkThemeForScafold,
->>>>>>> origin/main
     required this.black,
     required this.blue,
     required this.white,
@@ -372,56 +275,56 @@ class AppTheme {
     return t.copyWith(
       textTheme: const TextTheme()
           .apply(
-        displayColor: isDark ? Colors.white : Colors.black,
-        bodyColor: isDark ? Colors.white : Colors.black,
-      )
+            displayColor: isDark ? Colors.white : Colors.black,
+            bodyColor: isDark ? Colors.white : Colors.black,
+          )
           .copyWith(
-        labelMedium: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        titleLarge: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        headlineSmall: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        headlineMedium: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        headlineLarge: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        titleMedium: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        labelLarge: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        displayLarge: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        bodyMedium: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        labelSmall: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        bodyLarge: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        displayMedium: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        displaySmall: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        bodySmall: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-        titleSmall: isDark
-            ? const TextStyle(color: Colors.white)
-            : const TextStyle(color: Colors.black),
-      ),
+            labelMedium: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            titleLarge: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            headlineSmall: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            headlineMedium: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            headlineLarge: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            titleMedium: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            labelLarge: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            displayLarge: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            bodyMedium: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            labelSmall: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            bodyLarge: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            displayMedium: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            displaySmall: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            bodySmall: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+            titleSmall: isDark
+                ? const TextStyle(color: Colors.white)
+                : const TextStyle(color: Colors.black),
+          ),
       appBarTheme: AppBarTheme(
         color: Colors.black,
         elevation: 0,

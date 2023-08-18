@@ -56,13 +56,18 @@ class ListOfFavorite extends StatelessWidget {
                       Positioned(
                         top: 10,
                         right: 50,
-                        child: IconButton(
+                        child: CircleAvatar(
+                          backgroundColor: theme.error,
+                          radius: 25,
+                          child: IconButton(
                             onPressed: () {},
                             icon: Icon(
                               Icons.favorite_rounded,
-                              color: theme.red,
-                              size: 74,
-                            )),
+                              color: theme.white,
+                              size: 75,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -72,7 +77,7 @@ class ListOfFavorite extends StatelessWidget {
                 ),
                 Text(
                   AppLocalizations.of(context)?.translate("Place Name") ?? '',
-                  style: StylesText.textStyleForTextFormTilte,
+                  style: StylesText.defaultTextStyle,
                 ),
                 SizedBox(
                   height: height * 0.02,
