@@ -14,52 +14,6 @@ import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/them
 import 'package:travel_guide/feature/setting_page/presentation/screens/sitting_page.dart';
 import 'package:travel_guide/injection.dart';
 
-class CustomText extends StatelessWidget {
-  final String titleName;
-  final TextStyle textStyleForTextTilte;
-  final TextStyle defaultTextStyle;
-  final Function onTap;
-  CustomText({
-    super.key,
-    required this.titleName,
-    required this.onTap,
-    required this.textStyleForTextTilte,
-    required this.defaultTextStyle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(16.0, 10.0, 10.0, 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            titleName,
-            style: textStyleForTextTilte,
-          ),
-          InkWell(
-            onTap: () {
-              onTap();
-            },
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)?.translate('See all') ?? "",
-                    style: defaultTextStyle,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class searchWithNotifications extends StatelessWidget {
   const searchWithNotifications({
     super.key,

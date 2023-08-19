@@ -28,4 +28,10 @@ class ImagesApp {
   static const String restaurant = 'asset/images/res.png';
   static const String star = 'asset/images/star.png';
   static const String game = 'asset/images/game.png';
+  static const String kemarea = 'asset/images/kh.jpg';
+  static const String hotels2 = 'asset/images/11983.jpg';
+  static const String kemarea1 = 'asset/images/images.png';
+  static const String hotels = 'asset/images/hotels.jpg';
+  static const String restaurantK = 'asset/images/Restaurant.jpg';
+  static const String weather = 'asset/images/weather.png';
 }

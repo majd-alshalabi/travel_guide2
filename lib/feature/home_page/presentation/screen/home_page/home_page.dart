@@ -3,6 +3,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
+import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/home_page/presentation/widgets/components.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
@@ -55,7 +56,8 @@ class HomePage extends StatelessWidget {
                 titleName:
                     AppLocalizations.of(context)?.translate("Places") ?? "",
                 onTap: () {},
-                textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
+                textStyleForTextTilte:
+                    StylesText.defaultTextStyleForAnotherModel,
                 defaultTextStyle: StylesText.defaultTextStyle,
               ),
               ListOfImages(
@@ -66,7 +68,8 @@ class HomePage extends StatelessWidget {
                 titleName:
                     AppLocalizations.of(context)?.translate("Top search") ?? "",
                 onTap: () {},
-                textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
+                textStyleForTextTilte:
+                    StylesText.defaultTextStyleForAnotherModel,
                 defaultTextStyle: StylesText.defaultTextStyle,
               ),
               ListOfImages(
@@ -77,7 +80,8 @@ class HomePage extends StatelessWidget {
                 titleName:
                     AppLocalizations.of(context)?.translate("Top rating") ?? "",
                 onTap: () {},
-                textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
+                textStyleForTextTilte:
+                    StylesText.defaultTextStyleForAnotherModel,
                 defaultTextStyle: StylesText.defaultTextStyle,
               ),
               ListOfImages(
@@ -89,7 +93,8 @@ class HomePage extends StatelessWidget {
                     AppLocalizations.of(context)?.translate("Nearby places") ??
                         "",
                 onTap: () {},
-                textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
+                textStyleForTextTilte:
+                    StylesText.defaultTextStyleForAnotherModel,
                 defaultTextStyle: StylesText.defaultTextStyle,
               ),
               ListOfImages(
