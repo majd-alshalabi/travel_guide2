@@ -64,8 +64,7 @@ class _ChatDetailsState extends State<ChatDetails> {
       }
       _textEditingController.clear();
       setState(() {
-        _isTextEmpty =
-            true;
+        _isTextEmpty = true;
       });
     }
   }
@@ -132,7 +131,7 @@ class _ChatDetailsState extends State<ChatDetails> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20 ,bottom: 10),
+            padding: const EdgeInsets.only(left: 20, bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -146,8 +145,7 @@ class _ChatDetailsState extends State<ChatDetails> {
                     child: SizedBox(
                       height: 56,
                       child: RawKeyboardListener(
-                        focusNode:
-                            FocusNode(),
+                        focusNode: FocusNode(),
                         onKey: (event) {
                           if (event.runtimeType == RawKeyDownEvent &&
                               event.logicalKey == LogicalKeyboardKey.enter) {
@@ -159,26 +157,25 @@ class _ChatDetailsState extends State<ChatDetails> {
                           controller: _textEditingController,
                           onChanged: (text) {
                             setState(() {
-                              _isTextEmpty = text
-                                  .trim()
-                                  .isEmpty;
+                              _isTextEmpty = text.trim().isEmpty;
                             });
                           },
                           decoration: InputDecoration(
-                              hintText: 'Message...',
-                              hintStyle:  TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                color: theme.white,
+                            hintText: 'Message...',
+                            hintStyle: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: theme.white,
+                            ),
+                            border: InputBorder.none,
+                            suffixIcon: TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
                               ),
-                              border: InputBorder.none,
-                              suffixIcon: TextButton(
-                                style: TextButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                ),
-                                onPressed: _getImageFromGallery,
-                                child: Icon(Icons.image_search_sharp),
-                              ),),
+                              onPressed: _getImageFromGallery,
+                              child: Icon(Icons.image_search_sharp),
+                            ),
+                          ),
                           onFieldSubmitted: (text) {
                             _sendMessage();
                           },
@@ -188,8 +185,7 @@ class _ChatDetailsState extends State<ChatDetails> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 8,  right: 20, top: 10),
+                  padding: const EdgeInsets.only(left: 8, right: 20, top: 10),
                   child: Container(
                     width: 50,
                     height: 50,
@@ -199,8 +195,10 @@ class _ChatDetailsState extends State<ChatDetails> {
                     ),
                     child: IconButton(
                       onPressed: _sendMessage,
-                      icon:  Icon(Icons.send,
-                        color: theme.darkThemeForScafold,),
+                      icon: Icon(
+                        Icons.send,
+                        color: theme.darkThemeForScafold,
+                      ),
                     ),
                   ),
                 )

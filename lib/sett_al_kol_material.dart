@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/app_localizations.dart';
-import 'package:travel_guide/core/constants/app_constant.dart';
-import 'package:travel_guide/core/services/app_settings/app_settings.dart';
-import 'package:travel_guide/feature/account/presentation/splash_screen/screen/splash_screen.dart';
+import 'package:travel_guide/core/constants/app_constantport 'package:travel_guide/feature/account/presentation/splash_screen/screen/splash_screen.dart';
 import 'package:travel_guide/feature/main_page/presentation/blocs/main_cubit/main_cubit.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 

@@ -334,6 +334,145 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(50);
 }
 
+class CustomText extends StatelessWidget {
+  final String titleName;
+  final TextStyle textStyleForTextTilte;
+  final TextStyle defaultTextStyle;
+  final Function onTap;
+  CustomText({
+    super.key,
+    required this.titleName,
+    required this.onTap,
+    required this.textStyleForTextTilte,
+    required this.defaultTextStyle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16.0, 10.0, 10.0, 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            titleName,
+            style: textStyleForTextTilte,
+          ),
+          InkWell(
+            onTap: () {
+              onTap();
+            },
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    AppLocalizations.of(context)?.translate('See all') ?? "",
+                    style: defaultTextStyle,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomAddTextField extends StatelessWidget {
+  const CustomAddTextField({
+    super.key,
+    required this.type,
+    required this.color,
+    required this.controllerName,
+    required this.label,
+    required this.valedate,
+  });
+  final Color color;
+  final Function valedate;
+  final String label;
+  final TextEditingController controllerName;
+  final TextInputType type;
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      cursorColor: Colors.blue,
+      controller: controllerName,
+      keyboardType: type,
+      validator: (val) {
+        return valedate(val);
+      },
+      decoration: InputDecoration(
+        errorStyle: StylesText.defaultTextStyle.copyWith(color: Colors.red),
+        hintText: label,
+        border: InputBorder.none,
+        enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.black12,
+              width: 0,
+            )),
+        hintStyle: StylesText.defaultTextStyle,
+        focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.black12,
+              width: 1,
+            )),
+      ),
+    );
+  }
+}
+
+class NewCustomBottom extends StatelessWidget {
+  final double height;
+  final double? width;
+  final String text;
+  final Function onPress;
+  final Color borderColor;
+  final TextStyle textStyleForButton;
+  const NewCustomBottom({
+    super.key,
+    required this.text,
+    required this.height,
+    this.width,
+    required this.onPress,
+    required this.borderColor,
+    required this.textStyleForButton,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+        style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(Colors.transparent)),
+        onPressed: () {
+          onPress();
+        },
+        child: Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            border: Border.all(color: borderColor, width: 0),
+            gradient: const LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.lightBlueAccent,
+                Colors.blueAccent,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Center(
+              child: Text(
+            text,
+            style: textStyleForButton,
+          )),
+        ));
+  }
+}
+
 class AppButton extends StatelessWidget {
   const AppButton({
     super.key,

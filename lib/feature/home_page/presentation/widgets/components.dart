@@ -83,7 +83,7 @@ class searchWithNotifications extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
             child: InkWell(
@@ -312,7 +312,7 @@ class DrawerHome extends StatelessWidget {
               child: ListTile(
                 leading: TravelGuideUserAvatar(
                   width: 13.w,
-                  imageUrl: '',
+                  imageUrl: ImagesApp.imagesUserAvatarUserAvatarImage,
                 ),
                 title: Text(
                   AppSettings().identity?.name ?? "login",
