@@ -14,13 +14,19 @@ class GuidesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
-      backgroundColor: theme.darkThemeForScafold,
-      appBar: CustomAppBar(title: AppLocalizations.of(context)?.translate('guides')??"",),
-      body:ListView.builder(itemBuilder: (context, index) => InkWell(
-        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => GuideProfile(),)),
-          child: GuideItem()),
-      itemCount: 5,)
-
-    );
+        backgroundColor: theme.darkThemeForScafold,
+        appBar: CustomAppBar(
+          title: AppLocalizations.of(context)?.translate('guides') ?? "",
+        ),
+        body: ListView.builder(
+          itemBuilder: (context, index) => InkWell(
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GuideProfile(),
+                  )),
+              child: GuideItem()),
+          itemCount: 5,
+        ));
   }
 }

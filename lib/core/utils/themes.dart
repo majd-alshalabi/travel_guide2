@@ -62,7 +62,8 @@ final appThemeData = {
     // scroll over color
     accent2: const Color(0xff5bc91a),
     greyWeak: const Color(0xff909f9c),
-    error: Colors.red.shade900,
+    error: Colors.red.shade900, grey: Colors.grey.shade400,
+    red: Colors.red.shade700,
   ),
   ThemeType.settAlKolDark: AppTheme(
     reserveDarkScaffold: Colors.white,
@@ -108,6 +109,8 @@ final appThemeData = {
     accent2: const Color(0xfff19e46),
     greyWeak: const Color(0xffa8b3b0),
     error: const Color(0xffe55642),
+    grey: Colors.grey.shade400,
+    red: Colors.red.shade700,
   ),
   ThemeType.systemMode: AppTheme.brightness == Brightness.dark
       ? AppTheme(
@@ -154,6 +157,8 @@ final appThemeData = {
           accent2: const Color(0xfff19e46),
           greyWeak: const Color(0xffa8b3b0),
           error: const Color(0xffe55642),
+          grey: Colors.grey.shade400,
+          red: Colors.red.shade700,
         )
       : AppTheme(
           reserveDarkScaffold: const Color(0xff2A2D3E),
@@ -201,7 +206,8 @@ final appThemeData = {
           // scroll over color
           accent2: const Color(0xff5bc91a),
           greyWeak: const Color(0xff909f9c),
-          error: Colors.red.shade900,
+          error: Colors.red.shade900, grey: Colors.grey.shade400,
+          red: Colors.red.shade700,
         ),
 };
 
@@ -226,11 +232,15 @@ class AppTheme {
   final Color greyWeak;
   final Color error;
   final Color blue;
+  final Color red;
   final Color darkThemeForScafold;
+  final Color grey;
   InputDecorationTheme inputDecorationTheme;
 
   /// Default constructor
   AppTheme({
+    required this.grey,
+    required this.red,
     required this.reserveDarkScaffold,
     required this.reserveBlue,
     required this.darkAndWhiteForAppBar,

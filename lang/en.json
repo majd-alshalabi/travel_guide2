@@ -8,7 +8,7 @@
   "Nearby places": "Nearby places",
   "Place Name" : "Place Name",
   "Location": "Location",
-
+  "howday" : "Howday",
   "settings": "Settings",
   "guides":"Guides",
   "delete_Account": "Delete Account",
@@ -23,7 +23,12 @@
   "Change_your_color_Mode_setting":"Change your color Mode Setting",
   "Change_your_languages_setting":"Change your Languages Setting",
   "delete_your_account": "Delete your account",
-  "favorite":"Favorite"
+  "favorite":"Favorite",
+  "restaurant" : "Restaurant",
+  "park": "Park",
+  "hotel": "Hotel",
+  "commment":"Commment",
+  "entertainment": "Entertainment"
 
 
 
