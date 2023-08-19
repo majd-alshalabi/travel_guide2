@@ -14,9 +14,10 @@ class HomeRepositories implements IHomeRepository {
   final HomeLocalDataSource accountLocalDataSource = HomeLocalDataSource();
 
   @override
-  Future<Either<String, GetActivityResponseModel>> getAllActivity() async {
+  Future<Either<String, GetActivityResponseModel>> getAllActivity(
+      GetActivityParamsModel params) async {
     final GetActivityResponseModel res =
-        await accountRemoteDataSource.getActivity();
+        await accountRemoteDataSource.getActivity(params);
     return Right(res);
   }
 

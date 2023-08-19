@@ -14,8 +14,8 @@ class LogOutUseCase extends UseCase<LogOutModel, NoParams> {
     res.fold(
       (l) => null,
       (r) async {
-        await DeleteMyIdentityUseCase().call(NoParams());
         AppSettings().identity = null;
+        await DeleteMyIdentityUseCase().call(NoParams());
       },
     );
     return res;

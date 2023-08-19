@@ -28,6 +28,7 @@ class HomePage extends StatelessWidget {
         ..add(GetAllActivityEvent()),
       child: Builder(builder: (context) {
         return Scaffold(
+          backgroundColor: theme.darkThemeForScafold,
           extendBodyBehindAppBar: true,
           body: Padding(
             padding: EdgeInsets.only(

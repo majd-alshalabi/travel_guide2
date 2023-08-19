@@ -3,18 +3,22 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
+import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/account/presentation/chat_page/presentation/pages/chat_details.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
 
-class GuideProfile  extends StatelessWidget {
+class GuideProfile extends StatelessWidget {
+  final GuideModel guide;
+
+  const GuideProfile({super.key, required this.guide});
   @override
   Widget build(BuildContext context) {
-    AppTheme theme =sl<ThemeCubit>().globalAppTheme;
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
       backgroundColor: theme.darkThemeForScafold,
       body: SingleChildScrollView(
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -22,7 +26,7 @@ class GuideProfile  extends StatelessWidget {
               Center(
                 child: Container(
                   width: double.infinity,
-                  height:MediaQuery.of(context).size.height*0.37 ,
+                  height: MediaQuery.of(context).size.height * 0.37,
                   decoration: BoxDecoration(
                     color: Colors.blueGrey,
                   ),
@@ -30,70 +34,58 @@ class GuideProfile  extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        margin:
-                        const EdgeInsets.only(bottom: 20,top: 30),
+                        margin: const EdgeInsets.only(bottom: 20, top: 30),
                         child: TravelGuideUserAvatar(
                           width: 25.w,
-                          imageUrl: ""
+                          imageUrl: guide.image ?? "",
                         ),
                       ),
-                        Text(
-                       "Abdalrahman",
-                          style: StylesText.defaultTextStyle
-                              .copyWith(color: Colors.white),
-                        ),
-                        Text(
-                          "abd233661@gmail.com",
-                          style: StylesText.defaultTextStyle
-                              .copyWith(color: Colors.white),
-                        ),
                       Text(
-                       "Damascus",
-                        style: StylesText.defaultTextStyle
+                        guide.name ?? "",
+                        style: StylesText.newDefaultTextStyle
                             .copyWith(color: Colors.white),
                       ),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Since : ",
-                              style: StylesText.defaultTextStyle
-                                  .copyWith(color: Colors.white),
-                            ),
-                            Text(
-                              "2023/15/11",
-                              style: StylesText.defaultTextStyle
-                                  .copyWith(color: Colors.white),
-                            ),
-                          ],
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 5),
+                        child: Text(
+                          guide.location ?? "",
+                          style: StylesText.newDefaultTextStyle
+                              .copyWith(color: Colors.white),
                         ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0 ,left: 16,right: 16),
-                        child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: Container(
-                            height:MediaQuery.of(context).size.height*0.05 ,
-                            width:MediaQuery.of(context).size.width*0.1 ,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Since : ",
+                            style: StylesText.newDefaultTextStyle
+                                .copyWith(color: Colors.white),
+                          ),
+                          Text(
+                            Utils.dateToUtcFormattedForNotificationFromString(
+                              guide.createdAt ?? "",
                             ),
-                            child: IconButton(
-                              onPressed: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                    const ChatDetails(senderName: "Harry Peterson"),
-                                  ),
-                                );
-                              }
-                              , icon: Icon(
-                              Icons.chat_bubble_outline_rounded
-                            ),
-
-                            ),
+                            style: StylesText.newDefaultTextStyle
+                                .copyWith(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        alignment: Alignment.centerRight,
+                        child: FloatingActionButton(
+                          backgroundColor: theme.white,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChatPage(guide: guide),
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            Icons.comment_bank_outlined,
+                            color: theme.black,
                           ),
                         ),
                       )
@@ -103,115 +95,124 @@ class GuideProfile  extends StatelessWidget {
               ),
             ]),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16 ,vertical: 10),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("gender : ",
-                      style: StylesText.newDefaultTextStyle.copyWith(
-                          color: Colors.black,
-                          fontSize: 18
-                      ),),
-                    SizedBox(height: 1.h,),
-                    Container(
-                      width: double.infinity,
-                      constraints: BoxConstraints(
-                        minHeight: 5.h,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "gender : ",
+                        style: StylesText.newDefaultTextStyle
+                            .copyWith(color: Colors.black, fontSize: 18),
                       ),
-                      decoration: BoxDecoration(
-                        color: theme.greyWeak.withAlpha(90),
-                        borderRadius: BorderRadius.circular(8)
+                      SizedBox(
+                        height: 1.h,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text("male",
-                          style: StylesText.newDefaultTextStyle.copyWith(
-                              color: theme.reserveDarkScaffold,
-                              fontSize: 18
-                          ),),
+                      Container(
+                        width: double.infinity,
+                        constraints: BoxConstraints(
+                          minHeight: 5.h,
+                        ),
+                        decoration: BoxDecoration(
+                            color: theme.greyWeak.withAlpha(90),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            guide.gender ?? "",
+                            style: StylesText.newDefaultTextStyle.copyWith(
+                                color: theme.reserveDarkScaffold, fontSize: 18),
+                          ),
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 1.h,),
-                    Text("Age : ",
-                      style: StylesText.newDefaultTextStyle.copyWith(
-                          color: Colors.black,
-                          fontSize: 18
-                      ),),
-                    SizedBox(height: 1.h,),
-                    Container(
-                      width: double.infinity,
-                      constraints: BoxConstraints(
-                        minHeight: 5.h,
+                      SizedBox(
+                        height: 1.h,
                       ),
-                      decoration: BoxDecoration(
-                          color: theme.greyWeak.withAlpha(90),
-                          borderRadius: BorderRadius.circular(8)
+                      Text(
+                        "Age : ",
+                        style: StylesText.newDefaultTextStyle
+                            .copyWith(color: Colors.black, fontSize: 18),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text("22",
-                          style: StylesText.newDefaultTextStyle.copyWith(
-                              color: Colors.black,
-                              fontSize: 18
-                          ),),
+                      SizedBox(
+                        height: 1.h,
                       ),
-                    ),
-                    SizedBox(height: 1.h,),
-                    Text("years Of Experience : ",
-                      style: StylesText.newDefaultTextStyle.copyWith(
-                          color: Colors.black,
-                          fontSize: 18
-                      ),),
-                    SizedBox(height: 1.h,),
-                    Container(
-                      width: double.infinity,
-                      constraints: BoxConstraints(
-                        minHeight: 5.h,
+                      Container(
+                        width: double.infinity,
+                        constraints: BoxConstraints(
+                          minHeight: 5.h,
+                        ),
+                        decoration: BoxDecoration(
+                            color: theme.greyWeak.withAlpha(90),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            guide.age.toString(),
+                            style: StylesText.newDefaultTextStyle
+                                .copyWith(color: Colors.black, fontSize: 18),
+                          ),
+                        ),
                       ),
-                      decoration: BoxDecoration(
-                          color: theme.greyWeak.withAlpha(90),
-                          borderRadius: BorderRadius.circular(8)
+                      SizedBox(
+                        height: 1.h,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text("3",
-                          style: StylesText.newDefaultTextStyle.copyWith(
-                              color: Colors.black,
-                              fontSize: 18
-                          ),),
+                      Text(
+                        "years Of Experience : ",
+                        style: StylesText.newDefaultTextStyle
+                            .copyWith(color: Colors.black, fontSize: 18),
                       ),
-                    ),
-                    SizedBox(height: 1.h,),
-                    Text("bio : ",
-                      style: StylesText.newDefaultTextStyle.copyWith(
-                          color: Colors.black,
-                          fontSize: 18
-                      ),),
-                    SizedBox(height: 1.h,),
-                    Container(
-                      width: double.infinity,
-                      constraints: BoxConstraints(
-                        minHeight: 5.h,
+                      SizedBox(
+                        height: 1.h,
                       ),
-                      decoration: BoxDecoration(
-                          color: theme.greyWeak.withAlpha(90),
-                          borderRadius: BorderRadius.circular(8)
+                      Container(
+                        width: double.infinity,
+                        constraints: BoxConstraints(
+                          minHeight: 5.h,
+                        ),
+                        decoration: BoxDecoration(
+                            color: theme.greyWeak.withAlpha(90),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            guide.yearsofExperience.toString(),
+                            style: StylesText.newDefaultTextStyle
+                                .copyWith(color: Colors.black, fontSize: 18),
+                          ),
+                        ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Text("sadnlk/asdnasn.asn.asdna.jskdna.sdnaj.kdnajdnaj.kdn.ajdnasjkdna.jkdnajk.dnajkdnakj.dnajk.dna.jdknadjk.andjk.adnjak.dnjak.sdnjak.dnj.kad",
-                          style: StylesText.newDefaultTextStyle.copyWith(
-                              color: Colors.black,
-                              fontSize: 18
-                          ),),
+                      SizedBox(
+                        height: 1.h,
                       ),
-                    ),
-
-                  ],
-                ),
-              )
-            ),
+                      Text(
+                        "bio : ",
+                        style: StylesText.newDefaultTextStyle
+                            .copyWith(color: Colors.black, fontSize: 18),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        constraints: BoxConstraints(
+                          minHeight: 5.h,
+                        ),
+                        decoration: BoxDecoration(
+                            color: theme.greyWeak.withAlpha(90),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            guide.bio ?? "",
+                            style: StylesText.newDefaultTextStyle
+                                .copyWith(color: Colors.black, fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
           ],
         ),
       ),

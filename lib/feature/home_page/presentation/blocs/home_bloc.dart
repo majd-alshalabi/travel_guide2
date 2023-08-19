@@ -18,7 +18,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
     on<GetAllActivityEvent>((event, emit) async {
       emit(GetAllActivityLoading());
-      final res = await GetAllActivityUseCase().call(NoParams());
+      final res =
+          await GetAllActivityUseCase().call(GetActivityParamsModel(page: 1));
       res.fold(
         (l) => emit(GetAllActivityError()),
         (r) {

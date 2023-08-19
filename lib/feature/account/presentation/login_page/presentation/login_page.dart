@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:travel_guide/core/constants/lite_rolling_switch.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
@@ -117,23 +115,23 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        LiteRollingSwitch(
-                          value: guide,
-                          textOn: 'guide',
-                          textOff: 'user',
-                          colorOn: const Color(0xffDE7254),
-                          colorOff: Colors.grey,
-                          iconOn: Icons.done,
-                          iconOff: Icons.remove_circle_outline,
-                          textSize: 16.0,
-                          width: 25.w,
-                          onChanged: (bool state) {
-                            guide = state;
-                          },
-                        ),
+                        // const SizedBox(
+                        //   height: 30,
+                        // ),
+                        // LiteRollingSwitch(
+                        //   value: guide,
+                        //   textOn: 'guide',
+                        //   textOff: 'user',
+                        //   colorOn: const Color(0xffDE7254),
+                        //   colorOff: Colors.grey,
+                        //   iconOn: Icons.done,
+                        //   iconOff: Icons.remove_circle_outline,
+                        //   textSize: 16.0,
+                        //   width: 25.w,
+                        //   onChanged: (bool state) {
+                        //     guide = state;
+                        //   },
+                        // ),
                         const SizedBox(
                           height: 30,
                         ),
@@ -143,7 +141,6 @@ class _LoginPageState extends State<LoginPage> {
                             buttonColor: const Color(0xffDE7254),
                             onPress: () {
                               context.read<LoginCubit>().login(
-                                    guide: guide,
                                     email: emailController.text,
                                     password: passwordController.text,
                                   );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
@@ -309,10 +310,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: theme.darkAndWhiteForAppBar,
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontSize: 18,
-              color: theme.reserveDarkScaffold,
-            ),
+        style: StylesText.newDefaultTextStyle.copyWith(
+          fontSize: 18,
+          color: theme.reserveDarkScaffold,
+        ),
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: theme.darkAndWhiteForAppBar,
@@ -336,15 +337,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class CustomText extends StatelessWidget {
   final String titleName;
-  final TextStyle textStyleForTextTilte;
-  final TextStyle defaultTextStyle;
   final Function onTap;
+  final bool seeAllButton;
   CustomText({
     super.key,
     required this.titleName,
     required this.onTap,
-    required this.textStyleForTextTilte,
-    required this.defaultTextStyle,
+    required this.seeAllButton,
   });
 
   @override
@@ -356,24 +355,26 @@ class CustomText extends StatelessWidget {
         children: [
           Text(
             titleName,
-            style: textStyleForTextTilte,
+            style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
           ),
-          InkWell(
-            onTap: () {
-              onTap();
-            },
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)?.translate('See all') ?? "",
-                    style: defaultTextStyle,
-                  ),
-                ],
+          if (seeAllButton)
+            InkWell(
+              onTap: () {
+                onTap();
+              },
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)?.translate('See all') ?? "",
+                      style: StylesText.newDefaultTextStyle
+                          .copyWith(color: Colors.grey),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -587,6 +588,46 @@ class HomeLoadingWidget extends StatelessWidget {
               BannerPlaceholder(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AllActivityLoadingWidget extends StatelessWidget {
+  const AllActivityLoadingWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      enabled: true,
+      child: const SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            BannerPlaceholder(),
+            TitlePlaceholder(width: double.infinity),
+            SizedBox(height: 16.0),
+            ContentPlaceholder(
+              lineType: ContentLineType.threeLines,
+            ),
+            SizedBox(height: 16.0),
+            TitlePlaceholder(width: 200.0),
+            SizedBox(height: 16.0),
+            ContentPlaceholder(
+              lineType: ContentLineType.twoLines,
+            ),
+            SizedBox(height: 16.0),
+            TitlePlaceholder(width: 200.0),
+            SizedBox(height: 16.0),
+            ContentPlaceholder(
+              lineType: ContentLineType.twoLines,
+            ),
+          ],
         ),
       ),
     );

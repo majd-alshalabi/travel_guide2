@@ -28,7 +28,7 @@ class GuideModel {
   String? gender;
   String? age;
   int? yearsofExperience;
-  UseImage? image;
+  String? image;
   String? location;
   String? bio;
   String? createdAt;
@@ -56,7 +56,7 @@ class GuideModel {
     gender = json['gender'];
     age = json['age'];
     yearsofExperience = json['yearsofExperience'];
-    image = json['image'] != null ? new UseImage.fromJson(json['image']) : null;
+    image = json['image'];
     location = json['location'];
     bio = json['bio'];
     createdAt = json['created_at'];
@@ -73,7 +73,7 @@ class GuideModel {
     data['age'] = this.age;
     data['yearsofExperience'] = this.yearsofExperience;
     if (this.image != null) {
-      data['image'] = this.image!.toJson();
+      data['image'] = this.image;
     }
     data['location'] = this.location;
     data['bio'] = this.bio;

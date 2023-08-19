@@ -7,12 +7,13 @@ import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_mode
 import 'package:travel_guide/feature/home_page/data/repositories/home_repositories.dart';
 
 class GetAllActivityUseCase
-    extends UseCase<GetActivityResponseModel, NoParams> {
+    extends UseCase<GetActivityResponseModel, GetActivityParamsModel> {
   HomeRepositories repository = HomeRepositories();
 
   @override
-  Future<Either<String, GetActivityResponseModel>> call(NoParams params) async {
-    return await repository.getAllActivity();
+  Future<Either<String, GetActivityResponseModel>> call(
+      GetActivityParamsModel params) async {
+    return await repository.getAllActivity(params);
   }
 }
 

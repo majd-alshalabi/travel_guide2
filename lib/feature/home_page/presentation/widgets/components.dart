@@ -20,52 +20,6 @@ import 'package:travel_guide/feature/search_screen/presentation/search_screen.da
 import 'package:travel_guide/feature/setting_page/presentation/screens/sitting_page.dart';
 import 'package:travel_guide/injection.dart';
 
-class CustomText extends StatelessWidget {
-  final String titleName;
-  final Function onTap;
-  final bool seeAllButton;
-  CustomText({
-    super.key,
-    required this.titleName,
-    required this.onTap,
-    required this.seeAllButton,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.fromLTRB(16.0, 10.0, 10.0, 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            titleName,
-            style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
-          ),
-          if (seeAllButton)
-            InkWell(
-              onTap: () {
-                onTap();
-              },
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)?.translate('See all') ?? "",
-                      style: StylesText.newDefaultTextStyle
-                          .copyWith(color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
 class searchWithNotifications extends StatelessWidget {
   const searchWithNotifications({
     super.key,

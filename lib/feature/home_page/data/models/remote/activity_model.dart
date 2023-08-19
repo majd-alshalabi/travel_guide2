@@ -1,3 +1,9 @@
+class GetActivityParamsModel {
+  int page;
+
+  GetActivityParamsModel({required this.page});
+}
+
 class GetActivityResponseModel {
   String? message;
   PaginationData? data;
@@ -150,7 +156,7 @@ class ActivityRemoteModel {
     region =
         json['region'] != null ? RegionModel.fromJson(json['region']) : null;
     city = json['city'] != null ? CityModel.fromJson(json['city']) : null;
-    admin = json['admin'] != null ? AdminModel.fromJson(json['admin']) : null;
+    admin = json['user'] != null ? AdminModel.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -274,27 +280,24 @@ class CityModel {
 class AdminModel {
   int? id;
   String? name;
-  String? email;
-  String? createdAt;
-  String? updatedAt;
+  String? image;
+  String? type;
 
-  AdminModel({this.id, this.name, this.email, this.createdAt, this.updatedAt});
+  AdminModel({this.id, this.name, this.image, this.type});
 
   AdminModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    email = json['email'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    image = json['image'];
+    type = json['type'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    data['email'] = email;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
+    data['image'] = image;
+    data['type'] = type;
     return data;
   }
 }

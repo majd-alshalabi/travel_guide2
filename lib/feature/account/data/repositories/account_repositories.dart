@@ -3,6 +3,7 @@ import 'package:travel_guide/feature/account/data/data_sources/local/account_loc
 import 'package:travel_guide/feature/account/data/data_sources/remote/account_remote_data_source.dart';
 import 'package:travel_guide/feature/account/data/models/local/my_identity_model.dart';
 import 'package:travel_guide/feature/account/data/models/remote/change_password_model.dart';
+import 'package:travel_guide/feature/account/data/models/remote/get_guide_models.dart';
 import 'package:travel_guide/feature/account/data/models/remote/log_out_model.dart';
 import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
 import 'package:travel_guide/feature/account/data/models/remote/register_model.dart';
@@ -75,6 +76,17 @@ class AccountRepositories implements IAccountRepository {
       return Right(res);
     } catch (e) {
       return const Left("Error while getting identity");
+    }
+  }
+
+  @override
+  Future<Either<String, GetAllGuideResponseModel>> getAllGuide() async {
+    try {
+      final GetAllGuideResponseModel res =
+          await accountRemoteDataSource.getAllGuide();
+      return Right(res);
+    } catch (e) {
+      return const Left("Error while updating fcm token");
     }
   }
 

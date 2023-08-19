@@ -57,14 +57,17 @@ class HomeRemoteDataSource {
     return Future.value(AddCommentResponseModel.fromJson(res));
   }
 
-  Future<GetActivityResponseModel> getActivity() async {
+  Future<GetActivityResponseModel> getActivity(
+      GetActivityParamsModel params) async {
     final res = await networkServices.get(
       RemoteDataBundle(
         body: {},
         networkPath: NetworkConfigurations.kGetAllActivity,
-        urlParams: <String, String>{},
+        urlParams: <String, dynamic>{"page": params.page},
       ),
     );
+    print(res);
+    print("das2gdas2g");
     return Future.value(GetActivityResponseModel.fromJson(res));
   }
 

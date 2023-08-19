@@ -7,7 +7,8 @@ import 'package:travel_guide/feature/home_page/data/models/remote/regions_model.
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
 
 abstract class IHomeRepository {
-  Future<Either<String, GetActivityResponseModel?>> getAllActivity();
+  Future<Either<String, GetActivityResponseModel?>> getAllActivity(
+      GetActivityParamsModel params);
   Future<Either<String, AddRateResponseModel>> rateActivity(
       AddRateParamsModel params);
   Future<Either<String, GetTopRatedResponseModel>> getTopRatedUseCase();
