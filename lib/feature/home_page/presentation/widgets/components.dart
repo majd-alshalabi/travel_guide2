@@ -77,7 +77,7 @@ class searchWithNotifications extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             width: width * 0.8,
@@ -97,13 +97,13 @@ class searchWithNotifications extends StatelessWidget {
                   color: theme.reserveDarkScaffold,
                 ),
                 enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                     borderSide: BorderSide(
                       color: theme.reserveDarkScaffold,
                       width: 2,
                     )),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
                   borderSide: BorderSide(
                     color: theme.reserveDarkScaffold,
                     width: 2,
@@ -179,18 +179,19 @@ class ListOfImages extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                            top: 10,
-                            right: 10,
-                            child: LikeButton(
-                              size: 20,
-                              circleColor: CircleColor(
-                                  start: Color(0xffffffff),
-                                  end: Color(0xffffffff)),
-                              bubblesColor: BubblesColor(
-                                dotPrimaryColor: Color(0xff33b5e5),
-                                dotSecondaryColor: Color(0xff0099cc),
-                              ),
-                            ))
+                          top: 10,
+                          right: 10,
+                          child: LikeButton(
+                            size: 20,
+                            circleColor: CircleColor(
+                                start: Color(0xffffffff),
+                                end: Color(0xffffffff)),
+                            bubblesColor: BubblesColor(
+                              dotPrimaryColor: Color(0xff33b5e5),
+                              dotSecondaryColor: Color(0xff0099cc),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -230,7 +231,7 @@ class DrawerHome extends StatelessWidget {
               child: ListTile(
                 leading: TravelGuideUserAvatar(
                   width: 13.w,
-                  imageUrl: 'assets/images/user_avatar/user_avatar_image.png',
+                  imageUrl: ImagesApp.imagesUserAvatarUserAvatarImage,
                 ),
                 title: Text(
                   AppSettings().identity?.name ?? "login",

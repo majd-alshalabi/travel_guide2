@@ -37,63 +37,68 @@ class _TogglePageState extends State<TogglePage> {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
-    return Scaffold(
-      drawer: DrawerHome(),
-      appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0),
-      extendBodyBehindAppBar: true,
-      backgroundColor: theme.darkThemeForScafold,
-      extendBody: true,
-      resizeToAvoidBottomInset: false,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: PageView(
-        onPageChanged: (value) {
-          currentIndex = value;
-        },
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: List.generate(
-          bottomBarPages.length,
-          (index) => bottomBarPages[index],
+    return SafeArea(
+      child: Scaffold(
+        drawer: DrawerHome(),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
-      ),
-      bottomNavigationBar: AnimatedNotchBottomBar(
-        /// Provide NotchBottomBarController
-        notchBottomBarController: _controller,
-        color: theme.reserveDarkScaffold,
-        notchColor: theme.reserveDarkScaffold,
-        showShadow: false,
-        removeMargins: false,
-        itemLabelStyle: StylesText.newDefaultTextStyle
-            .copyWith(fontSize: 14, color: theme.darkThemeForScafold),
-        bottomBarWidth: double.infinity,
-        durationInMilliSeconds: 200,
-        bottomBarItems: [
-          BottomBarItem(
-            inActiveItem: Icon(
-              Icons.home_outlined,
-              color: Colors.white,
-            ),
-            activeItem: Icon(
-              Icons.home,
-              color: theme.white,
-            ),
-            itemLabel: 'text',
+        extendBodyBehindAppBar: true,
+        backgroundColor: theme.darkThemeForScafold,
+        extendBody: true,
+        resizeToAvoidBottomInset: false,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: PageView(
+          onPageChanged: (value) {
+            currentIndex = value;
+          },
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: List.generate(
+            bottomBarPages.length,
+            (index) => bottomBarPages[index],
           ),
-          BottomBarItem(
-            inActiveItem: Icon(
-              Icons.location_searching_outlined,
-              color: Colors.white,
+        ),
+        bottomNavigationBar: AnimatedNotchBottomBar(
+          /// Provide NotchBottomBarController
+          notchBottomBarController: _controller,
+          color: theme.reserveDarkScaffold,
+          notchColor: theme.reserveDarkScaffold,
+          showShadow: false,
+          removeMargins: false,
+          itemLabelStyle: StylesText.newDefaultTextStyle
+              .copyWith(fontSize: 14, color: theme.darkThemeForScafold),
+          bottomBarWidth: double.infinity,
+          durationInMilliSeconds: 200,
+          bottomBarItems: [
+            BottomBarItem(
+              inActiveItem: Icon(
+                Icons.home_outlined,
+                color: Colors.white,
+              ),
+              activeItem: Icon(
+                Icons.home,
+                color: theme.white,
+              ),
+              itemLabel: 'text',
             ),
-            activeItem: Icon(
-              Icons.location_searching,
-              color: theme.white,
+            BottomBarItem(
+              inActiveItem: Icon(
+                Icons.location_searching_outlined,
+                color: Colors.white,
+              ),
+              activeItem: Icon(
+                Icons.location_searching,
+                color: theme.white,
+              ),
+              itemLabel: 'text',
             ),
-            itemLabel: 'text',
-          ),
-        ],
-        onTap: (index) {
-          _pageController.jumpToPage(index);
-        },
+          ],
+          onTap: (index) {
+            _pageController.jumpToPage(index);
+          },
+        ),
       ),
     );
   }
