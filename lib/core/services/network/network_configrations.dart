@@ -1,6 +1,9 @@
 class NetworkConfigurations {
   static const kRegister = 'user/register';
+  static const kLogOut = 'logout';
   static const kGetAllActivity = 'getactivity';
+  static const kGetAllRegion = 'getregions';
+  static const kGetAllGuides = 'get_all_guides';
   static const kGetTopRatedActivity = 'toprated';
   static const kRateActivity = 'addrate';
   static const kRateGuide = 'rateaguide';

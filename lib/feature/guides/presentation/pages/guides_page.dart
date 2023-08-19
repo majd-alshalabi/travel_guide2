@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_guide/app_localizations.dart';
+import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
-import 'package:travel_guide/feature/guides/presentation/pages/guide_profile.dart';
+import 'package:travel_guide/feature/guides/presentation/cubits/guides_cubit/guides_cubit.dart';
 import 'package:travel_guide/feature/guides/presentation/widget/components.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
@@ -13,20 +15,70 @@ class GuidesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
-    return Scaffold(
-        backgroundColor: theme.darkThemeForScafold,
-        appBar: CustomAppBar(
-          title: AppLocalizations.of(context)?.translate('guides') ?? "",
-        ),
-        body: ListView.builder(
-          itemBuilder: (context, index) => InkWell(
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => GuideProfile(),
-                  )),
-              child: GuideItem()),
-          itemCount: 5,
-        ));
+    return BlocProvider(
+      create: (context) => GuidesCubit()..getAllGuide(),
+      child: Builder(builder: (context) {
+        return Scaffold(
+            backgroundColor: theme.darkThemeForScafold,
+            appBar: CustomAppBar(
+              title: AppLocalizations.of(context)?.translate('guides') ?? "",
+            ),
+            body: RefreshIndicator(
+              onRefresh: () async {
+                context.read<GuidesCubit>().getAllGuide();
+              },
+              child: BlocBuilder<GuidesCubit, GuidesState>(
+                buildWhen: (previous, current) {
+                  if (current is GuidesError) return true;
+                  if (current is GuidesLoading) return true;
+                  if (current is GuidesLoaded) return true;
+                  return false;
+                },
+                builder: (context, state) {
+                  if (state is GuidesLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is GuidesError) {
+                    return Center(
+                      child: Text(
+                        "error while loading",
+                        style: StylesText.newDefaultTextStyle
+                            .copyWith(color: Colors.black),
+                      ),
+                    );
+                  } else if (context.read<GuidesCubit>().guides.isEmpty) {
+                    return Center(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "there is not guide currently",
+                          style: StylesText.newDefaultTextStyle
+                              .copyWith(color: Colors.black),
+                        ),
+                        InkWell(
+                          onTap: () =>
+                              context.read<GuidesCubit>().getAllGuide(),
+                          child: Text(
+                            "try again",
+                            style: StylesText.newDefaultTextStyle
+                                .copyWith(color: Colors.blue),
+                          ),
+                        ),
+                      ],
+                    ));
+                  }
+                  return ListView.builder(
+                    itemBuilder: (context, index) => GuideItem(
+                      guide: context.read<GuidesCubit>().guides[index],
+                    ),
+                    itemCount: context.read<GuidesCubit>().guides.length,
+                  );
+                },
+              ),
+            ));
+      }),
+    );
   }
 }

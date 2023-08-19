@@ -9,6 +9,7 @@ import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
 import 'package:travel_guide/core/services/network/network_interface.dart';
 import 'package:travel_guide/core/utils/utils.dart';
+import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
 import 'package:travel_guide/feature/account/domain/use_cases/delete_my_identity_use_case.dart';
 import 'package:travel_guide/feature/account/domain/use_cases/get_my_identity_use_case.dart';
 import 'package:travel_guide/feature/account/presentation/login_page/presentation/login_page.dart';
@@ -32,6 +33,7 @@ class NetworkServices implements IRemoteDataSource {
 
   _returnResponse(Response response) async {
     var responseJson = json.decode(response.data);
+    print("adg2sgas2d");
     print(responseJson);
     switch (response.statusCode) {
       case 200:
@@ -76,14 +78,25 @@ class NetworkServices implements IRemoteDataSource {
         compact: true,
         maxWidth: 90,
       ));
+      String addedValue = '';
+      if (remoteBundle.networkPath != NetworkConfigurations.kRegister &&
+          remoteBundle.networkPath != NetworkConfigurations.kLogin) {
+        addedValue = (AppSettings().identity?.guide == UserType.guide
+            ? "for_guide/"
+            : "");
+      }
       final Response response = await Dio().get(
-        NetworkConfigurations.BaseUrl + remoteBundle.networkPath,
+        NetworkConfigurations.BaseUrl + addedValue + remoteBundle.networkPath,
         options: Options(
           headers: headers,
           responseType: ResponseType.plain,
         ),
         queryParameters: remoteBundle.urlParams,
       );
+      print(
+        NetworkConfigurations.BaseUrl + addedValue + remoteBundle.networkPath,
+      );
+      print("sagdsda");
       return _returnResponse(response);
     } on DioException catch (e) {
       if (e.response == null) throw Exception("no internet connection");
@@ -111,9 +124,15 @@ class NetworkServices implements IRemoteDataSource {
         compact: true,
         maxWidth: 90,
       ));
-
+      String addedValue = '';
+      if (remoteBundle.networkPath != NetworkConfigurations.kRegister &&
+          remoteBundle.networkPath != NetworkConfigurations.kLogin) {
+        addedValue = (AppSettings().identity?.guide == UserType.guide
+            ? "for_guide/"
+            : "");
+      }
       final response = await dio.post(
-        NetworkConfigurations.BaseUrl + remoteBundle.networkPath,
+        NetworkConfigurations.BaseUrl + addedValue + remoteBundle.networkPath,
         data: remoteBundle.body,
         queryParameters: remoteBundle.urlParams,
         options: Options(
@@ -143,8 +162,16 @@ class NetworkServices implements IRemoteDataSource {
           error: true,
           compact: true,
           maxWidth: 90));
+      String addedValue = '';
+
+      if (remoteBundle.networkPath != NetworkConfigurations.kRegister &&
+          remoteBundle.networkPath != NetworkConfigurations.kLogin) {
+        addedValue = (AppSettings().identity?.guide == UserType.guide
+            ? "for_guide/"
+            : "");
+      }
       final response = await dio.post(
-        NetworkConfigurations.BaseUrl + remoteBundle.networkPath,
+        NetworkConfigurations.BaseUrl + addedValue + remoteBundle.networkPath,
         data: remoteBundle.data,
         options: Options(headers: headers, responseType: ResponseType.plain),
       );

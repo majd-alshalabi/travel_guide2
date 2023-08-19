@@ -55,7 +55,7 @@ class SettAlKolDatabase {
     // When creating the db, create the table
     await db.execute("create table $kIdentity(id integer primary key ,"
         "phoneNumber TEXT,name TEXT,"
-        "imageUrl TEXT,token TEXT,serverId integer,notificationType integer,"
+        "imageUrl TEXT,token TEXT,serverId integer,guide integer,notificationType integer,"
         "fcmToken TEXT,location TEXT ,"
         "email TEXT,createdAt TEXT "
         ")");

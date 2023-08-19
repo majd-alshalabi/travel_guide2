@@ -4,11 +4,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
-import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/account/presentation/register_page/presentation/blocs/register_cubit/register_cubit.dart';
 import 'package:travel_guide/feature/home_page/presentation/screen/toggle_page.dart';
-import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -64,18 +62,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Form(
                     key: formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         const SizedBox(height: 30),
-                        InkWell(
-                          onTap: () => context
-                              .read<ThemeCubit>()
-                              .chooseThemeFromDialog(
-                                  value: context.read<ThemeCubit>().themeType ==
-                                          ThemeType.settAlKolDark
-                                      ? ThemeType.settAlKolLight
-                                      : ThemeType.settAlKolDark),
+                        Container(
+                          alignment: Alignment.centerLeft,
                           child: Text(
                             "Sign up",
                             style: StylesText.textStyleForTitle,
@@ -86,17 +78,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         Text(
                           "Welcome pleas enter your Name , email and password  to create your account ",
-                          style: StylesText.defaultTextStyle,
+                          style: StylesText.newDefaultTextStyle
+                              .copyWith(color: Colors.grey),
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        const SizedBox(height: 30),
                         CustomTextField(
                           type: TextInputType.text,
                           prefix: const Icon(Icons.person),
                           color: Colors.black,
                           controllerName: usernameController,
-                          label: "UserName",
+                          label: "name",
                           valedate: (val) {
                             if ((val?.length ?? 0) < 3) {
                               return "user name must be at least three character";
@@ -104,15 +95,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        const SizedBox(height: 10),
                         CustomTextField(
                           type: TextInputType.text,
                           prefix: const Icon(Icons.email),
                           color: Colors.black,
                           controllerName: emailController,
-                          label: "Email",
+                          label: "email",
                           valedate: (val) {
                             if (val?.isEmpty ?? true) {
                               return "email must not be empty";
@@ -120,15 +109,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        const SizedBox(height: 10),
                         CustomTextField(
                           type: TextInputType.text,
                           prefix: const Icon(Icons.password_rounded),
                           color: Colors.black,
                           controllerName: passwordController,
-                          label: "Password",
+                          label: "password",
                           valedate: (val) {
                             if ((val?.length ?? 0) < 8) {
                               return "password length must be 8 at least";
@@ -141,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         CustomBottom(
                           text: "Register",
-                          height: 60,
+                          height: 50,
                           buttonColor: const Color(0xffDE7254),
                           onPress: () {
                             if (formKey.currentState!.validate()) {

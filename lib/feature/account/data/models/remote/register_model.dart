@@ -25,18 +25,22 @@ class RegisterParamsModel {
 class RegisterResponseModel {
   String? message;
   String? accessToken;
+  int? id;
 
-  RegisterResponseModel({this.message, this.accessToken});
+  RegisterResponseModel({this.message, this.accessToken, this.id});
 
   RegisterResponseModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     accessToken = json['access_token'];
+    id = json['user']['id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['message'] = message;
     data['access_token'] = accessToken;
+    data['id'] = id;
+
     return data;
   }
 }

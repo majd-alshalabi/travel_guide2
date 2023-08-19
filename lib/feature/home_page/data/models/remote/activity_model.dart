@@ -1,10 +1,44 @@
+class GetActivityParamsModel {
+  int page;
+
+  GetActivityParamsModel({required this.page});
+}
+
 class GetActivityResponseModel {
   String? message;
-  List<ActivityRemoteModel>? data;
+  PaginationData? data;
 
   GetActivityResponseModel({this.message, this.data});
 
   GetActivityResponseModel.fromJson(Map<String, dynamic> json) {
+    message = json['message'];
+    data = json['data'] != null ? PaginationData.fromJson(json['data']) : null;
+  }
+}
+
+class PaginationData {
+  List<ActivityRemoteModel>? data;
+  PaginationData({
+    this.data,
+  });
+
+  PaginationData.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <ActivityRemoteModel>[];
+      json['data'].forEach((v) {
+        data!.add(ActivityRemoteModel.fromJson(v));
+      });
+    }
+  }
+}
+
+class GetNearbyActivityResponseModel {
+  String? message;
+  List<ActivityRemoteModel>? data;
+
+  GetNearbyActivityResponseModel({this.message, this.data});
+
+  GetNearbyActivityResponseModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     if (json['data'] != null) {
       data = <ActivityRemoteModel>[];
@@ -24,15 +58,35 @@ class GetActivityResponseModel {
   }
 }
 
+class GetNearbyActivityParamsModel {
+  double? latitude;
+  double? longitude;
+
+  GetNearbyActivityParamsModel({this.latitude, this.longitude});
+
+  GetNearbyActivityParamsModel.fromJson(Map<String, dynamic> json) {
+    longitude = json['longitude'];
+    latitude = json['latitude'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
+    return data;
+  }
+}
+
 class GetTopRatedResponseModel {
   List<ActivityRemoteModel>? topRated;
 
   GetTopRatedResponseModel({this.topRated});
 
   GetTopRatedResponseModel.fromJson(Map<String, dynamic> json) {
-    if (json['Top_Rated'] != null) {
+    if (json['data'] != null) {
       topRated = <ActivityRemoteModel>[];
-      json['Top_Rated'].forEach((v) {
+
+      json['data'].forEach((v) {
         topRated!.add(new ActivityRemoteModel.fromJson(v));
       });
     }
@@ -48,8 +102,7 @@ class GetTopRatedResponseModel {
 }
 
 class ActivityRemoteModel {
-  List<ImageModel>? url;
-  int? activityId;
+  int? id;
   int? regionId;
   String? name;
   String? type;
@@ -57,26 +110,33 @@ class ActivityRemoteModel {
   int? price;
   double? latitude;
   double? longitude;
+  int? adminId;
+  int? guideId;
+  int? rating;
+  List<Images>? urls;
+  RegionModel? region;
+  CityModel? city;
+  AdminModel? admin;
 
   ActivityRemoteModel(
-      {this.url,
-      this.activityId,
+      {this.id,
       this.regionId,
       this.name,
       this.type,
       this.description,
       this.price,
       this.latitude,
-      this.longitude});
+      this.longitude,
+      this.adminId,
+      this.guideId,
+      this.rating,
+      this.urls,
+      this.region,
+      this.city,
+      this.admin});
 
   ActivityRemoteModel.fromJson(Map<String, dynamic> json) {
-    if (json['url'] != null) {
-      url = <ImageModel>[];
-      json['url'].forEach((v) {
-        url!.add(new ImageModel.fromJson(v));
-      });
-    }
-    activityId = json['activity_id'];
+    id = json['id'];
     regionId = json['region_id'];
     name = json['name'];
     type = json['type'];
@@ -84,37 +144,160 @@ class ActivityRemoteModel {
     price = json['price'];
     latitude = json['latitude'];
     longitude = json['longitude'];
+    adminId = json['admin_id'];
+    guideId = json['guide_id'];
+    rating = json['rating'];
+    if (json['urls'] != null) {
+      urls = <Images>[];
+      json['urls'].forEach((v) {
+        urls!.add(Images.fromJson(v));
+      });
+    }
+    region =
+        json['region'] != null ? RegionModel.fromJson(json['region']) : null;
+    city = json['city'] != null ? CityModel.fromJson(json['city']) : null;
+    admin = json['user'] != null ? AdminModel.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.url != null) {
-      data['url'] = this.url!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['region_id'] = regionId;
+    data['name'] = name;
+    data['type'] = type;
+    data['description'] = description;
+    data['price'] = price;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    data['admin_id'] = adminId;
+    data['guide_id'] = guideId;
+    data['rating'] = rating;
+    if (urls != null) {
+      data['urls'] = urls!.map((v) => v.toJson()).toList();
     }
-    data['activity_id'] = this.activityId;
-    data['region_id'] = this.regionId;
-    data['name'] = this.name;
-    data['type'] = this.type;
-    data['description'] = this.description;
-    data['price'] = this.price;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
+    if (region != null) {
+      data['region'] = region!.toJson();
+    }
+    if (city != null) {
+      data['city'] = city!.toJson();
+    }
+    if (admin != null) {
+      data['admin'] = admin!.toJson();
+    }
     return data;
   }
 }
 
-class ImageModel {
+class Images {
   String? url;
 
-  ImageModel({this.url});
+  Images({this.url});
 
-  ImageModel.fromJson(Map<String, dynamic> json) {
+  Images.fromJson(Map<String, dynamic> json) {
     url = json['url'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['url'] = this.url;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['url'] = url;
+    return data;
+  }
+}
+
+class RegionModel {
+  int? id;
+  int? cityId;
+  String? name;
+  String? createdAt;
+  String? updatedAt;
+  List<Images>? images;
+  CityModel? city;
+
+  RegionModel(
+      {this.id,
+      this.name,
+      this.createdAt,
+      this.updatedAt,
+      this.cityId,
+      this.city,
+      this.images});
+
+  RegionModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    cityId = json['city_id'];
+    name = json['name'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    if (json['city'] != null) {
+      city = CityModel.fromJson(json['city']);
+    }
+    if (json['images'] != null) {
+      images = <Images>[];
+      json['images'].forEach((v) {
+        images!.add(new Images.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['city_id'] = cityId;
+    data['name'] = name;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['images'] = images;
+    data['city'] = city;
+    return data;
+  }
+}
+
+class CityModel {
+  int? id;
+  String? name;
+  String? createdAt;
+  String? updatedAt;
+
+  CityModel({this.id, this.name, this.createdAt, this.updatedAt});
+
+  CityModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    return data;
+  }
+}
+
+class AdminModel {
+  int? id;
+  String? name;
+  String? image;
+  String? type;
+
+  AdminModel({this.id, this.name, this.image, this.type});
+
+  AdminModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    image = json['image'];
+    type = json['type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
+    data['type'] = type;
     return data;
   }
 }

@@ -20,7 +20,11 @@ class LoginUseCase extends UseCase<LoginResponseModel, LoginParamsModel> {
         name: r.user?.name,
         email: r.user?.email,
         token: r.accessToken,
+        serverId: r.user?.id,
+        guide: r.type,
       );
+      print(AppSettings().identity?.toJson());
+      print("adsgsdag");
       if (AppSettings().identity != null) {
         await SaveMyIdentityUseCase().call(AppSettings().identity!);
       }
