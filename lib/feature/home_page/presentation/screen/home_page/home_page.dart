@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                       SizedBox(
                         height: 50.h,
                         child: MapScreen(
-                          gesture: false,
+                          gesture: false, onTap: (argument) {  },
                         ),
                       ),
                       Container(
