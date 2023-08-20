@@ -4,6 +4,7 @@ import 'package:travel_guide/core/services/network/network_service.dart';
 import 'package:travel_guide/feature/add_places/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/add_places/data/models/remote/city_models.dart';
 import 'package:travel_guide/feature/add_places/data/models/remote/get_activity_model.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 
 class ActivityRemoteDataSource {
   NetworkServices networkServices = NetworkServices();
@@ -19,6 +20,7 @@ class ActivityRemoteDataSource {
     );
     return Future.value(AddActivityResponseModel.fromJson(res));
   }
+
   Future<GetActivityResponseModel> getActivity(
       GetActivityParamsModel params) async {
     final res = await networkServices.get(
@@ -30,6 +32,7 @@ class ActivityRemoteDataSource {
     );
     return Future.value(GetActivityResponseModel.fromJson(res));
   }
+
   Future<GetAllCityResponseModel> getAllCities() async {
     final res = await networkServices.get(
       RemoteDataBundle(
@@ -53,10 +56,9 @@ class ActivityRemoteDataSource {
     return Future.value(AddCityResponseModel.fromJson(res));
   }
 
-
   Future<GetAllRegionResponseModel> getRegion(
       GetRegionParamsModel params) async {
-    final res = await networkServices.post(
+    final res = await networkServices.get(
       RemoteDataBundle(
         body: params.toJson(),
         networkPath: NetworkConfigurations.kGetRegion,
@@ -77,5 +79,4 @@ class ActivityRemoteDataSource {
 
     return Future.value(AddRegionResponseModel.fromJson(res));
   }
-
 }

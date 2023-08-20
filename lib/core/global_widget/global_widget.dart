@@ -398,6 +398,7 @@ class CustomAddTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
       cursorColor: Colors.blue,
       controller: controllerName,
       keyboardType: type,
@@ -405,22 +406,39 @@ class CustomAddTextField extends StatelessWidget {
         return valedate(val);
       },
       decoration: InputDecoration(
-        errorStyle: StylesText.defaultTextStyle.copyWith(color: Colors.red),
+        errorStyle: StylesText.newDefaultTextStyle.copyWith(color: Colors.red),
+        filled: true,
         hintText: label,
         border: InputBorder.none,
         enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(
-              color: Colors.black12,
-              width: 0,
-            )),
-        hintStyle: StylesText.defaultTextStyle,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.black38,
+            width: 0,
+          ),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 0,
+          ),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 0,
+          ),
+        ),
+        hintStyle: StylesText.newDefaultTextStyle.copyWith(color: Colors.grey),
         focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(
-              color: Colors.black12,
-              width: 1,
-            )),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.black38,
+            width: 1,
+          ),
+        ),
       ),
     );
   }
@@ -633,6 +651,7 @@ class AllActivityLoadingWidget extends StatelessWidget {
     );
   }
 }
+
 class CustomDescriptionTextField extends StatelessWidget {
   const CustomDescriptionTextField({
     super.key,
@@ -657,7 +676,7 @@ class CustomDescriptionTextField extends StatelessWidget {
         expands: true,
         maxLines: null,
         textAlignVertical:
-        TextAlignVertical.top, // Set the vertical alignment to top
+            TextAlignVertical.top, // Set the vertical alignment to top
         cursorColor: Colors.blue,
         controller: controllerName,
         keyboardType: type,
@@ -666,7 +685,7 @@ class CustomDescriptionTextField extends StatelessWidget {
         },
         decoration: InputDecoration(
           errorStyle:
-          StylesText.newDefaultTextStyle.copyWith(color: Colors.red),
+              StylesText.newDefaultTextStyle.copyWith(color: Colors.red),
           filled: true,
           hintText: label,
           border: InputBorder.none,
@@ -692,7 +711,7 @@ class CustomDescriptionTextField extends StatelessWidget {
             ),
           ),
           hintStyle:
-          StylesText.newDefaultTextStyle.copyWith(color: Colors.grey),
+              StylesText.newDefaultTextStyle.copyWith(color: Colors.grey),
           focusedBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(

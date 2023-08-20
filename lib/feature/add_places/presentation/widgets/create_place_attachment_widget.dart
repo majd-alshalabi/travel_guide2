@@ -28,7 +28,6 @@ class CreateActivityAttachmentSection extends StatelessWidget {
             context.read<UploadImageCubit>().addImage();
           },
           child: Container(
-            margin: EdgeInsets.only(top: 1.h),
             height: MediaQuery.of(context).size.height * 0.08,
             decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.1),
@@ -38,8 +37,9 @@ class CreateActivityAttachmentSection extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                    padding: EdgeInsets.only(left: 1.w),
-                    child: const FaIcon(FontAwesomeIcons.pinterest)),
+                  padding: EdgeInsets.only(left: 3.w),
+                  child: const FaIcon(FontAwesomeIcons.pinterest),
+                ),
                 Padding(
                   padding: EdgeInsets.only(left: 1.w),
                   child: Text(
@@ -81,8 +81,7 @@ class ActivityScreenImageSection extends StatelessWidget {
             child: CarouselSlider(
               options: CarouselOptions(
                 padEnds: false,
-                height: 20.w,
-                aspectRatio: 1,
+                height: 40.w,
                 viewportFraction: 0.3,
                 initialPage: 1,
                 reverse: false,
@@ -139,8 +138,8 @@ class ActivityImageContainer extends StatelessWidget {
           InkWell(
             onTap: () {},
             child: Container(
-              height: smallSize ? 10.w : 20.w,
-              width: smallSize ? 10.w : 20.w,
+              height: smallSize ? 15.w : 25.w,
+              width: smallSize ? 15.w : 25.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Corners.s10),
                 color: Colors.transparent,

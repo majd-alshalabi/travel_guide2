@@ -4,7 +4,9 @@ import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/core/utils/utils.dart';
-import 'package:travel_guide/feature/account/presentation/chat_page/presentation/pages/chat_details.dart';
+import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
+import 'package:travel_guide/feature/account/presentation/chat_page/presentation/pages/screens/chat_details.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
@@ -79,7 +81,14 @@ class GuideProfile extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ChatPage(guide: guide),
+                                builder: (context) => ChatPage(
+                                  guide: AdminModel(
+                                    id: guide.id,
+                                    type: UserType.guide,
+                                    image: guide.image,
+                                    name: guide.name,
+                                  ),
+                                ),
                               ),
                             );
                           },
