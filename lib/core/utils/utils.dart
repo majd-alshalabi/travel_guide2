@@ -1,7 +1,12 @@
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
 
 class Utils {
+  static String getIdForChat(int id, UserType type) {
+    return id.toString() + type.name;
+  }
+
   static DateTime dateFromStringUtcFormatted(String date) {
     var parsedDate = DateTime.parse(date).add(const Duration(hours: 3));
     return parsedDate;

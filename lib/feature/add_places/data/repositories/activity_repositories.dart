@@ -4,7 +4,7 @@ import 'package:travel_guide/feature/add_places/data/models/remote/activity_mode
 import 'package:travel_guide/feature/add_places/data/models/remote/city_models.dart';
 import 'package:travel_guide/feature/add_places/data/models/remote/get_activity_model.dart';
 import 'package:travel_guide/feature/add_places/domain/repositories/iacctivity_repository.dart';
-
+import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 
 class ActivityRepositories implements IActivityRepository {
   final ActivityRemoteDataSource accountRemoteDataSource =
@@ -20,21 +20,23 @@ class ActivityRepositories implements IActivityRepository {
       return const Left("Error while updating fcm token");
     }
   }
+
   @override
   Future<Either<String, GetActivityResponseModel>> getAllActivity(
       GetActivityParamsModel params) async {
     try {
       final GetActivityResponseModel res =
-      await accountRemoteDataSource.getActivity(params);
+          await accountRemoteDataSource.getActivity(params);
       return Right(res);
     } catch (e) {
       return const Left("Error while updating fcm token");
     }
   }
+
   Future<Either<String, GetAllCityResponseModel>> getAllCity() async {
     try {
       final GetAllCityResponseModel res =
-      await accountRemoteDataSource.getAllCities();
+          await accountRemoteDataSource.getAllCities();
       return Right(res);
     } catch (e) {
       return const Left("Error while updating fcm token");
@@ -52,18 +54,18 @@ class ActivityRepositories implements IActivityRepository {
       return const Left("Error while updating fcm token");
     }
   }
+
   @override
   Future<Either<String, GetAllRegionResponseModel>> getRegion(
       GetRegionParamsModel params) async {
     try {
       final GetAllRegionResponseModel res =
-      await accountRemoteDataSource.getRegion(params);
+          await accountRemoteDataSource.getRegion(params);
       return Right(res);
     } catch (e) {
       return const Left("Error while updating fcm token");
     }
   }
-
 
   @override
   Future<Either<String, AddRegionResponseModel>> addRegion(

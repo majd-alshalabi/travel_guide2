@@ -89,6 +89,13 @@ enum UserType {
       return UserType.guide;
   }
 
+  static fromString(String val) {
+    if (val == "user")
+      return UserType.user;
+    else
+      return UserType.guide;
+  }
+
   String toString() {
     switch (this) {
       case guide:

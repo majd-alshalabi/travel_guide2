@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travel_guide/core/models/user_case_model.dart';
 import 'package:travel_guide/core/services/app_settings/app_settings.dart';
+import 'package:travel_guide/feature/add_places/data/models/remote/get_activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
 import 'package:travel_guide/feature/home_page/data/repositories/home_repositories.dart';
@@ -48,11 +48,7 @@ class GetNearbyLocationUseCase extends UseCase<GetNearbyActivityResponseModel,
     final res = await repository.getNearbyLocation(params);
     res.fold((l) => null, (r) {
       AppSettings().controller.add(
-            NearByLocationEvent(
-              r.data
-                  ?.map((e) => LatLng(e.latitude ?? 0, e.longitude ?? 0))
-                  .toList(),
-            ),
+            NearByLocationEvent(r.data),
           );
     });
     return res;

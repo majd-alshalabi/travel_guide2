@@ -43,36 +43,44 @@ class DropDownTextFieldState extends State<DropDownTextField> {
     if (widget.withAdd && !widget.options.contains("add")) {
       widget.options.add("add");
     }
-    return DropdownButtonHideUnderline(
-      child: DropdownButton<String>(
-        borderRadius: BorderRadius.circular(20),
-        iconDisabledColor: Colors.blue,
-        iconEnabledColor: Colors.blue,
-        value: _selectedOption,
-        hint: Text(widget.hintText,
-            style:
-                StylesText.newDefaultTextStyle.copyWith(color: Colors.grey)),
-        isExpanded: true,
-        onChanged: (value) {
-          if (widget.withAdd && value == "add") {
-            widget.addClicked?.call();
-          } else {
-            setState(() {
-              _selectedOption = value;
-              widget.onChanged(value);
-            });
-          }
-        },
-        items: widget.options.map((String option) {
-          return DropdownMenuItem<String>(
-            value: option,
-            child: Text(
-              option,
-              style: StylesText.newDefaultTextStyle
-                  .copyWith(color: Colors.black),
-            ),
-          );
-        }).toList(),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black38),
+        color: Colors.black12.withAlpha(11),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          borderRadius: BorderRadius.circular(20),
+          iconDisabledColor: Colors.blue,
+          iconEnabledColor: Colors.blue,
+          value: _selectedOption,
+          hint: Text(widget.hintText,
+              style:
+                  StylesText.newDefaultTextStyle.copyWith(color: Colors.grey)),
+          isExpanded: true,
+          onChanged: (value) {
+            if (widget.withAdd && value == "add") {
+              widget.addClicked?.call();
+            } else {
+              setState(() {
+                _selectedOption = value;
+                widget.onChanged(value);
+              });
+            }
+          },
+          items: widget.options.map((String option) {
+            return DropdownMenuItem<String>(
+              value: option,
+              child: Text(
+                option,
+                style: StylesText.newDefaultTextStyle
+                    .copyWith(color: Colors.black),
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

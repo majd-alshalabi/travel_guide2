@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:travel_guide/feature/account/data/models/local/my_identity_model.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 
 class AppSettings {
   static final AppSettings _instance = AppSettings._internal();
@@ -59,7 +60,7 @@ class UpdateLatLong extends LocationEvent {
 }
 
 class NearByLocationEvent extends LocationEvent {
-  final List<LatLng>? list;
+  final List<ActivityRemoteModel>? list;
 
   NearByLocationEvent(this.list);
 }

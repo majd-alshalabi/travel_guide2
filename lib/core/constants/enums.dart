@@ -9,3 +9,13 @@ enum RequestState {
   loaded,
   error,
 }
+
+enum MessageType {
+  text,
+  attachment;
+
+  static MessageType fromInt(int type) {
+    if (type == 1) return MessageType.text;
+    return MessageType.attachment;
+  }
+}

@@ -1,35 +1,9 @@
+import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
+
 class GetActivityParamsModel {
   int page;
 
   GetActivityParamsModel({required this.page});
-}
-
-class GetActivityResponseModel {
-  String? message;
-  PaginationData? data;
-
-  GetActivityResponseModel({this.message, this.data});
-
-  GetActivityResponseModel.fromJson(Map<String, dynamic> json) {
-    message = json['message'];
-    data = json['data'] != null ? PaginationData.fromJson(json['data']) : null;
-  }
-}
-
-class PaginationData {
-  List<ActivityRemoteModel>? data;
-  PaginationData({
-    this.data,
-  });
-
-  PaginationData.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      data = <ActivityRemoteModel>[];
-      json['data'].forEach((v) {
-        data!.add(ActivityRemoteModel.fromJson(v));
-      });
-    }
-  }
 }
 
 class GetNearbyActivityResponseModel {
@@ -281,7 +255,7 @@ class AdminModel {
   int? id;
   String? name;
   String? image;
-  String? type;
+  UserType? type;
 
   AdminModel({this.id, this.name, this.image, this.type});
 
@@ -289,7 +263,7 @@ class AdminModel {
     id = json['id'];
     name = json['name'];
     image = json['image'];
-    type = json['type'];
+    type = UserType.fromString(json['type'] ?? 0);
   }
 
   Map<String, dynamic> toJson() {

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:travel_guide/feature/add_places/data/models/remote/get_activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/book_mark_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/comment_models.dart';

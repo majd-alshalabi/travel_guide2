@@ -33,8 +33,6 @@ class NetworkServices implements IRemoteDataSource {
 
   _returnResponse(Response response) async {
     var responseJson = json.decode(response.data);
-    print("adg2sgas2d");
-    print(responseJson);
     switch (response.statusCode) {
       case 200:
       case 201:
@@ -91,12 +89,11 @@ class NetworkServices implements IRemoteDataSource {
           headers: headers,
           responseType: ResponseType.plain,
         ),
+        data: remoteBundle.body,
         queryParameters: remoteBundle.urlParams,
       );
-      print(
-        NetworkConfigurations.BaseUrl + addedValue + remoteBundle.networkPath,
-      );
-      print("sagdsda");
+      print("result :");
+      print(response.data);
       return _returnResponse(response);
     } on DioException catch (e) {
       if (e.response == null) throw Exception("no internet connection");
