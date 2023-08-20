@@ -43,7 +43,7 @@ class _TogglePageState extends State<TogglePage> {
   final List<Widget> bottomBarPages = [
     HomePage(),
     MapScreen(
-      gesture: true,
+      gesture: true, onTap: (argument) {  },
     ),
   ];
 

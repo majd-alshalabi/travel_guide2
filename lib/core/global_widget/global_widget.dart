@@ -633,3 +633,76 @@ class AllActivityLoadingWidget extends StatelessWidget {
     );
   }
 }
+class CustomDescriptionTextField extends StatelessWidget {
+  const CustomDescriptionTextField({
+    super.key,
+    required this.type,
+    required this.color,
+    required this.controllerName,
+    required this.label,
+    required this.valedate,
+  });
+  final Color color;
+  final Function valedate;
+  final String label;
+  final TextEditingController controllerName;
+  final TextInputType type;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 150,
+      child: TextFormField(
+        style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
+
+        expands: true,
+        maxLines: null,
+        textAlignVertical:
+        TextAlignVertical.top, // Set the vertical alignment to top
+        cursorColor: Colors.blue,
+        controller: controllerName,
+        keyboardType: type,
+        validator: (val) {
+          return valedate(val);
+        },
+        decoration: InputDecoration(
+          errorStyle:
+          StylesText.newDefaultTextStyle.copyWith(color: Colors.red),
+          filled: true,
+          hintText: label,
+          border: InputBorder.none,
+          enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.black38,
+              width: 0,
+            ),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.red,
+              width: 0,
+            ),
+          ),
+          errorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.red,
+              width: 0,
+            ),
+          ),
+          hintStyle:
+          StylesText.newDefaultTextStyle.copyWith(color: Colors.grey),
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.black38,
+              width: 1,
+            ),
+          ),
+        ),
+        cursorHeight: 24.0, // Set the desired cursor height
+      ),
+    );
+  }
+}

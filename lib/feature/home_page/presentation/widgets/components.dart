@@ -11,6 +11,7 @@ import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
 import 'package:travel_guide/core/utils/themes.dart';
+import 'package:travel_guide/feature/add_places/presentation/add_places.dart';
 import 'package:travel_guide/feature/favorite_page/presentation/screen/favorite_page.dart';
 import 'package:travel_guide/feature/guides/presentation/pages/guides_page.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
@@ -294,6 +295,25 @@ class DrawerHome extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => SettingPage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.settings_outlined,
+              color: theme.black,
+            ),
+            title: Text(
+              AppLocalizations.of(context)?.translate('settings') ?? "",
+              style: StylesText.newDefaultTextStyle.copyWith(
+                color: theme.black,
+              ),
+            ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AddPlaces(),
                   ));
             },
           ),

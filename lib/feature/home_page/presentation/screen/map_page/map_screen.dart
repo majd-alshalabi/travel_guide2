@@ -7,7 +7,7 @@ import 'package:travel_guide/feature/home_page/data/models/remote/activity_model
 import 'package:travel_guide/feature/home_page/domain/use_cases/get_all_activity_use_case.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({super.key, required this.gesture});
+  const MapScreen({super.key, required this.gesture, required  Function(dynamic argument) onTap});
 
   @override
   _MapScreen createState() => _MapScreen();
