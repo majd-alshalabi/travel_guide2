@@ -3,6 +3,7 @@ import 'package:like_button/like_button.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
+import 'package:travel_guide/core/utils/extensions.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/activities/presentation/screen/activities.dart';
 import 'package:travel_guide/feature/details_page/presentation/widgets/components.dart';
@@ -78,7 +79,48 @@ class DetailsRegion extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
+                Positioned(
+                  left: 20,
+                  bottom: 25,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      gradient: LinearGradient(
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                        colors: [
+                          theme.white.withOpacity(0.5),
+                          theme.white.withOpacity(0.5),
+                        ],
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset(
+                          ImagesApp.imagesUserAvatarUserAvatarImage,
+                          width: 50,
+                          height: 50,
+                        ),
+                        10.w,
+                        Column(
+                          children: [
+                            Text(
+                              'Guide Name',
+                              style: StylesText.textStyleForDescription,
+                            ),
+                            Text(
+                              'Location Guide',
+                              style: StylesText.textStyleForDescription,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
             CustomText(
