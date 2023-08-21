@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                     MediaQuery.of(context).viewInsets.bottom != 0 ? 0 : 9.h),
             child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Stack(
@@ -211,10 +211,13 @@ class HomePage extends StatelessWidget {
                           ],
                         );
                       }
-                      return ListActivity(
-                        height: height,
-                        width: width,
-                        activities: context.read<HomeBloc>().activityList,
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: ListActivity(
+                          height: height,
+                          width: width,
+                          activities: context.read<HomeBloc>().activityList,
+                        ),
                       );
                     },
                   ),

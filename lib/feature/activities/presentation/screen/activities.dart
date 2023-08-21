@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/feature/details_page/presentation/widgets/components.dart';
 
 import '../../../../core/constants/app_images.dart';
@@ -17,9 +18,11 @@ class ActivitiesScreen extends StatelessWidget {
     var width = MediaQuery.sizeOf(context).width;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: theme.mainAppColor,
+      appBar: CustomAppBar(
+        showBackButton: true,
+        title: "Activities",
       ),
+      backgroundColor: theme.darkThemeForScafold,
       body: SizedBox(
         width: width,
         child: ListView.builder(
@@ -30,7 +33,6 @@ class ActivitiesScreen extends StatelessWidget {
             return ActivitysOfRegion(
               width: width,
               height: height,
-              theme: theme,
               image: ImagesApp.imagesSyria1,
             );
           },
