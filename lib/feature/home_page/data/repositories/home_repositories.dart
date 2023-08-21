@@ -8,6 +8,7 @@ import 'package:travel_guide/feature/home_page/data/models/remote/comment_models
 import 'package:travel_guide/feature/home_page/data/models/remote/rate_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/regions_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/wether_api.dart';
 import 'package:travel_guide/feature/home_page/domain/repositories/ihome_repository.dart';
 
 class HomeRepositories implements IHomeRepository {
@@ -29,8 +30,18 @@ class HomeRepositories implements IHomeRepository {
           await accountRemoteDataSource.getAllRegion();
       return Right(res);
     } catch (e) {
+      print(e);
+      print("d2asfga2sdg");
       return const Left("Error while updating fcm token");
     }
+  }
+
+  @override
+  Future<Either<String, WitherApiModel>> getWitherApi(
+      WitherApiParams params) async {
+    final WitherApiModel res =
+        await accountRemoteDataSource.getWitherApi(params);
+    return Right(res);
   }
 
   @override
@@ -72,6 +83,18 @@ class HomeRepositories implements IHomeRepository {
     try {
       final GetTopRatedResponseModel res =
           await accountRemoteDataSource.getTopRated();
+      return Right(res);
+    } catch (e) {
+      return const Left("Error while updating fcm token");
+    }
+  }
+
+  @override
+  Future<Either<String, GetNearbyActivityResponseModel>> getActivityInRegion(
+      GetActivityInRegionParamsModel params) async {
+    try {
+      final GetNearbyActivityResponseModel res =
+          await accountRemoteDataSource.getActivityInRegion(params);
       return Right(res);
     } catch (e) {
       return const Left("Error while updating fcm token");
@@ -124,5 +147,13 @@ class HomeRepositories implements IHomeRepository {
     } catch (e) {
       return const Left("Error while updating fcm token");
     }
+  }
+
+  @override
+  Future<Either<String, List<CommentModel>?>> getComment(
+      GetCommentParamsModel model) async {
+    final List<CommentModel>? res =
+        await accountRemoteDataSource.getAllComment(model);
+    return Right(res);
   }
 }

@@ -12,15 +12,16 @@ class CommentCubit extends Cubit<CommentState> {
   void getCommentForCurrentPost(int activityId) async {
     emit(LoadingGetAllComment());
 
-    // final result = await GetAllCommentUseCase().call(
-    //   GetCommentParamsModel(adsId: activityId),
-    // );
-    // result.fold(
-    //   (l) => emit(ErrorGetAllComment()),
-    //   (r) {
-    //     emit(CompleteGetAllComment());
-    //   },
-    // );
+    final result = await GetAllCommentUseCase().call(
+      GetCommentParamsModel(activityId: activityId),
+    );
+    result.fold(
+      (l) => emit(ErrorGetAllComment()),
+      (r) {
+        commentList.addAll(r ?? []);
+        emit(CompleteGetAllComment());
+      },
+    );
   }
 
   void addComment(AddCommentParamsModel comment) async {
@@ -29,7 +30,7 @@ class CommentCubit extends Cubit<CommentState> {
     final res = await AddCommentUseCase().call(comment);
     res.fold((l) => emit(AddCommentError(l)), (r) {
       if (r.data != null) {
-        commentList.insert(0, r.data!);
+        commentList.add(r.data!);
       }
       emit(CompleteGetAllComment());
     });

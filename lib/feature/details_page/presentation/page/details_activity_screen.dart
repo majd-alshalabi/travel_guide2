@@ -1,142 +1,102 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:travel_guide/app_localizations.dart';
-import 'package:travel_guide/core/constants/app_images.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:like_button/like_button.dart';
 import 'package:travel_guide/core/constants/styles.dart';
-import 'package:travel_guide/core/global_widget/global_widget.dart';
-import 'package:travel_guide/core/utils/extensions.dart';
-import 'package:travel_guide/core/utils/themes.dart';
+import 'package:travel_guide/feature/details_page/presentation/page/details_region.dart';
 import 'package:travel_guide/feature/details_page/presentation/widgets/components.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
+import 'package:travel_guide/feature/home_page/presentation/screen/home_page/all_activity.dart';
+import 'package:travel_guide/feature/home_page/presentation/screen/map_page/map_screen.dart';
 
-import '../../../../injection.dart';
-import '../../../other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
+class DetailsActivitiesRegionScreen extends StatelessWidget {
+  const DetailsActivitiesRegionScreen({Key? key, required this.model})
+      : super(key: key);
+  final ActivityRemoteModel model;
 
-class DetailsActivitysRegionScreen extends StatelessWidget {
-  const DetailsActivitysRegionScreen({Key? key}) : super(key: key);
-
-  static const List<String> images = [
-    ImagesApp.imagesRedSyriaMapPoster,
-    ImagesApp.imagesRedSyriaMapPoster,
-    ImagesApp.imagesRedSyriaMapPoster,
-    ImagesApp.imagesRedSyriaMapPoster,
-    ImagesApp.imagesRedSyriaMapPoster,
-    ImagesApp.imagesRedSyriaMapPoster,
-  ];
   @override
   Widget build(BuildContext context) {
-    final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      backgroundColor: theme.darkThemeForScafold,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CarouselSlider.builder(
-                itemCount: images.length,
-                itemBuilder:
-                    (BuildContext context, int itemIndex, int pageViewIndex) {
-                  return ListOfImagesDetails(
-                    width: width,
-                    height: height,
-                  );
-                },
-                options: CarouselOptions(
-                  height: height * 0.5,
-                  autoPlay: false,
-                  animateToClosest: true,
-                  enlargeCenterPage: true,
-                  viewportFraction: 1,
-                  aspectRatio: 2.0,
-                  initialPage: 1,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                ImageViewer(
+                  images: model.urls?.map((e) => e.url ?? "").toList() ?? [],
+                  file: false,
                 ),
-              ),
-              LocationInformation(),
-              10.h,
-              Container(
-                width: double.infinity,
-                height: MediaQuery.sizeOf(context).height * 0.05,
-                child: Row(
-                  
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Name Activity",
-                      style: StylesText.defaultTextStyleForAnotherModel.copyWith(color: theme.reserveDarkScaffold ,fontSize: 25),
+                Positioned(
+                  right: 20,
+                  bottom: 5,
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.5),
+                        shape: BoxShape.circle),
+                    child: LikeButton(
+                      size: 40,
+                      animationDuration: const Duration(milliseconds: 300),
+                      padding: EdgeInsets.zero,
+                      onTap: (isLiked) async {
+                        return true;
+                      },
                     ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        '5000\$',
-                        style: StylesText.textStyleForDescription
-                            .copyWith(fontSize: 15 ,color: theme.accent2),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              10.w,
-              Container(
-                width: double.infinity,
-                height: MediaQuery.sizeOf(context).height * 0.1,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  "This place is for description guys This place is for description guys This place is for description guys This place is for description guysThis place is for description guys",
-                  style: StylesText.newDefaultTextStyle.copyWith(color: theme.reserveDarkScaffold ,fontSize:14 ),
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: Row(
-                  children: [
-                    Text(
-                      "Read More",
-                      style: StylesText.defaultHintStyle
-                          .copyWith(color: theme.accent2),
-                    ),
-                    Icon(
-                      Icons.expand_more,
-                      color: theme.accent2,
-                    )
-                  ],
-                ),
-              ),
-              10.h,
-              GestureDetector(
-                onTap: () {
-                },
-                child: Row(
-                  children: [
-                    Text("Add your comment" ,  style: StylesText.newDefaultTextStyle
-                    .copyWith(color: theme.reserveDarkScaffold),),
-                    3.w,
-                    Icon(Icons.comment_outlined ,size: 30, color: theme.reserveDarkScaffold,)
-                  ],
-                ),
-              ),
-              10.h,
-
-              Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: Container(
-                  width: width,
-                  height: height * 0.15,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: theme.grey,
                   ),
-                  child: Center(child: Text('This is for MAP Majd')),
                 ),
+              ],
+            ),
+            AdsCommentLikeFav(adsData: model),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  LocationInformation(
+                    name: model.city?.name ?? "",
+                    type: model.type ?? "",
+                    rate: model.rating.toString(),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    width: double.infinity,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          model.name ?? "",
+                          style: StylesText.newDefaultTextStyle.copyWith(
+                            color: Colors.black,
+                            fontSize: 30,
+                          ),
+                        ),
+                        Text(
+                          "${model.price}\$",
+                          style: StylesText.newDefaultTextStyle
+                              .copyWith(fontSize: 15, color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      model.description ?? "",
+                      style: StylesText.newDefaultTextStyle
+                          .copyWith(color: Colors.black),
+                    ),
+                  ),
+                  MapForDetails(
+                    latLng: LatLng(model.latitude ?? 0, model.longitude ?? 0),
+                  ),
+                ],
               ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

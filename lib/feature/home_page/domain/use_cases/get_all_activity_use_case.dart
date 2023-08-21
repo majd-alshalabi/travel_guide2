@@ -28,6 +28,19 @@ class ShowTopRatedUseCase extends UseCase<GetTopRatedResponseModel, NoParams> {
   }
 }
 
+class GetActivityInRegion extends UseCase<GetNearbyActivityResponseModel,
+    GetActivityInRegionParamsModel> {
+  HomeRepositories repository = HomeRepositories();
+
+  @override
+  Future<Either<String, GetNearbyActivityResponseModel>> call(
+      GetActivityInRegionParamsModel params) async {
+    final res = await repository.getActivityInRegion(params);
+
+    return res;
+  }
+}
+
 class GetBookMarked extends UseCase<GetNearbyActivityResponseModel, NoParams> {
   HomeRepositories repository = HomeRepositories();
 
@@ -48,7 +61,7 @@ class GetNearbyLocationUseCase extends UseCase<GetNearbyActivityResponseModel,
     final res = await repository.getNearbyLocation(params);
     res.fold((l) => null, (r) {
       AppSettings().controller.add(
-            NearByLocationEvent(r.data),
+            NearByLocationEvent(r.data ?? []),
           );
     });
     return res;

@@ -8,6 +8,7 @@ import 'package:travel_guide/feature/home_page/data/models/remote/comment_models
 import 'package:travel_guide/feature/home_page/data/models/remote/rate_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/regions_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/wether_api.dart';
 
 class HomeRemoteDataSource {
   NetworkServices networkServices = NetworkServices();
@@ -58,6 +59,18 @@ class HomeRemoteDataSource {
     return Future.value(AddCommentResponseModel.fromJson(res));
   }
 
+  Future<List<CommentModel>?> getAllComment(GetCommentParamsModel model) async {
+    final res = await networkServices.post(
+      RemoteDataBundle(
+        body: model.toJson(),
+        networkPath: NetworkConfigurations.kGetComment,
+        urlParams: {},
+      ),
+    );
+    final res2 = GetCommentResponseModel.fromJson(res);
+    return Future.value(res2.listOfAllComment);
+  }
+
   Future<GetActivityResponseModel> getActivity(
       GetActivityParamsModel params) async {
     final res = await networkServices.get(
@@ -67,8 +80,6 @@ class HomeRemoteDataSource {
         urlParams: <String, dynamic>{"page": params.page},
       ),
     );
-    print(res);
-    print("das2gdas2g");
     return Future.value(GetActivityResponseModel.fromJson(res));
   }
 
@@ -81,6 +92,19 @@ class HomeRemoteDataSource {
       ),
     );
     return Future.value(GetRegionResponseModel.fromJson(res));
+  }
+
+  Future<WitherApiModel> getWitherApi(WitherApiParams params) async {
+    final res = await networkServices.getWither(
+      RemoteDataBundle(
+        body: {},
+        networkPath: params.oneDay
+            ? NetworkConfigurations.kWitherOneDay
+            : NetworkConfigurations.kWitherFiveDay,
+        urlParams: params.toJson(),
+      ),
+    );
+    return Future.value(WitherApiModel.fromJson(res));
   }
 
   Future<GetNearbyActivityResponseModel> getAllBookMarked() async {
@@ -115,6 +139,18 @@ class HomeRemoteDataSource {
       ),
     );
     return Future.value(TopGuideResponseModel.fromJson(res));
+  }
+
+  Future<GetNearbyActivityResponseModel> getActivityInRegion(
+      GetActivityInRegionParamsModel params) async {
+    final res = await networkServices.get(
+      RemoteDataBundle(
+        body: params.toJson(),
+        networkPath: NetworkConfigurations.kGetActivityInRegion,
+        urlParams: <String, String>{},
+      ),
+    );
+    return Future.value(GetNearbyActivityResponseModel.fromJson(res));
   }
 
   Future<GetTopRatedResponseModel> getTopRated() async {

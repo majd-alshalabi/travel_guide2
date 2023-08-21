@@ -6,12 +6,16 @@ import 'package:travel_guide/feature/home_page/data/models/remote/comment_models
 import 'package:travel_guide/feature/home_page/data/models/remote/rate_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/regions_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/wether_api.dart';
 
 abstract class IHomeRepository {
   Future<Either<String, GetActivityResponseModel?>> getAllActivity(
       GetActivityParamsModel params);
   Future<Either<String, AddRateResponseModel>> rateActivity(
       AddRateParamsModel params);
+  Future<Either<String, List<CommentModel>?>> getComment(
+      GetCommentParamsModel model);
+  Future<Either<String, WitherApiModel>> getWitherApi(WitherApiParams params);
   Future<Either<String, GetTopRatedResponseModel>> getTopRatedUseCase();
   Future<Either<String, ToggleBookMarkResponseModel>> toggleBookMark(
       ToggleBookMarkParamsModel params);

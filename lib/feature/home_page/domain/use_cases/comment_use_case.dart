@@ -13,3 +13,14 @@ class AddCommentUseCase
     return await repository.addCommentModel(params);
   }
 }
+
+class GetAllCommentUseCase
+    extends UseCase<List<CommentModel>?, GetCommentParamsModel> {
+  HomeRepositories repository = HomeRepositories();
+
+  @override
+  Future<Either<String, List<CommentModel>?>> call(
+      GetCommentParamsModel params) async {
+    return await repository.getComment(params);
+  }
+}

@@ -2,12 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:like_button/like_button.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
 import 'package:travel_guide/core/utils/themes.dart';
+import 'package:travel_guide/feature/comment_page/presentation/comment_page.dart';
+import 'package:travel_guide/feature/details_page/presentation/page/details_activity_screen.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/domain/use_cases/get_all_activity_use_case.dart';
 import 'package:travel_guide/feature/home_page/presentation/blocs/all_activity_bloc/get_all_ads_bloc.dart';
@@ -156,7 +158,14 @@ class ItemBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailsActivitiesRegionScreen(model: adsData),
+          ),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 10),
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -425,42 +434,25 @@ class AdsCommentLikeFav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              LikeButton(
-                size: 25.0,
-                animationDuration: const Duration(
-                  milliseconds: 500,
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      CommentPage(activityId: adsData.id ?? -1),
                 ),
-                padding: EdgeInsets.zero,
-                onTap: (isLiked) async {
-                  return true;
-                },
-              ),
-              const SizedBox(width: 5),
-              Text(
-                "10",
-                style: StylesText.defaultTextStyle,
-              ),
-              const SizedBox(width: 10),
-            ],
+              );
+            },
+            child: const FaIcon(FontAwesomeIcons.comments, size: 20),
           ),
-          Row(
-            children: [
-              InkWell(
-                onTap: () {},
-                child: const Icon(Icons.comment, size: 17),
-              ),
-              const SizedBox(width: 10),
-              Text(
-                "${10}",
-                style: StylesText.defaultTextStyle,
-              ),
-            ],
+          const SizedBox(width: 10),
+          Text(
+            adsData.comments.toString(),
+            style: StylesText.defaultTextStyle,
           ),
         ],
       ),
