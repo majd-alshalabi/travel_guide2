@@ -12,7 +12,6 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
       backgroundColor: theme.darkThemeForScafold,
@@ -54,7 +53,7 @@ class UserProfile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Since : ",
+                            "Since: ",
                             style: StylesText.defaultTextStyle
                                 .copyWith(color: Colors.white),
                           ),

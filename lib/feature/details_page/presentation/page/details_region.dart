@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
+import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/extensions.dart';
 import 'package:travel_guide/core/utils/themes.dart';
-import 'package:travel_guide/feature/activities/presentation/screen/activities.dart';
+import 'package:travel_guide/feature/activities_page/presentation/screen/activities.dart';
 import 'package:travel_guide/feature/details_page/presentation/widgets/components.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 
