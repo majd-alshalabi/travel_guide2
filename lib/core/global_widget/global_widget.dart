@@ -307,16 +307,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return AppBar(
-      backgroundColor: theme.darkAndWhiteForAppBar,
-      title: Text(
-        title,
-        style: StylesText.newDefaultTextStyle.copyWith(
-          fontSize: 18,
-          color: theme.reserveDarkScaffold,
+      backgroundColor: theme.accent2,
+      title: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Text(
+          title,
+          style: StylesText.newTextStyleForAppBar.copyWith(
+            color: theme.darkThemeForScafold,
+          ),
         ),
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: theme.darkAndWhiteForAppBar,
+        statusBarColor: theme.darkThemeForScafold,
       ),
       leading: showBackButton && Navigator.of(context).canPop()
           ? IconButton(
@@ -325,7 +327,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.arrow_back_ios_new),
+              icon:  Icon(Icons.arrow_back_ios_new ,color: theme.reserveDarkScaffold,),
             )
           : null,
     );

@@ -99,10 +99,11 @@ class ListOfPlaces extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme =sl<ThemeCubit>().globalAppTheme;
     return FadeIn(
       duration: const Duration(milliseconds: 500),
       child: SizedBox(
-        height: height * 0.20,
+        height: height * 0.25,
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
@@ -147,6 +148,8 @@ class ListOfPlaces extends StatelessWidget {
                     style: StylesText.newDefaultTextStyle
                         .copyWith(color: Colors.grey),
                   ),
+                  Divider(color: theme.reserveDarkScaffold,),
+
                 ],
               ),
             );
@@ -171,10 +174,11 @@ class ListActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme =sl<ThemeCubit>().globalAppTheme;
     return FadeIn(
       duration: const Duration(milliseconds: 500),
       child: SizedBox(
-        height: height * 0.21,
+        height: height * 0.25,
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
@@ -230,12 +234,12 @@ class ListActivity extends StatelessWidget {
                   Text(
                     activities[index].name ?? "",
                     style: StylesText.newDefaultTextStyle
-                        .copyWith(color: Colors.black),
+                        .copyWith(color: theme.reserveDarkScaffold),
                   ),
                   Text(
                     activities[index].region?.name ?? "",
                     style: StylesText.newDefaultTextStyle
-                        .copyWith(color: Colors.grey),
+                        .copyWith(color: theme.reserveDarkScaffold),
                   ),
                 ],
               ),
@@ -375,3 +379,14 @@ class DrawerHome extends StatelessWidget {
     );
   }
 }
+
+
+class PopupMap extends StatelessWidget {
+  const PopupMap({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+

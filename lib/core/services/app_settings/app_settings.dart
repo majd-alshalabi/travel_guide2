@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:travel_guide/core/constants/enums.dart';
 import 'package:travel_guide/feature/account/data/models/local/my_identity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 
@@ -13,6 +14,7 @@ class AppSettings {
     return _instance;
   }
   AppSettings._internal();
+  AppState appState = AppState.background;
   LatLng? currentLocation;
   MyIdentity? identity;
   String fcmToken = '';

@@ -19,6 +19,7 @@ class DetailsRegion extends StatelessWidget {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
+      backgroundColor: theme.darkThemeForScafold,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -40,15 +41,6 @@ class DetailsRegion extends StatelessWidget {
                         color: theme.black,
                         function: () {},
                       ),
-                      // SizedBox(
-                      //   width: width * 0.6,
-                      // ),
-                      // CircleIconsDetails(
-                      //   theme: theme,
-                      //   widget: Icon(Icons.favorite),
-                      //   color: theme.black,
-                      //   function: () {},
-                      // ),
                       LikeButton(
                         size: 35,
                         circleColor: CircleColor(
@@ -121,7 +113,6 @@ class DetailsRegion extends StatelessWidget {
                   return ActivitysOfRegion(
                     width: width,
                     height: height,
-                    theme: theme,
                     image: ImagesApp.imagesSyria1,
                   );
                 },

@@ -28,6 +28,7 @@ class DetailsActivitysRegionScreen extends StatelessWidget {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
+      backgroundColor: theme.darkThemeForScafold,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: SingleChildScrollView(
@@ -42,7 +43,6 @@ class DetailsActivitysRegionScreen extends StatelessWidget {
                   return ListOfImagesDetails(
                     width: width,
                     height: height,
-                    theme: theme,
                   );
                 },
                 options: CarouselOptions(
@@ -61,20 +61,26 @@ class DetailsActivitysRegionScreen extends StatelessWidget {
                 width: double.infinity,
                 height: MediaQuery.sizeOf(context).height * 0.05,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       "Name Activity",
-                      style: StylesText.textStyleForTitle,
+                      style: StylesText.defaultTextStyleForAnotherModel.copyWith(color: theme.reserveDarkScaffold ,fontSize: 25),
                     ),
-                    Text(
-                      '5000\$',
-                      style: StylesText.textStyleForDescription
-                          .copyWith(fontSize: 15),
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        '5000\$',
+                        style: StylesText.textStyleForDescription
+                            .copyWith(fontSize: 15 ,color: theme.accent2),
+                      ),
                     ),
                   ],
                 ),
               ),
+              10.w,
               Container(
                 width: double.infinity,
                 height: MediaQuery.sizeOf(context).height * 0.1,
@@ -83,7 +89,7 @@ class DetailsActivitysRegionScreen extends StatelessWidget {
                 ),
                 child: Text(
                   "This place is for description guys This place is for description guys This place is for description guys This place is for description guysThis place is for description guys",
-                  style: StylesText.textStyleForDescription,
+                  style: StylesText.newDefaultTextStyle.copyWith(color: theme.reserveDarkScaffold ,fontSize:14 ),
                 ),
               ),
               InkWell(
@@ -92,49 +98,42 @@ class DetailsActivitysRegionScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Read More",
-                      style: StylesText.textStyleForButton
-                          .copyWith(color: theme.error),
+                      style: StylesText.defaultHintStyle
+                          .copyWith(color: theme.accent2),
                     ),
                     Icon(
                       Icons.expand_more,
-                      color: theme.error,
+                      color: theme.accent2,
                     )
                   ],
                 ),
               ),
-              // 10.h,
-              // ActivitysOfRegion(
-              //   width: width,
-              //   height: height,
-              //   theme: theme,
-              //   image: ImagesApp.imagesSyria1,
-              // ),
-              // Divider(
-              //   thickness: 2,
-              // ),
-              // ActivitysOfRegion(
-              //   width: width,
-              //   height: height,
-              //   theme: theme,
-              //   image: ImagesApp.imagesSyria,
-              // ),
               10.h,
-              CustomBottom(
-                text: AppLocalizations.of(context)?.translate("commment") ?? '',
-                height: height * 0.07,
-                buttonColor: theme.mainAppColor,
-                onPress: () {},
-                borderColor: theme.white,
-                textStyleForButton: StylesText.textStyleForButton,
-              ),
-              Container(
-                width: width,
-                height: height * 0.15,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: theme.grey,
+              GestureDetector(
+                onTap: () {
+                },
+                child: Row(
+                  children: [
+                    Text("Add your comment" ,  style: StylesText.newDefaultTextStyle
+                    .copyWith(color: theme.reserveDarkScaffold),),
+                    3.w,
+                    Icon(Icons.comment_outlined ,size: 30, color: theme.reserveDarkScaffold,)
+                  ],
                 ),
-                child: Center(child: Text('This is for MAP Majd')),
+              ),
+              10.h,
+
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: Container(
+                  width: width,
+                  height: height * 0.15,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: theme.grey,
+                  ),
+                  child: Center(child: Text('This is for MAP Majd')),
+                ),
               ),
             ],
           ),

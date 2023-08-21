@@ -40,36 +40,35 @@ class LocationInformation extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           imageIcons(
             image: ImagesApp.imagesGreyLocation,
           ),
           Text(
             'Name Region',
+            style: StylesText.newDefaultTextStyle
+                .copyWith(color: theme.reserveDarkScaffold),
           ),
-          20.w,
-          Container(
-            width: 100,
-            height: 30,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: theme.mainAppColor,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(AppLocalizations.of(context)?.translate("type") ?? ''),
-              ],
-            ),
+          Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)?.translate("type") ?? '',
+                style: StylesText.newDefaultTextStyle
+                    .copyWith(color: theme.accent2),
+              ),
+            ],
           ),
-          20.w,
-          imageIcons(
+          Spacer()
+,          imageIcons(
             image: ImagesApp.star,
           ),
           Text(
             '4.5',
-            style: StylesText.textStyleForDescription,
+            style: StylesText.newDefaultTextStyle
+                .copyWith(color: theme.reserveDarkScaffold),
           ),
         ],
       ),
@@ -95,7 +94,7 @@ class IconsDetails extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: theme.white,
+          color: theme.darkThemeForScafold,
           borderRadius: BorderRadius.circular(25),
         ),
         child: Center(
@@ -111,15 +110,14 @@ class ListOfImagesDetails extends StatelessWidget {
     super.key,
     required this.width,
     required this.height,
-    required this.theme,
   });
 
   final double width;
   final double height;
-  final AppTheme theme;
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme =sl<ThemeCubit>().globalAppTheme;
     return Container(
       width: width,
       height: height * 0.5,
@@ -150,7 +148,7 @@ class ListOfImagesDetails extends StatelessWidget {
               onTap: () => Navigator.pop(context),
               child: IconsDetails(
                 theme: theme,
-                widget: Icon(Icons.arrow_back_ios),
+                widget: Icon(Icons.arrow_back_ios ,color: theme.reserveDarkScaffold,),
               ),
             ),
           ),
@@ -229,17 +227,16 @@ class ActivitysOfRegion extends StatelessWidget {
     super.key,
     required this.width,
     required this.height,
-    required this.theme,
     required this.image,
   });
 
   final double width;
   final double height;
   final String image;
-  final AppTheme theme;
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -250,71 +247,63 @@ class ActivitysOfRegion extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         width: width,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
           children: [
-            Container(
-              width: 75,
-              height: 75,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(14),
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            10.w,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Row(
+                Container(
+                  width: 75,
+                  height: 75,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(14),
+                    child: Image.asset(
+                      image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                10.w,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Restaurant Name",
-                      style: StylesText.textStyleForTitle.copyWith(
-                        fontSize: 20,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Restaurant Name",
+                          style: StylesText.defaultHintStyle
+                              .copyWith(color: theme.reserveDarkScaffold ,fontWeight: FontWeight.w500 ,fontSize: 18 ,),
+                        ),
+                      ],
+                    ),
+                    20.h,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(AppLocalizations.of(context)?.translate("type") ??
+                            '',
+                          style: StylesText.newDefaultTextStyle
+                              .copyWith(color: theme.accent2),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-                5.h,
-                Container(
-                  width: 100,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: theme.mainAppColor,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(AppLocalizations.of(context)?.translate("type") ??
-                          ''),
-                    ],
+                Spacer(),
+                InkWell(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.keyboard_arrow_right_sharp,
+                    color: theme.accent2,
+                    size: 35,
                   ),
                 ),
               ],
             ),
-            Spacer(),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                width: 35,
-                height: 75,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: theme.mainAppColor,
-                ),
-                child: Icon(
-                  Icons.keyboard_arrow_right_sharp,
-                  color: theme.white,
-                  size: 35,
-                ),
-              ),
-            ),
+            Divider(color: theme.reserveDarkScaffold,)
           ],
         ),
       ),
