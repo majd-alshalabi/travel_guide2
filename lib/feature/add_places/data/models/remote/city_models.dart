@@ -1,3 +1,5 @@
+import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
+
 class GetAllCityResponseModel {
   String? message;
   List<CityModel>? data;
@@ -20,31 +22,6 @@ class GetAllCityResponseModel {
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    return data;
-  }
-}
-
-class CityModel {
-  int? id;
-  String? name;
-  String? createdAt;
-  String? updatedAt;
-
-  CityModel({this.id, this.name, this.createdAt, this.updatedAt});
-
-  CityModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -88,35 +65,6 @@ class GetAllRegionResponseModel {
   }
 }
 
-class RegionModel {
-  int? id;
-  int? cityId;
-  String? name;
-  String? createdAt;
-  String? updatedAt;
-
-  RegionModel(
-      {this.id, this.name, this.createdAt, this.updatedAt, this.cityId});
-
-  RegionModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    cityId = json['city_id'];
-    name = json['name'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['city_id'] = cityId;
-    data['name'] = name;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    return data;
-  }
-}
-
 class AddCityParamsModel {
   final String name;
 
@@ -146,8 +94,12 @@ class AddRegionParamsModel {
   final String name;
   final int cityId;
   final List<String> images;
+  final double latitude;
+  final double longitude;
 
   AddRegionParamsModel({
+    required this.latitude,
+    required this.longitude,
     required this.images,
     required this.name,
     required this.cityId,
@@ -157,6 +109,8 @@ class AddRegionParamsModel {
     data['name'] = name;
     data['city_id'] = cityId;
     data['images'] = images;
+    data['longitude'] = longitude;
+    data['latitude'] = latitude;
     return data;
   }
 }

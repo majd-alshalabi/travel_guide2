@@ -62,7 +62,7 @@ class UpdateLatLong extends LocationEvent {
 }
 
 class NearByLocationEvent extends LocationEvent {
-  final List<ActivityRemoteModel>? list;
+  final List<ActivityRemoteModel> list;
 
   NearByLocationEvent(this.list);
 }

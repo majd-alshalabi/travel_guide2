@@ -6,6 +6,18 @@ class GetActivityParamsModel {
   GetActivityParamsModel({required this.page});
 }
 
+class GetActivityInRegionParamsModel {
+  int regionId;
+
+  GetActivityInRegionParamsModel({required this.regionId});
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['region_id'] = this.regionId;
+
+    return data;
+  }
+}
+
 class GetNearbyActivityResponseModel {
   String? message;
   List<ActivityRemoteModel>? data;
@@ -91,10 +103,12 @@ class ActivityRemoteModel {
   RegionModel? region;
   CityModel? city;
   AdminModel? admin;
+  int? comments;
 
   ActivityRemoteModel(
       {this.id,
       this.regionId,
+      this.comments,
       this.name,
       this.type,
       this.description,
@@ -112,6 +126,7 @@ class ActivityRemoteModel {
   ActivityRemoteModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     regionId = json['region_id'];
+    comments = json['comments'];
     name = json['name'];
     type = json['type'];
     description = json['description'];
@@ -138,6 +153,7 @@ class ActivityRemoteModel {
     data['id'] = id;
     data['region_id'] = regionId;
     data['name'] = name;
+    data['comments'] = comments;
     data['type'] = type;
     data['description'] = description;
     data['price'] = price;
@@ -184,6 +200,8 @@ class RegionModel {
   String? name;
   String? createdAt;
   String? updatedAt;
+  double? latitude;
+  double? longitude;
   List<Images>? images;
   CityModel? city;
 
@@ -192,6 +210,8 @@ class RegionModel {
       this.name,
       this.createdAt,
       this.updatedAt,
+      this.latitude,
+      this.longitude,
       this.cityId,
       this.city,
       this.images});
@@ -202,13 +222,15 @@ class RegionModel {
     name = json['name'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
     if (json['city'] != null) {
       city = CityModel.fromJson(json['city']);
     }
     if (json['images'] != null) {
-      images = <Images>[];
+      images = [];
       json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
+        images!.add(Images.fromJson(v));
       });
     }
   }
@@ -221,6 +243,8 @@ class RegionModel {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['images'] = images;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
     data['city'] = city;
     return data;
   }

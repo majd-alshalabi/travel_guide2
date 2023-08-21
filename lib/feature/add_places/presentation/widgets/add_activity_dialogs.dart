@@ -9,6 +9,7 @@ import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/add_places/presentation/blocs/activity_cubit/activity_cubit.dart';
 import 'package:travel_guide/feature/add_places/presentation/blocs/upload_image_cubit/upload_image_cubit.dart';
 import 'package:travel_guide/feature/add_places/presentation/widgets/create_place_attachment_widget.dart';
+import 'package:travel_guide/feature/home_page/presentation/screen/map_page/map_screen.dart';
 import 'package:travel_guide/injection.dart';
 
 class AddCityDialog extends StatefulWidget {
@@ -128,12 +129,15 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
   }
 
   var formKey = GlobalKey<FormState>();
+  double lat = 0;
+  double lang = 0;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => UploadImageCubit("region")..initState([]),
       child: Builder(builder: (context) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
           body: LoaderOverlay(
             useDefaultLoading: false,
@@ -153,7 +157,7 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
                 ),
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * 0.95,
-                height: MediaQuery.of(context).size.height * 0.5,
+                height: MediaQuery.of(context).size.height * 0.9,
                 child: BlocListener(
                   bloc: sl<ActivityCubit>(),
                   listener: (context, state) {
@@ -188,6 +192,17 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
                         padding: EdgeInsets.all(8.0),
                         child: CreateActivityAttachmentSection(smallSize: true),
                       ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.4,
+                        padding: const EdgeInsets.all(8),
+                        child: AddMapScreen(
+                          gesture: true,
+                          onTap: (argument) {
+                            lat = argument.target.latitude;
+                            lang = argument.target.longitude;
+                          },
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
@@ -213,6 +228,8 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
                                       .attachments
                                       .map((e) => e.url ?? "")
                                       .toList(),
+                                  lat,
+                                  lang,
                                 );
                               }
                             },

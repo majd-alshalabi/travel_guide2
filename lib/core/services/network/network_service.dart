@@ -102,6 +102,44 @@ class NetworkServices implements IRemoteDataSource {
   }
 
   @override
+  Future getWither(RemoteDataBundle remoteBundle) async {
+    try {
+      await initTokenAndHeaders();
+      headers.addAll({"Content-Type": "application/json"});
+      BaseOptions options = BaseOptions(
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
+        sendTimeout: const Duration(seconds: 10),
+      );
+      Dio dio = Dio(options);
+      dio.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+        maxWidth: 90,
+      ));
+      final Response response = await Dio().get(
+        "https://api.openweathermap.org/data/2.5/" + remoteBundle.networkPath,
+        options: Options(
+          headers: headers,
+          responseType: ResponseType.plain,
+        ),
+        data: remoteBundle.body,
+        queryParameters: remoteBundle.urlParams,
+      );
+      print("result :");
+      print(response.data);
+      return _returnResponse(response);
+    } on DioException catch (e) {
+      if (e.response == null) throw Exception("no internet connection");
+      return _returnResponse(e.response!);
+    }
+  }
+
+  @override
   Future post(RemoteDataBundle remoteBundle) async {
     try {
       await initTokenAndHeaders();

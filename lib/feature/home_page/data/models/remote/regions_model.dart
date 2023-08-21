@@ -7,6 +7,8 @@ class GetRegionResponseModel {
   GetRegionResponseModel({this.message, this.data});
 
   GetRegionResponseModel.fromJson(Map<String, dynamic> json) {
+    print(json);
+    print("adsfdasfads");
     message = json['message'];
     if (json['data'] != null) {
       data = <RegionModel>[];

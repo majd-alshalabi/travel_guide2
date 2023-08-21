@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -31,9 +30,11 @@ class _MapScreen extends State<MapScreen> {
   @override
   void dispose() {
     mapController?.dispose();
+    subscription?.cancel();
     super.dispose();
   }
 
+  StreamSubscription? subscription;
   @override
   void initState() {
     if (widget.gesture) {
@@ -44,53 +45,29 @@ class _MapScreen extends State<MapScreen> {
         ),
       );
     }
-    AppSettings().controller.stream.listen((event) {
+
+    subscription = AppSettings().controller.stream.listen((event) {
+      int i = 0;
       if (event is UpdateLatLong) {
         if (event.latLng != null) {
           mapController?.animateCamera(CameraUpdate.newLatLng(event.latLng!));
         }
-      }
-    });
-    AppSettings().controller.stream.listen((event) {
-      int i = 0;
-      if (event is NearByLocationEvent) {
-        marker = event.list?.map((e) {
-          return Marker(
-            markerId: MarkerId((i++).toString()),
-            position: LatLng(e.latitude ?? 0, e.longitude ?? 0),
+      } else if (event is NearByLocationEvent) {
+        List<Marker> li = [];
+        Future.forEach(event.list, (ActivityRemoteModel element) async {
+          li.add(
+            Marker(
+              markerId: MarkerId((i++).toString()),
+              position: LatLng(element.latitude ?? 0, element.longitude ?? 0),
+            ),
           );
-        }).toSet();
-        setState(() {});
+        }).then((value) {
+          marker = li.toSet();
+          setState(() {});
+        });
       }
     });
     super.initState();
-  }
-
-  Future<Uint8List?> getBytesFromImage(String path) async {
-    Uint8List? image = await loadNetworkImage(path);
-    if (image != null) {
-      final ui.Codec markerImageCodec = await ui.instantiateImageCodec(
-          image.buffer.asUint8List(),
-          targetHeight: 150,
-          targetWidth: 150);
-      final ui.FrameInfo frameInfo = await markerImageCodec.getNextFrame();
-      final ByteData? byteData =
-          await frameInfo.image.toByteData(format: ui.ImageByteFormat.png);
-      final Uint8List? resizedImageMarker = byteData?.buffer.asUint8List();
-      return resizedImageMarker;
-    }
-    return null;
-  }
-
-  Future<Uint8List?> loadNetworkImage(path) async {
-    final completed = Completer<ImageInfo>();
-    var image = NetworkImage(path);
-    image.resolve(const ImageConfiguration()).addListener(
-        ImageStreamListener((info, _) => completed.complete(info)));
-    final imageInfo = await completed.future;
-    final byteData =
-        await imageInfo.image.toByteData(format: ui.ImageByteFormat.png);
-    return byteData?.buffer.asUint8List();
   }
 
   Set<Marker>? marker;
@@ -143,31 +120,116 @@ class AddMapScreenState extends State<AddMapScreen> {
     super.dispose();
   }
 
+  bool screenOpen = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          GoogleMap(
-            zoomGesturesEnabled: widget.gesture,
-            scrollGesturesEnabled: widget.gesture,
-            tiltGesturesEnabled: false,
-            rotateGesturesEnabled: false,
-            zoomControlsEnabled: false,
-            onCameraMove: widget.onTap,
-            onMapCreated: onMapCreated,
-            gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
-              Factory<OneSequenceGestureRecognizer>(
-                () => EagerGestureRecognizer(),
+    return WillPopScope(
+      onWillPop: () async {
+        setState(() {
+          screenOpen = false;
+        });
+        Navigator.of(context).pop();
+        return true;
+      },
+      child: Visibility(
+        visible: screenOpen,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            GoogleMap(
+              zoomGesturesEnabled: widget.gesture,
+              scrollGesturesEnabled: widget.gesture,
+              tiltGesturesEnabled: false,
+              rotateGesturesEnabled: false,
+              zoomControlsEnabled: false,
+              onCameraMove: widget.onTap,
+              onMapCreated: onMapCreated,
+              gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                Factory<OneSequenceGestureRecognizer>(
+                  () => EagerGestureRecognizer(),
+                ),
+              },
+              mapToolbarEnabled: false,
+              myLocationButtonEnabled: true,
+              initialCameraPosition: _initialCameraPosition,
+            ),
+            const FaIcon(FontAwesomeIcons.mapPin, color: Colors.red),
+          ],
+        ),
+      ),
+    );
+  }
+
+  onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+}
+
+class MapForDetails extends StatefulWidget {
+  const MapForDetails({super.key, required this.latLng});
+
+  @override
+  MapForDetailsState createState() => MapForDetailsState();
+  final LatLng latLng;
+}
+
+class MapForDetailsState extends State<MapForDetails> {
+  GoogleMapController? mapController;
+
+  late CameraPosition _initialCameraPosition =
+      CameraPosition(target: widget.latLng, zoom: 15);
+  @override
+  void dispose() {
+    mapController?.dispose();
+    super.dispose();
+  }
+
+  bool screenOpen = true;
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async {
+        setState(() {
+          screenOpen = false;
+        });
+        Navigator.of(context).pop();
+        return true;
+      },
+      child: Visibility(
+        visible: screenOpen,
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: GoogleMap(
+                markers: {
+                  Marker(
+                    markerId: MarkerId(
+                      "MapForDetails",
+                    ),
+                    position: widget.latLng,
+                  )
+                },
+                zoomGesturesEnabled: false,
+                scrollGesturesEnabled: false,
+                tiltGesturesEnabled: false,
+                rotateGesturesEnabled: false,
+                zoomControlsEnabled: false,
+                onMapCreated: onMapCreated,
+                gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
+                  Factory<OneSequenceGestureRecognizer>(
+                    () => EagerGestureRecognizer(),
+                  ),
+                },
+                mapToolbarEnabled: false,
+                myLocationButtonEnabled: true,
+                initialCameraPosition: _initialCameraPosition,
               ),
-            },
-            mapToolbarEnabled: false,
-            myLocationButtonEnabled: true,
-            initialCameraPosition: _initialCameraPosition,
+            ),
           ),
-          const FaIcon(FontAwesomeIcons.mapPin, color: Colors.red),
-        ],
+        ),
       ),
     );
   }

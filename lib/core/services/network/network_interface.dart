@@ -18,4 +18,5 @@ abstract class IRemoteDataSource {
   Future<dynamic> get(RemoteDataBundle remoteBundle);
   Future<dynamic> post(RemoteDataBundle remoteBundle);
   Future<dynamic> postFormData(RemoteDataBundle remoteBundle);
+  Future getWither(RemoteDataBundle remoteBundle);
 }

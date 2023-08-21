@@ -8,12 +8,12 @@ import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/add_places/data/models/remote/activity_model.dart';
-import 'package:travel_guide/feature/add_places/data/models/remote/city_models.dart';
 import 'package:travel_guide/feature/add_places/presentation/blocs/activity_cubit/activity_cubit.dart';
 import 'package:travel_guide/feature/add_places/presentation/blocs/upload_image_cubit/upload_image_cubit.dart';
 import 'package:travel_guide/feature/add_places/presentation/widgets/add_activity_dialogs.dart';
 import 'package:travel_guide/feature/add_places/presentation/widgets/add_place_widgets.dart';
 import 'package:travel_guide/feature/add_places/presentation/widgets/create_place_attachment_widget.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/presentation/screen/map_page/map_screen.dart';
 import 'package:travel_guide/injection.dart';
 

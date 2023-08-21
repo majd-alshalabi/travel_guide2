@@ -1,3 +1,49 @@
+import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
+
+class GetCommentParamsModel {
+  final int activityId;
+
+  GetCommentParamsModel({
+    required this.activityId,
+  });
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['activity_id'] = activityId;
+
+    return data;
+  }
+}
+
+class GetCommentResponseModel {
+  List<CommentModel>? listOfAllComment;
+  int? status;
+  String? message;
+
+  GetCommentResponseModel({this.listOfAllComment, this.status, this.message});
+
+  GetCommentResponseModel.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      listOfAllComment = <CommentModel>[];
+      json['data'].forEach((v) {
+        listOfAllComment!.add(CommentModel.fromJson(v));
+      });
+    }
+    status = json['status'];
+    message = json['message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (listOfAllComment != null) {
+      data['data'] = listOfAllComment!.map((v) => v.toJson()).toList();
+    }
+    data['status'] = status;
+    data['message'] = message;
+    return data;
+  }
+}
+
 class AddCommentResponseModel {
   String? message;
   String? name;
@@ -25,12 +71,12 @@ class AddCommentResponseModel {
 
 class CommentModel {
   String? message;
-  String? activitiesId;
+  int? activitiesId;
   int? userId;
   String? updatedAt;
   String? createdAt;
   int? id;
-  UserModel? user;
+  AdminModel? user;
 
   CommentModel(
       {this.message,
@@ -48,7 +94,7 @@ class CommentModel {
     updatedAt = json['updated_at'];
     createdAt = json['created_at'];
     id = json['id'];
-    user = json['user'] != null ? new UserModel.fromJson(json['user']) : null;
+    user = json['user'] != null ? AdminModel.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {

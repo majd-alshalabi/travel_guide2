@@ -11,7 +11,10 @@ import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
 import 'package:travel_guide/core/utils/themes.dart';
+import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
 import 'package:travel_guide/feature/add_places/presentation/add_places.dart';
+import 'package:travel_guide/feature/details_page/presentation/page/details_activity_screen.dart';
+import 'package:travel_guide/feature/details_page/presentation/page/details_region.dart';
 import 'package:travel_guide/feature/favorite_page/presentation/screen/favorite_page.dart';
 import 'package:travel_guide/feature/guides/presentation/pages/guides_page.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
@@ -99,7 +102,7 @@ class ListOfPlaces extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme theme =sl<ThemeCubit>().globalAppTheme;
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return FadeIn(
       duration: const Duration(milliseconds: 500),
       child: SizedBox(
@@ -116,7 +119,15 @@ class ListOfPlaces extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetailsRegion(model: regions[index]),
+                        ),
+                      );
+                    },
                     child: ClipRRect(
                       borderRadius:
                           const BorderRadius.all(Radius.circular(10.0)),
@@ -148,8 +159,9 @@ class ListOfPlaces extends StatelessWidget {
                     style: StylesText.newDefaultTextStyle
                         .copyWith(color: Colors.grey),
                   ),
-                  Divider(color: theme.reserveDarkScaffold,),
-
+                  Divider(
+                    color: theme.reserveDarkScaffold,
+                  ),
                 ],
               ),
             );
@@ -174,7 +186,7 @@ class ListActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme theme =sl<ThemeCubit>().globalAppTheme;
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return FadeIn(
       duration: const Duration(milliseconds: 500),
       child: SizedBox(
@@ -191,7 +203,15 @@ class ListActivity extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsActivitiesRegionScreen(
+                              model: activities[index],
+                            ),
+                          ));
+                    },
                     child: Stack(
                       children: [
                         ClipRRect(
@@ -302,25 +322,26 @@ class DrawerHome extends StatelessWidget {
                   ));
             },
           ),
-          ListTile(
-            leading: Icon(
-              Icons.settings_outlined,
-              color: theme.black,
-            ),
-            title: Text(
-              AppLocalizations.of(context)?.translate('settings') ?? "",
-              style: StylesText.newDefaultTextStyle.copyWith(
+          if (AppSettings().identity?.guide == UserType.guide)
+            ListTile(
+              leading: Icon(
+                Icons.add_rounded,
                 color: theme.black,
               ),
+              title: Text(
+                "add place",
+                style: StylesText.newDefaultTextStyle.copyWith(
+                  color: theme.black,
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddPlaces(),
+                    ));
+              },
             ),
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddPlaces(),
-                  ));
-            },
-          ),
           ListTile(
             leading: Icon(
               Icons.favorite_border_outlined,
@@ -342,7 +363,7 @@ class DrawerHome extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
-              Icons.person_pin_circle_outlined,
+              Icons.groups_outlined,
               color: theme.black,
             ),
             title: Text(
@@ -361,7 +382,7 @@ class DrawerHome extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
-              Icons.person_pin_circle_outlined,
+              Icons.logout_rounded,
               color: theme.black,
             ),
             title: Text(
@@ -380,7 +401,6 @@ class DrawerHome extends StatelessWidget {
   }
 }
 
-
 class PopupMap extends StatelessWidget {
   const PopupMap({Key? key}) : super(key: key);
 
@@ -389,4 +409,3 @@ class PopupMap extends StatelessWidget {
     return const Placeholder();
   }
 }
-
