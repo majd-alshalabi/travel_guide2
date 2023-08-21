@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:like_button/like_button.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
-import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/extensions.dart';
 import 'package:travel_guide/core/utils/themes.dart';
@@ -133,11 +132,10 @@ class DetailsRegion extends StatelessWidget {
               ],
             ),
             CustomText(
+              seeAllButton: false,
               titleName:
                   AppLocalizations.of(context)?.translate("could see") ?? "",
               onTap: () {},
-              textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
-              defaultTextStyle: StylesText.defaultTextStyle,
             ),
             ListOfImagesActivities(
               height: height,
@@ -152,8 +150,7 @@ class DetailsRegion extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => ActivitiesScreen()));
               },
-              textStyleForTextTilte: StylesText.defaultTextStyleForAnotherModel,
-              defaultTextStyle: StylesText.defaultTextStyle,
+              seeAllButton: false,
             ),
             SizedBox(
               width: width,

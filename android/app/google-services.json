@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "199699826356",
+    "firebase_url": "https://travel-guide-b6760-default-rtdb.firebaseio.com",
+    "project_id": "travel-guide-b6760",
+    "storage_bucket": "travel-guide-b6760.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199699826356:android:3f1fcad75205f20733f9e1",
+        "android_client_info": {
+          "package_name": "com.example.flutter_travel_guide_dashborad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199699826356-4gdgqq4jq6t1tu5iha4gj4l833d5h02n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqxB3AvWeDVZwpfNdjkcGI2NNHazwApnY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199699826356-4gdgqq4jq6t1tu5iha4gj4l833d5h02n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199699826356:android:c5ef62d900b03e5633f9e1",
+        "android_client_info": {
+          "package_name": "com.example.travel_guide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199699826356-4gdgqq4jq6t1tu5iha4gj4l833d5h02n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqxB3AvWeDVZwpfNdjkcGI2NNHazwApnY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199699826356-4gdgqq4jq6t1tu5iha4gj4l833d5h02n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

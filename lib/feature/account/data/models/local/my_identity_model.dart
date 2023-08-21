@@ -1,3 +1,5 @@
+import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
+
 class MyIdentity {
   int? id;
   String? phoneNumber;
@@ -9,6 +11,7 @@ class MyIdentity {
   String? location;
   String? createdAt;
   int? notificationType;
+  UserType? guide;
 
   MyIdentity({
     this.id,
@@ -16,6 +19,7 @@ class MyIdentity {
     this.serverId,
     this.phoneNumber,
     this.email,
+    this.guide,
     this.name,
     this.imageUrl,
     this.token,
@@ -34,6 +38,7 @@ class MyIdentity {
     token = json['token'];
     location = json['location'];
     createdAt = json['createdAt'];
+    guide = UserType.formInt(json['guide']);
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +53,7 @@ class MyIdentity {
     data['token'] = token;
     data['createdAt'] = createdAt;
     data['location'] = location;
+    data['guide'] = guide?.toInt();
     return data;
   }
 
@@ -62,12 +68,14 @@ class MyIdentity {
     String? email,
     String? createdAt,
     int? serverId,
+    UserType? guide,
     int? notificationType,
   }) =>
       MyIdentity(
         id: id ?? this.id,
         serverId: serverId ?? this.serverId,
         notificationType: notificationType ?? this.notificationType,
+        guide: guide ?? this.guide,
         email: email ?? this.email,
         phoneNumber: phoneNumber ?? this.phoneNumber,
         name: name ?? this.name,
@@ -87,6 +95,7 @@ class MyIdentity {
         "token": token,
         "location": location,
         "email": email,
+        "guide": guide?.toInt(),
         "createdAt": createdAt,
       };
 
@@ -98,6 +107,7 @@ class MyIdentity {
         name: json["name"],
         notificationType: json["notificationType"],
         createdAt: json["createdAt"],
+        guide: UserType.formInt(json["guide"]),
         email: json["email"],
         token: json["token"],
         location: json["location"],

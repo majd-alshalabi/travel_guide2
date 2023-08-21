@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
+import 'package:travel_guide/core/services/network/network_configrations.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
@@ -31,21 +34,24 @@ class CustomTextField extends StatelessWidget {
       validator: valedate,
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: StylesText.newDefaultTextStyle.copyWith(color: Colors.grey),
         border: InputBorder.none,
         prefixIcon: prefix,
         enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(
               color: Colors.black12,
               width: 1,
             )),
         focusedBorder: const OutlineInputBorder(
-            //Outline border type for TextFeild
-            borderRadius: BorderRadius.all(Radius.circular(50)),
-            borderSide: BorderSide(
-              color: Colors.black12,
-              width: 1,
-            )),
+          //Outline border type for TextFeild
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.black12,
+            width: 1,
+          ),
+        ),
+        prefixIconColor: Colors.grey,
       ),
     );
   }
@@ -58,14 +64,15 @@ class CustomBottom extends StatelessWidget {
   final Function onPress;
   final Color borderColor;
   final TextStyle textStyleForButton;
-  const CustomBottom(
-      {super.key,
-      required this.text,
-      required this.height,
-      required this.buttonColor,
-      required this.onPress,
-      required this.borderColor,
-      required this.textStyleForButton});
+  const CustomBottom({
+    super.key,
+    required this.text,
+    required this.height,
+    required this.buttonColor,
+    required this.onPress,
+    required this.borderColor,
+    required this.textStyleForButton,
+  });
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -73,7 +80,7 @@ class CustomBottom extends StatelessWidget {
         onPress();
       },
       child: Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width / 2,
         height: height,
         decoration: BoxDecoration(
           border: Border.all(color: borderColor, width: 3),
@@ -97,9 +104,9 @@ class BannerPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
-      height: 200.0,
-      margin: const EdgeInsets.all(16.0),
+      width: 35.w,
+      height: 20.h,
+      margin: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         color: Colors.grey,
@@ -179,14 +186,14 @@ class ContentPlaceholder extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: double.infinity,
+                  width: 200,
                   height: 10.0,
                   color: Colors.grey,
                   margin: const EdgeInsets.only(bottom: 8.0),
                 ),
                 if (lineType == ContentLineType.threeLines)
                   Container(
-                    width: double.infinity,
+                    width: 200,
                     height: 10.0,
                     color: theme.white,
                     margin: const EdgeInsets.only(bottom: 8.0),
@@ -278,7 +285,7 @@ class TravelGuideUserAvatar extends StatelessWidget {
             image: AssetImage(ImagesApp.userAvatarAsset),
             fit: BoxFit.fill,
           ),
-          imageUrl: imageUrl,
+          imageUrl: "${NetworkConfigurations.BaseUrl}$imageUrl",
           errorWidget: (context, url, error) => const Image(
             image: AssetImage(ImagesApp.userAvatarAsset),
             fit: BoxFit.fill,
@@ -303,10 +310,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: theme.darkAndWhiteForAppBar,
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              fontSize: 18,
-              color: theme.reserveDarkScaffold,
-            ),
+        style: StylesText.newDefaultTextStyle.copyWith(
+          fontSize: 18,
+          color: theme.reserveDarkScaffold,
+        ),
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: theme.darkAndWhiteForAppBar,
@@ -330,15 +337,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class CustomText extends StatelessWidget {
   final String titleName;
-  final TextStyle textStyleForTextTilte;
-  final TextStyle defaultTextStyle;
   final Function onTap;
+  final bool seeAllButton;
   CustomText({
     super.key,
     required this.titleName,
     required this.onTap,
-    required this.textStyleForTextTilte,
-    required this.defaultTextStyle,
+    required this.seeAllButton,
   });
 
   @override
@@ -350,24 +355,26 @@ class CustomText extends StatelessWidget {
         children: [
           Text(
             titleName,
-            style: textStyleForTextTilte,
+            style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
           ),
-          InkWell(
-            onTap: () {
-              onTap();
-            },
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)?.translate('See all') ?? "",
-                    style: defaultTextStyle,
-                  ),
-                ],
+          if (seeAllButton)
+            InkWell(
+              onTap: () {
+                onTap();
+              },
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)?.translate('See all') ?? "",
+                      style: StylesText.newDefaultTextStyle
+                          .copyWith(color: Colors.grey),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
@@ -391,6 +398,7 @@ class CustomAddTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
       cursorColor: Colors.blue,
       controller: controllerName,
       keyboardType: type,
@@ -398,22 +406,39 @@ class CustomAddTextField extends StatelessWidget {
         return valedate(val);
       },
       decoration: InputDecoration(
-        errorStyle: StylesText.defaultTextStyle.copyWith(color: Colors.red),
+        errorStyle: StylesText.newDefaultTextStyle.copyWith(color: Colors.red),
+        filled: true,
         hintText: label,
         border: InputBorder.none,
         enabledBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(
-              color: Colors.black12,
-              width: 0,
-            )),
-        hintStyle: StylesText.defaultTextStyle,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.black38,
+            width: 0,
+          ),
+        ),
+        focusedErrorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 0,
+          ),
+        ),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.red,
+            width: 0,
+          ),
+        ),
+        hintStyle: StylesText.newDefaultTextStyle.copyWith(color: Colors.grey),
         focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            borderSide: BorderSide(
-              color: Colors.black12,
-              width: 1,
-            )),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(
+            color: Colors.black38,
+            width: 1,
+          ),
+        ),
       ),
     );
   }
@@ -558,5 +583,145 @@ class LogOutCustomBottom extends StatelessWidget {
             style: textStyleForButton,
           )),
         ));
+  }
+}
+
+class HomeLoadingWidget extends StatelessWidget {
+  const HomeLoadingWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 19.h,
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
+        enabled: true,
+        child: const SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              BannerPlaceholder(),
+              BannerPlaceholder(),
+              BannerPlaceholder(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AllActivityLoadingWidget extends StatelessWidget {
+  const AllActivityLoadingWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      enabled: true,
+      child: const SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            BannerPlaceholder(),
+            TitlePlaceholder(width: double.infinity),
+            SizedBox(height: 16.0),
+            ContentPlaceholder(
+              lineType: ContentLineType.threeLines,
+            ),
+            SizedBox(height: 16.0),
+            TitlePlaceholder(width: 200.0),
+            SizedBox(height: 16.0),
+            ContentPlaceholder(
+              lineType: ContentLineType.twoLines,
+            ),
+            SizedBox(height: 16.0),
+            TitlePlaceholder(width: 200.0),
+            SizedBox(height: 16.0),
+            ContentPlaceholder(
+              lineType: ContentLineType.twoLines,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomDescriptionTextField extends StatelessWidget {
+  const CustomDescriptionTextField({
+    super.key,
+    required this.type,
+    required this.color,
+    required this.controllerName,
+    required this.label,
+    required this.valedate,
+  });
+  final Color color;
+  final Function valedate;
+  final String label;
+  final TextEditingController controllerName;
+  final TextInputType type;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 150,
+      child: TextFormField(
+        style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
+
+        expands: true,
+        maxLines: null,
+        textAlignVertical:
+            TextAlignVertical.top, // Set the vertical alignment to top
+        cursorColor: Colors.blue,
+        controller: controllerName,
+        keyboardType: type,
+        validator: (val) {
+          return valedate(val);
+        },
+        decoration: InputDecoration(
+          errorStyle:
+              StylesText.newDefaultTextStyle.copyWith(color: Colors.red),
+          filled: true,
+          hintText: label,
+          border: InputBorder.none,
+          enabledBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.black38,
+              width: 0,
+            ),
+          ),
+          focusedErrorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.red,
+              width: 0,
+            ),
+          ),
+          errorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.red,
+              width: 0,
+            ),
+          ),
+          hintStyle:
+              StylesText.newDefaultTextStyle.copyWith(color: Colors.grey),
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            borderSide: BorderSide(
+              color: Colors.black38,
+              width: 1,
+            ),
+          ),
+        ),
+        cursorHeight: 24.0, // Set the desired cursor height
+      ),
+    );
   }
 }

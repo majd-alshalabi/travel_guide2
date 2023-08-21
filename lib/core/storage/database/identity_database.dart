@@ -36,6 +36,7 @@ class IdentityDatabase {
     } else {
       res = await db.insert(SettAlKolDatabase.kIdentity, identity.toMap());
     }
+    print(res);
     if (res != 0) return true;
     return false;
   }

@@ -1,9 +1,10 @@
 {
   "welcome": "مرحبا",
   "To Where": "إلى أين؟",
-  "Places": "أماكن",
+  "region": "الأماكن",
   "See all": "عرض الكل",
-  "Top search": "الأكثر بحثاً",
+  "all places": "جميع الاماكن",
+  "logout": "تسجيل الخروج",
   "Top rating" : "الأعلى تقييماً",
   "Nearby places": "الأماكن المجاورة",
   "Place Name" : "اسم المكان",

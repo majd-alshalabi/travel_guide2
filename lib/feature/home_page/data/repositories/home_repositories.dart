@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:travel_guide/feature/add_places/data/models/remote/get_activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/data_sources/local/home_local_data_source.dart';
 import 'package:travel_guide/feature/home_page/data/data_sources/remote/home_remote_data_source.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/book_mark_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/comment_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/rate_models.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/regions_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
 import 'package:travel_guide/feature/home_page/domain/repositories/ihome_repository.dart';
 
@@ -13,10 +15,18 @@ class HomeRepositories implements IHomeRepository {
   final HomeLocalDataSource accountLocalDataSource = HomeLocalDataSource();
 
   @override
-  Future<Either<String, GetActivityResponseModel>> getAllActivity() async {
+  Future<Either<String, GetActivityResponseModel>> getAllActivity(
+      GetActivityParamsModel params) async {
+    final GetActivityResponseModel res =
+        await accountRemoteDataSource.getActivity(params);
+    return Right(res);
+  }
+
+  @override
+  Future<Either<String, GetRegionResponseModel>> getAllRegion() async {
     try {
-      final GetActivityResponseModel res =
-          await accountRemoteDataSource.getActivity();
+      final GetRegionResponseModel res =
+          await accountRemoteDataSource.getAllRegion();
       return Right(res);
     } catch (e) {
       return const Left("Error while updating fcm token");
@@ -24,9 +34,9 @@ class HomeRepositories implements IHomeRepository {
   }
 
   @override
-  Future<Either<String, GetActivityResponseModel>> getBookMarked() async {
+  Future<Either<String, GetNearbyActivityResponseModel>> getBookMarked() async {
     try {
-      final GetActivityResponseModel res =
+      final GetNearbyActivityResponseModel res =
           await accountRemoteDataSource.getAllBookMarked();
       return Right(res);
     } catch (e) {
@@ -35,10 +45,11 @@ class HomeRepositories implements IHomeRepository {
   }
 
   @override
-  Future<Either<String, GetActivityResponseModel>> getNearbyLocation() async {
+  Future<Either<String, GetNearbyActivityResponseModel>> getNearbyLocation(
+      GetNearbyActivityParamsModel params) async {
     try {
-      final GetActivityResponseModel res =
-          await accountRemoteDataSource.getNearbyLocation();
+      final GetNearbyActivityResponseModel res =
+          await accountRemoteDataSource.getNearbyLocation(params);
       return Right(res);
     } catch (e) {
       return const Left("Error while updating fcm token");
