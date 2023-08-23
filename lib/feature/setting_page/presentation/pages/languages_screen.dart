@@ -20,6 +20,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
   bool statusOfLanguages = false;
   @override
   void initState() {
+    statusOfLanguages = context.read<MainCubit>().language == Language.Arabic;
     super.initState();
   }
 

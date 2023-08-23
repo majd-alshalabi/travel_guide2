@@ -84,8 +84,6 @@ class NetworkServices implements IRemoteDataSource {
             ? "for_guide/"
             : "");
       }
-      print(addedValue);
-      print("sdagdsgs");
       final Response response = await Dio().get(
         NetworkConfigurations.BaseUrl + addedValue + remoteBundle.networkPath,
         options: Options(
