@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travel_guide/core/services/app_settings/app_settings.dart';
+import 'package:travel_guide/feature/details_page/presentation/page/details_activity_screen.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/domain/use_cases/get_all_activity_use_case.dart';
 
@@ -57,6 +58,15 @@ class _MapScreen extends State<MapScreen> {
         Future.forEach(event.list, (ActivityRemoteModel element) async {
           li.add(
             Marker(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        DetailsActivitiesRegionScreen(model: element),
+                  ),
+                );
+              },
               markerId: MarkerId((i++).toString()),
               position: LatLng(element.latitude ?? 0, element.longitude ?? 0),
             ),
