@@ -23,7 +23,7 @@ import 'package:travel_guide/feature/guides/presentation/pages/guides_page.dart'
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/main_page/presentation/blocs/main_cubit/main_cubit.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
-import 'package:travel_guide/feature/search_screen/presentation/search_screen.dart';
+import 'package:travel_guide/feature/search_page/presentation/searsh_page.dart';
 import 'package:travel_guide/feature/setting_page/presentation/screens/sitting_page.dart';
 import 'package:travel_guide/injection.dart';
 
@@ -52,7 +52,7 @@ class searchWithNotifications extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SearchScreen(),
+                    builder: (context) => SearchPage(),
                   ),
                 );
               },

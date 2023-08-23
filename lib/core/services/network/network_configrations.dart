@@ -22,6 +22,7 @@ class NetworkConfigurations {
   static const kGetTopGuide = 'topguides';
   static const kGetActivityInRegion = 'getActivityInRegion';
   static const kAddComment = 'comment';
+  static const kSearch = 'search';
   static const kLogin = 'user/login';
   static const kGetComment = 'getComment';
   static const kChangePassword = 'change_password';
