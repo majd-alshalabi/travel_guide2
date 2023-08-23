@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
@@ -27,11 +28,15 @@ class BuildPage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(24.0),
-            child: CircleAvatar(
-              radius: 180.0,
-              backgroundColor: Colors.transparent,
-              backgroundImage: AssetImage(urlImage),
-            ),
+            child: Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height*0.5,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100)
+              ),
+              child: Lottie.network(
+                  urlImage),
+            )
           ),
           const SizedBox(
             height: 24.0,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
@@ -60,7 +61,7 @@ class GuideProfile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Since : ",
+                          AppLocalizations.of(context)?.translate('since')??"",
                             style: StylesText.newDefaultTextStyle
                                 .copyWith(color: Colors.white),
                           ),
@@ -112,7 +113,7 @@ class GuideProfile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "gender : ",
+                       AppLocalizations.of(context)?.translate('gender')??"",
                         style: StylesText.newDefaultTextStyle
                             .copyWith(color: theme.accent2, fontSize: 18),
                       ),
@@ -140,7 +141,7 @@ class GuideProfile extends StatelessWidget {
                         height: 1.h,
                       ),
                       Text(
-                        "Age : ",
+                        AppLocalizations.of(context)?.translate('age')??"",
                         style: StylesText.newDefaultTextStyle
                             .copyWith(color: theme.accent2, fontSize: 18),
                       ),
@@ -168,7 +169,7 @@ class GuideProfile extends StatelessWidget {
                         height: 1.h,
                       ),
                       Text(
-                        "years Of Experience : ",
+                        AppLocalizations.of(context)?.translate('years_Of_Experience')??"",
                         style: StylesText.newDefaultTextStyle
                             .copyWith(color: theme.accent2, fontSize: 18),
                       ),
@@ -196,7 +197,7 @@ class GuideProfile extends StatelessWidget {
                         height: 1.h,
                       ),
                       Text(
-                        "bio : ",
+                          AppLocalizations.of(context)?.translate('bio')??"",
                         style: StylesText.newDefaultTextStyle
                             .copyWith(color: theme.accent2, fontSize: 18),
                       ),

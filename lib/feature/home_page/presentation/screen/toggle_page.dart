@@ -1,6 +1,7 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/core/utils/themes.dart';
@@ -106,7 +107,7 @@ class _TogglePageState extends State<TogglePage> {
                 Icons.home_filled,
                 color: theme.white,
               ),
-              itemLabel: 'home',
+              itemLabel: AppLocalizations.of(context)?.translate('home')??"",
             ),
             BottomBarItem(
               inActiveItem: Icon(
@@ -117,7 +118,7 @@ class _TogglePageState extends State<TogglePage> {
                 Icons.location_searching,
                 color: theme.white,
               ),
-              itemLabel: 'map',
+              itemLabel: AppLocalizations.of(context)?.translate('map')??"",
             ),
           ],
           onTap: (index) {

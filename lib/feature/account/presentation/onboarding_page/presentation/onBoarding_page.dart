@@ -31,22 +31,22 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         },
         children: [
           BuildPage(
-            title: "pick an image ",
-            color: theme.white,
-            subTitle: "easily to shard your Ads moment , spread the word ",
-            urlImage: "assets/images/back01.png",
+            title: "iIf you need to go on a trip",
+            color: theme.darkThemeForScafold,
+            subTitle: "We will give you the right place",
+            urlImage: "https://lottie.host/9e5eb354-57bb-4236-a93e-5b0fb2878859/NoFJbeZ5Qu.json",
           ),
           BuildPage(
-            title: "it's your Ads",
-            color: theme.white,
-            subTitle: "Moment share is your Ads , comment ,like and share",
-            urlImage: "assets/images/back02.png",
+            title: "What do you think is a good place for this trip",
+            color: theme.darkThemeForScafold,
+            subTitle: "Open your map and let us introduce you to this place",
+            urlImage: "https://lottie.host/b7cb2722-db31-41b5-bd7b-4ed67adee15e/YvZDdJw5FK.json",
           ),
           BuildPage(
-            title: "Many categories options ",
-            color: theme.white,
-            subTitle: "Select your proper to explore , post and share ",
-            urlImage: "assets/images/hobby3.png",
+            title: "Tourist trip to Syria",
+            color: theme.darkThemeForScafold,
+            subTitle: "Yes, everything you need is in our app . Come on, let's continue our journey ",
+            urlImage: "https://lottie.host/a2634eb0-8139-424f-8938-40c0a41bef44/clKCjjTO7H.json",
           )
         ],
       ),
@@ -59,7 +59,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     style: TextButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0)),
-                        backgroundColor: theme.blue,
+                        backgroundColor: theme.accent2,
                         minimumSize: const Size.fromHeight(60.0)),
                     onPressed: () async {
                       SharedService.saveOnBoarding(true).then(
@@ -95,7 +95,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     },
                     child: Text(
                       "SKIP",
-                      style: TextStyle(color: theme.blue),
+                      style: TextStyle(color: theme.accent2),
                     ),
                   ),
                   Center(
@@ -103,9 +103,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       count: 3,
                       controller: controller,
                       effect: WormEffect(
-                        dotColor: Colors.blueAccent,
+                        dotColor: theme.accent1,
                         spacing: 16,
-                        activeDotColor: theme.blue,
+                        activeDotColor: theme.accent2,
                       ),
                       onDotClicked: (index) => controller.animateToPage(
                         index,
@@ -123,7 +123,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     },
                     child: Text(
                       "Next",
-                      style: TextStyle(color: theme.blue),
+                      style: TextStyle(color: theme.accent2),
                     ),
                   ),
                 ],
