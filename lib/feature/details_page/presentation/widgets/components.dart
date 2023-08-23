@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:like_button/like_button.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
@@ -56,8 +55,8 @@ class LocationInformation extends StatelessWidget {
             SizedBox(width: 10),
             Text(
               name,
-              style:
-                  StylesText.newDefaultTextStyle.copyWith(color: theme.reserveDarkScaffold),
+              style: StylesText.newDefaultTextStyle
+                  .copyWith(color: theme.reserveDarkScaffold),
             ),
           ],
         ),
@@ -71,7 +70,8 @@ class LocationInformation extends StatelessWidget {
           ),
           child: Text(
             type,
-            style: StylesText.newDefaultTextStyle.copyWith(color: theme.darkThemeForScafold),
+            style: StylesText.newDefaultTextStyle
+                .copyWith(color: theme.darkThemeForScafold),
           ),
         ),
         Row(
@@ -93,8 +93,8 @@ class LocationInformation extends StatelessWidget {
             SizedBox(width: 10),
             Text(
               rate,
-              style:
-                  StylesText.newDefaultTextStyle.copyWith(color: theme.reserveDarkScaffold),
+              style: StylesText.newDefaultTextStyle
+                  .copyWith(color: theme.reserveDarkScaffold),
             ),
           ],
         )
@@ -127,80 +127,6 @@ class IconsDetails extends StatelessWidget {
         child: Center(
           child: widget,
         ),
-      ),
-    );
-  }
-}
-
-class ListOfImagesDetails extends StatelessWidget {
-  const ListOfImagesDetails({
-    super.key,
-    required this.width,
-    required this.height,
-  });
-
-  final double width;
-  final double height;
-
-  @override
-  Widget build(BuildContext context) {
-    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
-    return Container(
-      width: width,
-      height: height * 0.5,
-      child: Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            width: double.infinity,
-            height: height * 0.45,
-            child: Align(
-              child: SizedBox(
-                width: width,
-                height: height * 0.4,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.asset(
-                    ImagesApp.imagesRedSyriaMapPoster,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 25,
-            top: 40,
-            child: InkWell(
-              onTap: () => Navigator.pop(context),
-              child: IconsDetails(
-                theme: theme,
-                widget: Icon(
-                  Icons.arrow_back_ios,
-                  color: theme.reserveDarkScaffold,
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            right: 40,
-            bottom: 30,
-            child: CircleAvatar(
-              radius: 25,
-              backgroundColor: theme.white,
-              child: LikeButton(
-                size: 35,
-                circleColor: CircleColor(
-                    start: Color.fromARGB(255, 236, 75, 75),
-                    end: Color.fromARGB(255, 8, 3, 3)),
-                bubblesColor: BubblesColor(
-                  dotPrimaryColor: Color(0xff33b5e5),
-                  dotSecondaryColor: Color(0xff0099cc),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

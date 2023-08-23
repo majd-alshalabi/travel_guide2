@@ -53,7 +53,7 @@ class HomeRemoteDataSource {
     final res = await networkServices.post(
       RemoteDataBundle(
         body: params.toJson(),
-        networkPath: NetworkConfigurations.kRateActivity,
+        networkPath: NetworkConfigurations.kToggleBookMark,
         urlParams: <String, String>{},
       ),
     );

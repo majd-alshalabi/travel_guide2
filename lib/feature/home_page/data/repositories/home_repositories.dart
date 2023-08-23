@@ -140,13 +140,9 @@ class HomeRepositories implements IHomeRepository {
   @override
   Future<Either<String, ToggleBookMarkResponseModel>> toggleBookMark(
       ToggleBookMarkParamsModel params) async {
-    try {
-      final ToggleBookMarkResponseModel res =
-          await accountRemoteDataSource.toggleBookMark(params);
-      return Right(res);
-    } catch (e) {
-      return const Left("Error while updating fcm token");
-    }
+    final ToggleBookMarkResponseModel res =
+        await accountRemoteDataSource.toggleBookMark(params);
+    return Right(res);
   }
 
   @override

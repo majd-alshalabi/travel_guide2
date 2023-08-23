@@ -1,15 +1,20 @@
 class ToggleBookMarkResponseModel {
   String? message;
-
-  ToggleBookMarkResponseModel({this.message});
+  bool? added;
+  ToggleBookMarkResponseModel({
+    this.message,
+    this.added,
+  });
 
   ToggleBookMarkResponseModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
+    added = json['added'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = this.message;
+    data['added'] = this.added;
     return data;
   }
 }
@@ -20,12 +25,12 @@ class ToggleBookMarkParamsModel {
   ToggleBookMarkParamsModel({this.adsId});
 
   ToggleBookMarkParamsModel.fromJson(Map<String, dynamic> json) {
-    adsId = json['ads_id'];
+    adsId = json['activity_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ads_id'] = this.adsId;
+    data['activity_id'] = this.adsId;
     return data;
   }
 }

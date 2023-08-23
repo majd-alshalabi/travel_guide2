@@ -104,11 +104,13 @@ class ActivityRemoteModel {
   CityModel? city;
   AdminModel? admin;
   int? comments;
+  bool? bookmarked;
 
   ActivityRemoteModel(
       {this.id,
       this.regionId,
       this.comments,
+      this.bookmarked,
       this.name,
       this.type,
       this.description,
@@ -133,6 +135,7 @@ class ActivityRemoteModel {
     price = json['price'];
     latitude = json['latitude'];
     longitude = json['longitude'];
+    bookmarked = json['bookmarked'];
     adminId = json['admin_id'];
     guideId = json['guide_id'];
     try {
@@ -162,6 +165,7 @@ class ActivityRemoteModel {
     data['type'] = type;
     data['description'] = description;
     data['price'] = price;
+    data['bookmarked'] = bookmarked;
     data['latitude'] = latitude;
     data['longitude'] = longitude;
     data['admin_id'] = adminId;
