@@ -7,11 +7,14 @@ import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
+import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
 import 'package:travel_guide/feature/chat_page/presentation/cubits/chat_main_cubit/chat_main_bloc.dart';
 import 'package:travel_guide/feature/chat_page/presentation/services/chat_service/chat_service.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
+import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
+import 'package:travel_guide/injection.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatPage extends StatefulWidget {
@@ -65,10 +68,12 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme  = sl<ThemeCubit>().globalAppTheme;
     return BlocProvider(
       create: (context) => ChatMainBloc(service, widget.guide),
       child: Builder(builder: (context) {
         return Scaffold(
+          backgroundColor:  theme.darkThemeForScafold,
           appBar: AppBar(
             backgroundColor: Color(0xff1d1c21),
             title: Row(
@@ -106,10 +111,10 @@ class _ChatPageState extends State<ChatPage> {
                 user: _user,
                 theme: DarkChatTheme(
                   emptyChatPlaceholderTextStyle: StylesText.newDefaultTextStyle
-                      .copyWith(color: Colors.white),
+                      .copyWith(color: theme.reserveDarkScaffold),
                   inputTextStyle: StylesText.newDefaultTextStyle,
                   dateDividerTextStyle: StylesText.newDefaultTextStyle
-                      .copyWith(color: Colors.white),
+                      .copyWith(color: theme.reserveDarkScaffold),
                   receivedMessageBodyBoldTextStyle:
                       StylesText.newDefaultTextStyle,
                   sentMessageBodyTextStyle: StylesText.newDefaultTextStyle,

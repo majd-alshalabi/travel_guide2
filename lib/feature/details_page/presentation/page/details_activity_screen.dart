@@ -83,14 +83,14 @@ class DetailsActivitiesRegionScreen extends StatelessWidget {
                         Text(
                           model.name ?? "",
                           style: StylesText.newDefaultTextStyle.copyWith(
-                            color: Colors.black,
+                            color: theme.reserveDarkScaffold,
                             fontSize: 30,
                           ),
                         ),
                         Text(
                           "${model.price}\$",
                           style: StylesText.newDefaultTextStyle
-                              .copyWith(fontSize: 15, color: Colors.black),
+                              .copyWith(fontSize: 15, color: theme.reserveDarkScaffold),
                         ),
                       ],
                     ),
@@ -103,7 +103,7 @@ class DetailsActivitiesRegionScreen extends StatelessWidget {
                     child: Text(
                       model.description ?? "",
                       style: StylesText.newDefaultTextStyle
-                          .copyWith(color: Colors.black),
+                          .copyWith(color: theme.reserveDarkScaffold),
                     ),
                   ),
                   if ((model.urls?.length ?? 0) > 1)

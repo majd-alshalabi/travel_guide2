@@ -13,7 +13,7 @@ class SettAlKolMainPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppConstant.appName),
-        backgroundColor: theme.mainAppColor,
+        backgroundColor: theme.accent2,
       ),
     );
   }

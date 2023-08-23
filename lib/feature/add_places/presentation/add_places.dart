@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/enums.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
+import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/add_places/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/add_places/presentation/blocs/activity_cubit/activity_cubit.dart';
@@ -15,6 +17,7 @@ import 'package:travel_guide/feature/add_places/presentation/widgets/add_place_w
 import 'package:travel_guide/feature/add_places/presentation/widgets/create_place_attachment_widget.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/presentation/screen/map_page/map_screen.dart';
+import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
 
 class AddPlaces extends StatefulWidget {
@@ -54,13 +57,14 @@ class _AddPlacesState extends State<AddPlaces> {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
-      appBar: CustomAppBar(title: "add place"),
+      appBar: CustomAppBar(title: AppLocalizations.of(context)?.translate('add_places')??""),
       body: LoaderOverlay(
         useDefaultLoading: false,
-        overlayWidget: const Center(
+        overlayWidget:  Center(
           child: SpinKitSpinningLines(
-            color: Colors.white,
+            color:theme.reserveDarkScaffold,
             size: 50.0,
           ),
         ),
@@ -101,10 +105,10 @@ class _AddPlacesState extends State<AddPlaces> {
                             type: TextInputType.text,
                             color: Colors.black,
                             controllerName: nameController,
-                            label: "name",
+                            label: AppLocalizations.of(context)?.translate('Name')??"",
                             valedate: (String val) {
                               if (val.isEmpty) {
-                                return "name must be not Empty";
+                                return AppLocalizations.of(context)?.translate('field_must_not_be_empty')??"";
                               }
                             },
                           ),
@@ -118,7 +122,7 @@ class _AddPlacesState extends State<AddPlaces> {
                           padding: const EdgeInsets.all(8.0),
                           child: DropDownTextField(
                             selectedOption: selectedType,
-                            hintText: "type",
+                            hintText: AppLocalizations.of(context)?.translate('type')??"",
                             options: Constant.type,
                             onChanged: (value) {
                               selectedType = value;
@@ -131,10 +135,10 @@ class _AddPlacesState extends State<AddPlaces> {
                             type: TextInputType.text,
                             color: Colors.black,
                             controllerName: descriptionController,
-                            label: "description",
+                            label: AppLocalizations.of(context)?.translate('description')??"",
                             valedate: (String val) {
                               if (val.isEmpty) {
-                                return "description must be not Empty";
+                                return AppLocalizations.of(context)?.translate('field_must_not_be_empty')??"";
                               }
                             },
                           ),
@@ -143,12 +147,12 @@ class _AddPlacesState extends State<AddPlaces> {
                           padding: const EdgeInsets.all(8.0),
                           child: CustomAddTextField(
                             type: TextInputType.text,
-                            color: Colors.black,
+                            color: theme.reserveDarkScaffold,
                             controllerName: priceController,
-                            label: "price",
+                            label: AppLocalizations.of(context)?.translate('price')??"",
                             valedate: (String val) {
                               if (val.isEmpty) {
-                                return "price must be not Empty";
+                                return AppLocalizations.of(context)?.translate('field_must_not_be_empty')??"";
                               }
                             },
                           ),
@@ -184,7 +188,7 @@ class _AddPlacesState extends State<AddPlaces> {
                                         );
                                       },
                                       selectedOption: selectedCity,
-                                      hintText: "city",
+                                      hintText: AppLocalizations.of(context)?.translate('city')??"",
                                       options: citiesList
                                           .map((e) => e.name ?? "")
                                           .toList(),
@@ -255,7 +259,7 @@ class _AddPlacesState extends State<AddPlaces> {
                                       },
                                       withAdd: true,
                                       selectedOption: selectedRegion,
-                                      hintText: "region",
+                                      hintText: AppLocalizations.of(context)?.translate('region')??"",
                                       options: regionsList
                                           .map((e) => e.name ?? "")
                                           .toList(),
@@ -291,7 +295,7 @@ class _AddPlacesState extends State<AddPlaces> {
                               ),
                               child: TextButton(
                                 child: Text(
-                                  "Add",
+                                  AppLocalizations.of(context)?.translate('add')??"",
                                   style: StylesText.newDefaultTextStyle
                                       .copyWith(color: Colors.white),
                                 ),

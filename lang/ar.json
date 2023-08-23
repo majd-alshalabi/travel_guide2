@@ -33,7 +33,27 @@
   "could see": "ما يحب فعله",
   "activities": "النشاطات",
   "type":"نوع النشاط",
-  "edit": "تعديل"
+  "edit": "تعديل",
+  "Name": "الاسم",
+  "Upload_Image": "ارفع صورة",
+  "add": "اضف",
+  "field_must_not_be_empty": "الحقل لا يجب ان يكون فارغ",
+  "add_places": "اضافة اماكن",
+  "description": "التفاصيل",
+  "price": "السعر",
+  "city": "المدينة",
+  "chat": "المحادثات",
+  "login":"تسجيل الدخول",
+  "no_data_to_show":"لايوجد بيانات لعرضها",
+  "try_again":"حاول ثانية",
+  "Log_in_to_interact": "قم بتسجيل الدخول للتفاعل",
+  "enter_comment": "ادخل تعليق",
+  "Username_must_be_not_Empty": "اسم المستخدم لايجب ان يكون فارغ",
+  "Edit_Your_Name": "عدل اسمك",
+  "Submit": "تاكيد",
+  "cancel": "الغاء"
+
+
 
 
 

@@ -40,12 +40,11 @@ class _EditNameWidgetState extends State<EditNameWidget> {
                       color: Colors.black12,
                       controllerName: editNameController,
                       label: AppLocalizations.of(context)
-                              ?.translate('Edit Your Name') ??
-                          "",
+                              ?.translate('Edit_Your_Name') ?? "",
                       valedate: (String val) {
                         if (val.isEmpty) {
                           return AppLocalizations.of(context)
-                                  ?.translate('Username must be not Empty') ??
+                                  ?.translate('Username_must_be_not_Empty') ??
                               "";
                         }
                         return null;

@@ -4,18 +4,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:travel_guide/core/utils/themes.dart';
+import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
+import 'package:travel_guide/injection.dart';
 
 enum TtsState { playing, stopped, paused, continued }
 
 class TravelGuideTTS extends StatefulWidget {
   final String description;
 
-  const TravelGuideTTS({super.key, required this.description});
+   TravelGuideTTS({super.key, required this.description});
   @override
   _TravelGuideTTSState createState() => _TravelGuideTTSState();
 }
 
 class _TravelGuideTTSState extends State<TravelGuideTTS> {
+  AppTheme theme = sl <ThemeCubit>().globalAppTheme;
+
   late FlutterTts flutterTts;
   String? language;
   String? engine;
@@ -103,7 +108,7 @@ class _TravelGuideTTSState extends State<TravelGuideTTS> {
         },
         child: loading
             ? CircularProgressIndicator(
-                color: Colors.white,
+                color: theme.reserveDarkScaffold,
                 strokeWidth: 1,
               )
             : FaIcon(FontAwesomeIcons.play),

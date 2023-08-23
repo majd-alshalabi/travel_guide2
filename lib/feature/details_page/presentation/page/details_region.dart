@@ -31,6 +31,7 @@ class DetailsRegion extends StatelessWidget {
         ..getWitherForOneDay(model.longitude ?? 0, model.latitude ?? 0),
       child: Builder(builder: (context) {
         return Scaffold(
+          backgroundColor: theme.darkThemeForScafold,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -50,7 +51,7 @@ class DetailsRegion extends StatelessWidget {
                           CircleIconsDetails(
                             theme: theme,
                             widget: Icon(Icons.arrow_back),
-                            color: theme.black,
+                            color: theme.reserveDarkScaffold,
                             function: () {
                               Navigator.pop(context);
                             },
@@ -139,15 +140,16 @@ class DetailsRegion extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              "no data to show",
+                              AppLocalizations.of(context)?.translate('no_data_to_show')??"",
                               style: StylesText.newDefaultTextStyle
-                                  .copyWith(color: Colors.black),
+                                  .copyWith(color: theme.reserveDarkScaffold),
                             ),
                             TextButton(
                               child: Text(
-                                "try again",
+                            AppLocalizations.of(context)?.translate('try_again')??""
+                                ,
                                 style: StylesText.newDefaultTextStyle
-                                    .copyWith(color: Colors.blue),
+                                    .copyWith(color: theme.accent2),
                               ),
                               onPressed: () {
                                 context
