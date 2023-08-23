@@ -136,13 +136,15 @@ class TitlePlaceholder extends StatelessWidget {
           Container(
             width: width,
             height: 12.0,
-            color: theme.black,
+            decoration: BoxDecoration(
+                color: theme.black, borderRadius: BorderRadius.circular(10)),
           ),
           const SizedBox(height: 8.0),
           Container(
             width: width,
             height: 12.0,
-            color: theme.black,
+            decoration: BoxDecoration(
+                color: theme.black, borderRadius: BorderRadius.circular(10)),
           ),
         ],
       ),
@@ -309,9 +311,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return AppBar(
       flexibleSpace: Container(
-        decoration: BoxDecoration(
-          gradient: Constant.primaryBodyColor
-        ),
+        decoration: BoxDecoration(gradient: Constant.primaryBodyColor),
       ),
       title: Padding(
         padding: const EdgeInsets.only(top: 20),
@@ -327,16 +327,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       leading: showBackButton && Navigator.of(context).canPop()
           ? Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: IconButton(
+              padding: const EdgeInsets.only(top: 20),
+              child: IconButton(
                 color: theme.darkThemeForScafold,
                 iconSize: 20,
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon:  Icon(Icons.arrow_back_ios_new ,color: theme.darkThemeForScafold,),
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
+                  color: theme.darkThemeForScafold,
+                ),
               ),
-          )
+            )
           : null,
     );
   }

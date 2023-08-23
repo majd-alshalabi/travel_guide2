@@ -16,6 +16,7 @@ import 'package:travel_guide/feature/add_places/presentation/add_places.dart';
 import 'package:travel_guide/feature/details_page/presentation/page/details_activity_screen.dart';
 import 'package:travel_guide/feature/details_page/presentation/page/details_region.dart';
 import 'package:travel_guide/feature/favorite_page/presentation/screen/favorite_page.dart';
+import 'package:travel_guide/feature/guides/presentation/pages/chat_page_for_guide.dart';
 import 'package:travel_guide/feature/guides/presentation/pages/guides_page.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/main_page/presentation/blocs/main_cubit/main_cubit.dart';
@@ -106,7 +107,7 @@ class ListOfPlaces extends StatelessWidget {
     return FadeIn(
       duration: const Duration(milliseconds: 500),
       child: SizedBox(
-        height: height * 0.25,
+        height: height * 0.18,
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
@@ -154,14 +155,6 @@ class ListOfPlaces extends StatelessWidget {
                     style: StylesText.newDefaultTextStyle
                         .copyWith(color: Colors.black),
                   ),
-                  Text(
-                    regions[index].city?.name ?? "",
-                    style: StylesText.newDefaultTextStyle
-                        .copyWith(color: Colors.grey),
-                  ),
-                  Divider(
-                    color: theme.reserveDarkScaffold,
-                  ),
                 ],
               ),
             );
@@ -190,7 +183,7 @@ class ListActivity extends StatelessWidget {
     return FadeIn(
       duration: const Duration(milliseconds: 500),
       child: SizedBox(
-        height: height * 0.25,
+        height: height * 0.19,
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
@@ -367,17 +360,28 @@ class DrawerHome extends StatelessWidget {
               color: theme.black,
             ),
             title: Text(
-              AppLocalizations.of(context)?.translate('guides') ?? "",
+              AppSettings().identity?.guide == UserType.guide
+                  ? "chats"
+                  : AppLocalizations.of(context)?.translate('guides') ?? "",
               style: StylesText.newDefaultTextStyle.copyWith(
                 color: theme.black,
               ),
             ),
             onTap: () {
-              Navigator.push(
+              if (AppSettings().identity?.guide == UserType.guide) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatPageForGuide(),
+                    ));
+              } else {
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => GuidesPage(),
-                  ));
+                  ),
+                );
+              }
             },
           ),
           ListTile(

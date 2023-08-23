@@ -60,3 +60,18 @@ class CommentLoadingWidget extends StatelessWidget {
     );
   }
 }
+
+class UserLoadingWidget extends StatelessWidget {
+  const UserLoadingWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
+    return Shimmer.fromColors(
+      baseColor: theme.greyWeak.withOpacity(0.5),
+      highlightColor: Colors.grey,
+      enabled: true,
+      child: TitlePlaceholder(width: 200.0),
+    );
+  }
+}

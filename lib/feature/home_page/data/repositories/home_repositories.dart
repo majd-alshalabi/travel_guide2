@@ -5,6 +5,7 @@ import 'package:travel_guide/feature/home_page/data/data_sources/remote/home_rem
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/book_mark_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/comment_models.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/get_list_of_user.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/rate_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/regions_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
@@ -107,6 +108,18 @@ class HomeRepositories implements IHomeRepository {
     try {
       final AddRateResponseModel res =
           await accountRemoteDataSource.addRate(params);
+      return Right(res);
+    } catch (e) {
+      return const Left("Error while updating fcm token");
+    }
+  }
+
+  @override
+  Future<Either<String, GetListOfUserResponseModel>> getListOfUser(
+      GetListOfUserParamsModel params) async {
+    try {
+      final GetListOfUserResponseModel res =
+          await accountRemoteDataSource.getListOfUser(params);
       return Right(res);
     } catch (e) {
       return const Left("Error while updating fcm token");

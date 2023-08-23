@@ -42,7 +42,8 @@ dependencies:
   flutter_chat_ui: ^1.6.9
   uuid: ^3.0.7
   firebase_core: ^2.15.1
-  blur: ^3.1.0
+  flutter_tts: ^3.7.0
+  flutter_pannable_rating_bar: ^2.7.2+1
   firebase_database: ^10.2.5
 flutter_assets:
   assets_path: asset/images/

@@ -6,7 +6,7 @@ import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
-import 'package:travel_guide/feature/account/presentation/chat_page/presentation/pages/screens/chat_details.dart';
+import 'package:travel_guide/feature/chat_page/presentation/pages/screens/chat_details.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';

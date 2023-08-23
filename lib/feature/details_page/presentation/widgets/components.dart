@@ -7,6 +7,7 @@ import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/utils/extensions.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/details_page/presentation/cubits/region_details_cubit/region_details_cubit.dart';
+import 'package:travel_guide/feature/home_page/presentation/screen/home_page/rate_app_page.dart';
 
 import '../../../../injection.dart';
 import '../../../other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
@@ -34,8 +35,10 @@ class LocationInformation extends StatelessWidget {
     super.key,
     required this.name,
     required this.type,
+    required this.activityId,
     required this.rate,
   });
+  final int activityId;
   final String name;
   final String type;
   final String rate;
@@ -73,8 +76,19 @@ class LocationInformation extends StatelessWidget {
           ),
         ),
         20.w,
-        imageIcons(
-          image: ImagesApp.star,
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RatingApp(
+                    activityId: activityId,
+                  ),
+                ));
+          },
+          child: imageIcons(
+            image: ImagesApp.star,
+          ),
         ),
         Text(
           rate,

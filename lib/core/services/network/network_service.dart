@@ -25,7 +25,8 @@ class NetworkServices implements IRemoteDataSource {
     final res = await GetMyIdentityUseCase().call(NoParams());
     res.fold(
       (l) => null,
-      (r) => headers.addAll({"Authorization": "Bearer ${r?.token}"}),
+      (r) => headers
+          .addAll({"Authorization": "Bearer ${AppSettings().identity?.token}"}),
     );
     headers.addAll({"accept": "application/json"});
     return headers;
@@ -62,9 +63,9 @@ class NetworkServices implements IRemoteDataSource {
       await initTokenAndHeaders();
       headers.addAll({"Content-Type": "application/json"});
       BaseOptions options = BaseOptions(
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
-        sendTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 20),
+        receiveTimeout: const Duration(seconds: 20),
+        sendTimeout: const Duration(seconds: 20),
       );
       Dio dio = Dio(options);
       dio.interceptors.add(PrettyDioLogger(
@@ -83,6 +84,8 @@ class NetworkServices implements IRemoteDataSource {
             ? "for_guide/"
             : "");
       }
+      print(addedValue);
+      print("sdagdsgs");
       final Response response = await Dio().get(
         NetworkConfigurations.BaseUrl + addedValue + remoteBundle.networkPath,
         options: Options(
@@ -107,9 +110,9 @@ class NetworkServices implements IRemoteDataSource {
       await initTokenAndHeaders();
       headers.addAll({"Content-Type": "application/json"});
       BaseOptions options = BaseOptions(
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
-        sendTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 20),
+        receiveTimeout: const Duration(seconds: 20),
+        sendTimeout: const Duration(seconds: 20),
       );
       Dio dio = Dio(options);
       dio.interceptors.add(PrettyDioLogger(
@@ -145,9 +148,9 @@ class NetworkServices implements IRemoteDataSource {
       await initTokenAndHeaders();
       headers.addAll({"Content-Type": "application/json"});
       BaseOptions options = BaseOptions(
-        connectTimeout: const Duration(seconds: 10),
-        receiveTimeout: const Duration(seconds: 10),
-        sendTimeout: const Duration(seconds: 10),
+        connectTimeout: const Duration(seconds: 20),
+        receiveTimeout: const Duration(seconds: 20),
+        sendTimeout: const Duration(seconds: 20),
       );
       Dio dio = Dio(options);
       dio.interceptors.add(PrettyDioLogger(
