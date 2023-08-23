@@ -69,6 +69,8 @@ flutter:
     - lang/
     - asset/images/user_avatar/
     - asset/images/user_avatar/user_avatar_image.png
+    - asset/images/json/FT2K8lxPsQ.json
+    - asset/images/json/animation_lloddrpr.json
     - asset/images/
   fonts:
     - family: DMSans-Bold

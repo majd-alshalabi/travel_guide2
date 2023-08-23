@@ -40,6 +40,7 @@ class _CommentPageState extends State<CommentPage> {
           CommentCubit()..getCommentForCurrentPost(widget.activityId),
       child: Builder(builder: (context) {
         return Scaffold(
+          backgroundColor: theme.darkThemeForScafold,
           appBar: CustomAppBar(
             title:AppLocalizations.of(context)?.translate('comments')??"" ,
           ),
@@ -72,9 +73,9 @@ class _CommentPageState extends State<CommentPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "no comment to show",
+                                  AppLocalizations.of(context)?.translate('no_comment_to_show')??"",
                                   style: StylesText.newDefaultTextStyle
-                                      .copyWith(color: Colors.black),
+                                      .copyWith(color: theme.reserveDarkScaffold),
                                 ),
                                 TextButton(
                                   onPressed: () {
@@ -84,7 +85,7 @@ class _CommentPageState extends State<CommentPage> {
                                             widget.activityId);
                                   },
                                   child: Text(
-                                    "try again",
+                                    AppLocalizations.of(context)?.translate('try_again')??"",
                                     style: StylesText.defaultTextStyle
                                         .copyWith(color: theme.mainAppColor),
                                   ),

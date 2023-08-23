@@ -60,6 +60,7 @@ class _AddPlacesState extends State<AddPlaces> {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
       appBar: CustomAppBar(title: AppLocalizations.of(context)?.translate('add_places')??""),
+      backgroundColor:  theme.darkThemeForScafold,
       body: LoaderOverlay(
         useDefaultLoading: false,
         overlayWidget:  Center(
@@ -103,7 +104,7 @@ class _AddPlacesState extends State<AddPlaces> {
                           padding: const EdgeInsets.all(8.0),
                           child: CustomAddTextField(
                             type: TextInputType.text,
-                            color: Colors.black,
+                            color: theme.reserveDarkScaffold,
                             controllerName: nameController,
                             label: AppLocalizations.of(context)?.translate('Name')??"",
                             valedate: (String val) {
@@ -133,7 +134,7 @@ class _AddPlacesState extends State<AddPlaces> {
                           padding: const EdgeInsets.all(8.0),
                           child: CustomDescriptionTextField(
                             type: TextInputType.text,
-                            color: Colors.black,
+                            color: theme.reserveDarkScaffold,
                             controllerName: descriptionController,
                             label: AppLocalizations.of(context)?.translate('description')??"",
                             valedate: (String val) {
@@ -297,7 +298,7 @@ class _AddPlacesState extends State<AddPlaces> {
                                 child: Text(
                                   AppLocalizations.of(context)?.translate('add')??"",
                                   style: StylesText.newDefaultTextStyle
-                                      .copyWith(color: Colors.white),
+                                      .copyWith(color: theme.darkThemeForScafold),
                                 ),
                                 onPressed: () {
                                   if (selectedRegion == null) {

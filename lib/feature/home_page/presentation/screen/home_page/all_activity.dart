@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
@@ -26,19 +27,9 @@ class AllActivityPage extends StatelessWidget {
         return BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, state) {
             AppTheme theme = sl<ThemeCubit>().globalAppTheme;
-
             return Scaffold(
               backgroundColor: theme.darkThemeForScafold,
-              appBar: AppBar(
-                iconTheme: IconThemeData(color: theme.black),
-                elevation: 0.0,
-                backgroundColor: Colors.transparent,
-                title: Text(
-                  "all activity",
-                  style: StylesText.newTextStyleForAppBar
-                      .copyWith(color: theme.black),
-                ),
-              ),
+              appBar: CustomAppBar(title: AppLocalizations.of(context)?.translate('all_activity')??"",),
               body: Padding(
                 padding: EdgeInsets.only(top: 10.0, right: 10.0, left: 10.0),
                 child: RefreshIndicator(
@@ -88,7 +79,7 @@ class AllActivityPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "no data to show",
+                                        AppLocalizations.of(context)?.translate('no_data_to_show')??"",
                                         style: StylesText.newDefaultTextStyle
                                             .copyWith(color: Colors.blue),
                                       ),
@@ -99,7 +90,7 @@ class AllActivityPage extends StatelessWidget {
                                               .add(ReGetEvent());
                                         },
                                         child: Text(
-                                          "try again",
+                                          AppLocalizations.of(context)?.translate('try_again')??"",
                                           style: StylesText.newDefaultTextStyle
                                               .copyWith(
                                                   color: theme.mainAppColor),
@@ -174,7 +165,7 @@ class ItemBuilder extends StatelessWidget {
           minHeight: MediaQuery.of(context).size.height * .1,
         ),
         decoration: BoxDecoration(
-          color: theme.white,
+          color: theme.darkThemeForScafold,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
@@ -205,7 +196,7 @@ class ItemBuilder extends StatelessWidget {
               Text(
                 "${adsData.name}",
                 style:
-                    StylesText.newDefaultTextStyle.copyWith(color: theme.black),
+                    StylesText.newDefaultTextStyle.copyWith(color: theme.reserveDarkScaffold),
               ),
               AdsCommentLikeFav(adsData: adsData),
               // CommentInHomeContainer(
@@ -244,7 +235,7 @@ class AdsContainerHeaderWidget extends StatelessWidget {
           child: Text(
             data.admin?.name ?? "user",
             style: StylesText.newDefaultTextStyle.copyWith(
-              color: theme.black,
+              color: theme.reserveDarkScaffold,
             ),
           ),
         ),
@@ -352,9 +343,9 @@ class GettingNewAdsTheWholeWidget extends StatelessWidget {
           if (context.read<GetAllAdsBloc>().lastPage) {
             return Center(
               child: Text(
-                "no more places",
+                AppLocalizations.of(context)?.translate("no_more_places")??"",
                 style: StylesText.newDefaultTextStyle
-                    .copyWith(color: Colors.black),
+                    .copyWith(color: theme.reserveDarkScaffold),
               ),
             );
           }
@@ -421,7 +412,7 @@ class GetNewAdsButton extends StatelessWidget {
         ),
         child: Icon(
           Icons.add,
-          color: theme.black,
+          color: theme.reserveDarkScaffold,
         ),
       ),
     );
@@ -433,6 +424,7 @@ class AdsCommentLikeFav extends StatelessWidget {
   final ActivityRemoteModel adsData;
   @override
   Widget build(BuildContext context) {
+    AppTheme theme =sl<ThemeCubit>().globalAppTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
       child: Row(
@@ -447,12 +439,14 @@ class AdsCommentLikeFav extends StatelessWidget {
                 ),
               );
             },
-            child: const FaIcon(FontAwesomeIcons.comments, size: 20),
+            child:  FaIcon(FontAwesomeIcons.comments, size: 20 ,color: theme.reserveDarkScaffold,),
           ),
           const SizedBox(width: 10),
           Text(
             adsData.comments.toString(),
-            style: StylesText.defaultTextStyle,
+            style: StylesText.defaultTextStyle.copyWith(
+              color: theme.greyWeak
+            ),
           ),
         ],
       ),

@@ -53,7 +53,7 @@ class GuidesPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "there is not guide currently",
+                          AppLocalizations.of(context)?.translate('there_is_not_chats_currently')??"",
                           style: StylesText.newDefaultTextStyle
                               .copyWith(color: theme.reserveDarkScaffold),
                         ),
@@ -61,7 +61,7 @@ class GuidesPage extends StatelessWidget {
                           onTap: () =>
                               context.read<GuidesCubit>().getAllGuide(),
                           child: Text(
-                            "try again",
+                            AppLocalizations.of(context)?.translate('try_again')??"",
                             style: StylesText.newDefaultTextStyle
                                 .copyWith(color: theme.reserveDarkScaffold),
                           ),

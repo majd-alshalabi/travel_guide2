@@ -25,7 +25,7 @@ final appThemeData = {
     blue: Colors.blue,
     white: Colors.white,
     isDark: false,
-    mainAppColor: Colors.blue,
+    mainAppColor: const Color(0xff5bc91a),
     inputDecorationTheme: const InputDecorationTheme(
       fillColor: Color(0xffE6E6E6),
       filled: true,
@@ -74,7 +74,7 @@ final appThemeData = {
     blue: Colors.blue,
     white: Colors.black,
     isDark: true,
-    mainAppColor: Colors.blue,
+    mainAppColor: const Color(0xff5bc91a),
     inputDecorationTheme: const InputDecorationTheme(
       fillColor: Color(0xffE6E6E6),
       filled: true,
@@ -122,7 +122,7 @@ final appThemeData = {
           blue: Colors.blue,
           white: Colors.black,
           isDark: true,
-          mainAppColor: Colors.blue,
+          mainAppColor: const Color(0xff5bc91a),
           inputDecorationTheme: const InputDecorationTheme(
             fillColor: Color(0xffE6E6E6),
             filled: true,
@@ -171,7 +171,7 @@ final appThemeData = {
           blue: Colors.blue,
           white: Colors.white,
           isDark: false,
-          mainAppColor: Colors.blue,
+          mainAppColor: const Color(0xff5bc91a),
           inputDecorationTheme: const InputDecorationTheme(
             fillColor: Color(0xffE6E6E6),
             filled: true,

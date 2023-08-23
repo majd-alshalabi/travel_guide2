@@ -65,14 +65,15 @@ class _SplashScreenState extends State<SplashScreen> {
             }
           },
           child:  Scaffold(
-            backgroundColor: theme.reserveDarkScaffold,
+            backgroundColor: theme.darkThemeForScafold,
             body: Center(
               child: SizedBox(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height*0.5,
-                child: Image.asset('asset/images/logo.png'),
+                child:  Lottie.asset(
+                    'asset/images/json/animation_lloddrpr.json'),
               ),
-            ),
+              ),
           ),
         );
       }),

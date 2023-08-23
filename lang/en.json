@@ -63,7 +63,18 @@
   "password_length": "password length must be 8 at least",
   "password": "Password",
   "Register": "Register",
-  "comments": "Comments"
+  "comments": "Comments",
+  "all_activity": "all activity",
+  "there_is_not_chats_currently":"there is not chats currently",
+  "years_Of_Experience": "years Of Experience : ",
+  "no_more_places": "No more places",
+  "no_comment_to_show": "No Comment to show",
+  "Rate_Us": "Rate Us",
+  "home":"Home",
+  "map":"Map"
+
+
+
 
 
 

@@ -50,6 +50,7 @@
   "Log_in_to_interact": "قم بتسجيل الدخول للتفاعل",
   "enter_comment": "ادخل تعليق",
   "Username_must_be_not_Empty": "اسم المستخدم لايجب ان يكون فارغ",
+  "all_activity": "جميع النشاطات",
   "Edit_Your_Name": "عدل اسمك",
   "Submit": "تاكيد",
   "cancel": "الغاء",
@@ -63,7 +64,16 @@
   "password_length": "يجب أن يكون طول كلمة المرور 8 على الأقل",
   "password": "كلمة المرور",
   "Register":"التسجيل",
-  "comments": "التعليقات"
+  "comments": "التعليقات",
+  "there_is_not_chats_currently":"لايوجد محادثة حاليا",
+  "years_Of_Experience": "سنوات الخبرة : ",
+  "no_more_places": "لا مزيد من الاماكن",
+  "no_comment_to_show": "لايوجد تعليقات لعرضها",
+  "Rate_Us": "قيمنا",
+  "home":"الصفحة الرئيسية",
+  "map":"الخريطة"
+
+
 
 
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
@@ -33,7 +34,7 @@ class _ChatPageForGuideState extends State<ChatPageForGuide> {
         builder: (context) {
           return Scaffold(
             backgroundColor: theme.darkThemeForScafold,
-            appBar: CustomAppBar(title: "chats"),
+            appBar: CustomAppBar(title: AppLocalizations.of(context)?.translate('chat')??""),
             body: BlocBuilder<GuidesCubit, GuidesState>(
               buildWhen: (previous, current) {
                 if (current is GetChatListFromFirebaseLoaded) return true;
@@ -43,9 +44,9 @@ class _ChatPageForGuideState extends State<ChatPageForGuide> {
                 if (context.read<GuidesCubit>().chats.isEmpty) {
                   return Center(
                     child: Text(
-                      "there is not chats currently",
+                      AppLocalizations.of(context)?.translate('there_is_not_chats_currently')??"",
                       style: StylesText.newDefaultTextStyle
-                          .copyWith(color: Colors.black),
+                          .copyWith(color: theme.reserveDarkScaffold),
                     ),
                   );
                 }
@@ -139,7 +140,7 @@ class UserItemForChat extends StatelessWidget {
                   Text(
                     user.name ?? "",
                     style: StylesText.newDefaultTextStyle
-                        .copyWith(color: Colors.black),
+                        .copyWith(color: theme.reserveDarkScaffold),
                   )
                 else
                   UserLoadingWidget(),

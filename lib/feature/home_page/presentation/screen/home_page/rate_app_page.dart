@@ -4,7 +4,10 @@ import 'package:flutter_pannable_rating_bar/flutter_pannable_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:lottie/lottie.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:travel_guide/app_localizations.dart';
+import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
@@ -30,9 +33,9 @@ class _RatingAppState extends State<RatingApp> {
       child: Builder(builder: (context) {
         return LoaderOverlay(
           useDefaultLoading: false,
-          overlayWidget: const Center(
+          overlayWidget: Center(
             child: SpinKitSpinningLines(
-              color: Colors.white,
+              color: theme.reserveDarkScaffold,
               size: 50.0,
             ),
           ),
@@ -52,21 +55,22 @@ class _RatingAppState extends State<RatingApp> {
             child: Scaffold(
                 extendBodyBehindAppBar: true,
                 backgroundColor: theme.darkThemeForScafold,
-                appBar: AppBar(
-                  iconTheme: IconThemeData(color: theme.black),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                ),
+                appBar: CustomAppBar(
+                    title: AppLocalizations.of(context)?.translate('Rate_Us') ??
+                        ""),
                 body: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Center(
-                        child: Image.asset(
-                      'asset/images/rate.png',
-                      width: 200,
-                      height: 200,
-                    )),
+                      child: Container(
+                        width: 200,
+                        height: 200,
+
+                        child: Lottie.asset(
+                            'asset/images/json/FT2K8lxPsQ.json'),
+                      ),
+                    ),
                     Center(
                       child: PannableRatingBar(
                         rate: rating,
@@ -91,21 +95,20 @@ class _RatingAppState extends State<RatingApp> {
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.02,
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: NewCustomBottom(
-                        text: "Submit",
-                        height: 50,
-                        width: 50.w,
-                        onPress: () {
-                          context
-                              .read<RateCubit>()
-                              .addRate(rating.floor(), widget.activityId);
-                        },
-                        borderColor: Colors.transparent,
-                        textStyleForButton: StylesText.defaultTextStyle
-                            .copyWith(color: theme.white),
-                      ),
+                    Center(
+                      child: CustomBottom(
+                          text: AppLocalizations.of(context)
+                                  ?.translate('Submit') ??
+                              "",
+                          height: 50,
+                          buttonColor: Constant.primaryBodyColor,
+                          onPress: () {
+                            context
+                                .read<RateCubit>()
+                                .addRate(rating.floor(), widget.activityId);
+                          },
+                          borderColor: theme.darkThemeForScafold,
+                          textStyleForButton: StylesText.textStyleForButton),
                     ),
                   ],
                 )),

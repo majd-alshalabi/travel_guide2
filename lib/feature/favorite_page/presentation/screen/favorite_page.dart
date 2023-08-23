@@ -31,15 +31,16 @@ class _FavoritePageState extends State<FavoritePage> {
     var height = MediaQuery.sizeOf(context).height;
 
     return Scaffold(
-      appBar: CustomAppBar(title: "favorite"),
+      backgroundColor: theme.darkThemeForScafold,
+      appBar: CustomAppBar(title: AppLocalizations.of(context)?.translate('favorite')??""),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
-              AppLocalizations.of(context)?.translate("Favorites") ?? '',
-              style: StylesText.textStyleForTitle,
+              AppLocalizations.of(context)?.translate("favorite") ?? '',
+              style: StylesText.textStyleForTitle.copyWith(color: theme.reserveDarkScaffold),
             ),
           ),
           BlocBuilder<BookMarkCubit, BookMarkState>(
@@ -60,15 +61,15 @@ class _FavoritePageState extends State<FavoritePage> {
                   child: Column(
                     children: [
                       Text(
-                        "no data to show",
+                        AppLocalizations.of(context)?.translate('no_data_to_show')??"",
                         style: StylesText.newDefaultTextStyle
-                            .copyWith(color: theme.black),
+                            .copyWith(color: theme.accent2),
                       ),
                       TextButton(
                         child: Text(
-                          "try again",
+                          AppLocalizations.of(context)?.translate('try_again')??"",
                           style: StylesText.newDefaultTextStyle
-                              .copyWith(color: Colors.green),
+                              .copyWith(color: theme.accent2),
                         ),
                         onPressed: () {
                           context.read<BookMarkCubit>().getBookMark();
