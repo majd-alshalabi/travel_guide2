@@ -19,14 +19,14 @@ class SettAlKolMaterialApp extends StatefulWidget {
   State<SettAlKolMaterialApp> createState() => _SettAlKolMaterialAppState();
 }
 
-class _SettAlKolMaterialAppState extends State<SettAlKolMaterialApp> with WidgetsBindingObserver {
+class _SettAlKolMaterialAppState extends State<SettAlKolMaterialApp>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     AppSettings().appState = AppState.foreground;
     sl<HomeCubit>().getCurrentLanguage();
     super.initState();
   }
-
 
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
@@ -42,8 +42,8 @@ class _SettAlKolMaterialAppState extends State<SettAlKolMaterialApp> with Widget
       builder: (context, orientation, deviceType) {
         return MultiBlocProvider(
           providers: [
-            BlocProvider(
-              create: (_) => ThemeCubit()..getCurrentTheme(),
+            BlocProvider.value(
+              value: sl<ThemeCubit>()..getCurrentTheme(),
             ),
             BlocProvider(
               create: (context) => MainCubit(),

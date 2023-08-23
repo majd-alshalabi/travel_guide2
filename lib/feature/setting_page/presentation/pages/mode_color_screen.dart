@@ -26,11 +26,13 @@ class _ModeColorScreenState extends State<ModeColorScreen> {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
-    return
-      Scaffold(
+    return Scaffold(
       backgroundColor: theme.darkThemeForScafold,
-      appBar: CustomAppBar(title:    AppLocalizations.of(context)?.translate('Color_Mode_App_Setting') ??
-          "",),
+      appBar: CustomAppBar(
+        title:
+            AppLocalizations.of(context)?.translate('Color_Mode_App_Setting') ??
+                "",
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Padding(
@@ -71,10 +73,10 @@ class _ModeColorScreenState extends State<ModeColorScreen> {
                         statusOfMode = val;
                         if (val == false) {
                           sl<ThemeCubit>()
-                              .themeChanged(themeType: ThemeType.settAlKolLight);
-                        } else {
-                          sl<ThemeCubit>()
                               .themeChanged(themeType: ThemeType.settAlKolDark);
+                        } else {
+                          sl<ThemeCubit>().themeChanged(
+                              themeType: ThemeType.settAlKolLight);
                         }
                       });
                     },
