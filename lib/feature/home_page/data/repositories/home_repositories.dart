@@ -32,7 +32,6 @@ class HomeRepositories implements IHomeRepository {
       return Right(res);
     } catch (e) {
       print(e);
-      print("d2asfga2sdg");
       return const Left("Error while updating fcm token");
     }
   }
