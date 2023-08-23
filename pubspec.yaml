@@ -10,6 +10,7 @@ environment:
 dependencies:
   animate_do: ^3.0.2
   animated_notch_bottom_bar: ^1.0.0
+  flutter_native_splash: ^2.3.2
   cached_network_image: ^3.2.3
   lottie: ^2.6.0
   carousel_slider: ^4.2.1
@@ -46,11 +47,18 @@ dependencies:
   flutter_tts: ^3.7.0
   flutter_pannable_rating_bar: ^2.7.2+1
   firebase_database: ^10.2.5
+
 flutter_assets:
   assets_path: asset/images/
   output_path: lib/core/constants/
   filename: app_images.dart
   field_prefix: null
+
+  flutter_native_splash:
+    color: "#000000"
+    image: "assets/images/logo.png"
+    android: true
+    ios: true
 
 flutter:
 

@@ -361,6 +361,7 @@ class CustomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Container(
       margin: const EdgeInsets.fromLTRB(16.0, 10.0, 10.0, 8.0),
       child: Row(
@@ -368,7 +369,7 @@ class CustomText extends StatelessWidget {
         children: [
           Text(
             titleName,
-            style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
+            style: StylesText.newDefaultTextStyle.copyWith(color: theme.reserveDarkScaffold),
           ),
           if (seeAllButton)
             InkWell(

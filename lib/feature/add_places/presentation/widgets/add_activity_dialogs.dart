@@ -6,11 +6,13 @@ import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
+import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/add_places/presentation/blocs/activity_cubit/activity_cubit.dart';
 import 'package:travel_guide/feature/add_places/presentation/blocs/upload_image_cubit/upload_image_cubit.dart';
 import 'package:travel_guide/feature/add_places/presentation/widgets/create_place_attachment_widget.dart';
 import 'package:travel_guide/feature/home_page/presentation/screen/map_page/map_screen.dart';
+import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
 
 class AddCityDialog extends StatefulWidget {
@@ -30,6 +32,7 @@ class _AddCityDialogState extends State<AddCityDialog> {
   var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: LoaderOverlay(
@@ -46,7 +49,7 @@ class _AddCityDialogState extends State<AddCityDialog> {
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Colors.white,
+              color: theme.darkThemeForScafold,
             ),
             alignment: Alignment.center,
             width: MediaQuery.of(context).size.width * 0.95,
@@ -71,7 +74,7 @@ class _AddCityDialogState extends State<AddCityDialog> {
                     key: formKey,
                     child: CustomAddTextField(
                       type: TextInputType.text,
-                      color: Colors.black,
+                      color: theme.reserveDarkScaffold,
                       controllerName: controller,
                       label: AppLocalizations.of(context)?.translate('Name') ?? "",
                       valedate: (String val) {
@@ -94,7 +97,7 @@ class _AddCityDialogState extends State<AddCityDialog> {
                         child: Text(
                           AppLocalizations.of(context)?.translate('add')??"",
                           style: StylesText.newDefaultTextStyle
-                              .copyWith(color: Colors.white),
+                              .copyWith(color: theme.reserveDarkScaffold),
                         ),
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
@@ -134,6 +137,7 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
   double lang = 0;
   @override
   Widget build(BuildContext context) {
+    AppTheme theme =sl<ThemeCubit>().globalAppTheme;
     return BlocProvider(
       create: (context) => UploadImageCubit("region")..initState([]),
       child: Builder(builder: (context) {
@@ -142,9 +146,9 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
           backgroundColor: Colors.transparent,
           body: LoaderOverlay(
             useDefaultLoading: false,
-            overlayWidget: const Center(
+            overlayWidget:  Center(
               child: SpinKitSpinningLines(
-                color: Colors.white,
+                color: theme.reserveDarkScaffold,
                 size: 50.0,
               ),
             ),
@@ -154,7 +158,7 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
+                  color: theme.darkThemeForScafold,
                 ),
                 alignment: Alignment.center,
                 width: MediaQuery.of(context).size.width * 0.95,
@@ -217,7 +221,7 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
                             child: Text(
                               AppLocalizations.of(context)?.translate('add')??"",
                               style: StylesText.newDefaultTextStyle
-                                  .copyWith(color: Colors.white),
+                                  .copyWith(color: theme.reserveDarkScaffold),
                             ),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {

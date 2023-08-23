@@ -67,8 +67,11 @@ class _SplashScreenState extends State<SplashScreen> {
           child:  Scaffold(
             backgroundColor: theme.reserveDarkScaffold,
             body: Center(
-              child: Lottie.network(
-                  'https://lottie.host/2397a825-00ca-480d-adac-ac9d745cb291/r5j1dD9oah.json'),
+              child: SizedBox(
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height*0.5,
+                child: Image.asset('asset/images/logo.png'),
+              ),
             ),
           ),
         );
