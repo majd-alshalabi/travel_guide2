@@ -33,7 +33,31 @@
   "could see": "Could See",
   "activities": "Activities",
   "type":"Type",
-  "edit": "Edit"
+  "edit": "Edit",
+  "add": "Add",
+  "Upload_Image": "Upload Image",
+  "Name": "Name",
+  "field_must_not_be_empty": "field must not be empty",
+  "add_places": "Add Places",
+  "description": "Description",
+  "price": "Price",
+  "city": "City",
+  "chat": "Chat",
+  "login":"LogIn",
+  "no_data_to_show":"no data to show",
+  "try_again":"try again",
+  "Log_in_to_interact": "Log in to interact",
+  "enter_comment": "Enter Comment",
+  "Username_must_be_not_Empty": "Username must be not Empty",
+  "Edit_Your_Name": "Edit Your Name",
+  "Submit": "Submit",
+  "cancel": "Cancel"
+
+
+
+
+
+
 
 
 

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:travel_guide/core/constants/enums.dart';
+import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/account/presentation/login_page/presentation/login_page.dart';
 import 'package:travel_guide/feature/account/presentation/onboarding_page/presentation/onBoarding_page.dart';
 import 'package:travel_guide/feature/account/presentation/splash_screen/bloc/splash_screen_bloc/splash_screen_cubit.dart';
 import 'package:travel_guide/feature/home_page/presentation/screen/toggle_page.dart';
+import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
+import 'package:travel_guide/injection.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,6 +20,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return BlocProvider(
       create: (context) => SplashScreenCubit()..initState(),
       child: Builder(builder: (context) {
@@ -59,8 +64,12 @@ class _SplashScreenState extends State<SplashScreen> {
               );
             }
           },
-          child: const Scaffold(
-            backgroundColor: Colors.black87,
+          child:  Scaffold(
+            backgroundColor: theme.reserveDarkScaffold,
+            body: Center(
+              child: Lottie.network(
+                  'https://lottie.host/2397a825-00ca-480d-adac-ac9d745cb291/r5j1dD9oah.json'),
+            ),
           ),
         );
       }),

@@ -45,7 +45,6 @@ class LocationInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -58,7 +57,7 @@ class LocationInformation extends StatelessWidget {
             Text(
               name,
               style:
-                  StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
+                  StylesText.newDefaultTextStyle.copyWith(color: theme.reserveDarkScaffold),
             ),
           ],
         ),
@@ -72,7 +71,7 @@ class LocationInformation extends StatelessWidget {
           ),
           child: Text(
             type,
-            style: StylesText.newDefaultTextStyle.copyWith(color: Colors.white),
+            style: StylesText.newDefaultTextStyle.copyWith(color: theme.darkThemeForScafold),
           ),
         ),
         Row(
@@ -95,7 +94,7 @@ class LocationInformation extends StatelessWidget {
             Text(
               rate,
               style:
-                  StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
+                  StylesText.newDefaultTextStyle.copyWith(color: theme.reserveDarkScaffold),
             ),
           ],
         )

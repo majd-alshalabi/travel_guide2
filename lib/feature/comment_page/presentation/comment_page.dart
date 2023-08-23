@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/services/app_settings/app_settings.dart';
@@ -234,8 +235,8 @@ class _ChatUITextFieldState extends State<ChatUITextField> {
           color: theme.greyWeak,
         ),
         child: Text(
-          "Log in to interact",
-          style: StylesText.newDefaultTextStyle.copyWith(color: theme.black),
+          AppLocalizations.of(context)?.translate('Log_in_to_interact')??"",
+          style: StylesText.newDefaultTextStyle.copyWith(color: theme.reserveDarkScaffold),
         ),
       );
     }
@@ -262,7 +263,7 @@ class _ChatUITextFieldState extends State<ChatUITextField> {
                 _inputText.value = value;
               },
               decoration: InputDecoration(
-                hintText: "enter comment",
+                hintText: AppLocalizations.of(context)?.translate('enter_comment')??"",
                 fillColor: Colors.transparent,
                 filled: true,
                 hintStyle: StylesText.newDefaultTextStyle.copyWith(

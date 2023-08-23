@@ -5,11 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/enums.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/models/image_local_model.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
+import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/add_places/presentation/blocs/upload_image_cubit/upload_image_cubit.dart';
+import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
+import 'package:travel_guide/injection.dart';
 
 class CreateActivityAttachmentSection extends StatelessWidget {
   const CreateActivityAttachmentSection({
@@ -43,7 +47,7 @@ class CreateActivityAttachmentSection extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 1.w),
                   child: Text(
-                    "Upload Image",
+                    AppLocalizations.of(context)?.translate('Upload_Image')??"",
                     style: StylesText.newDefaultTextStyle
                         .copyWith(color: Colors.black),
                   ),
@@ -211,7 +215,8 @@ class ActivityImageContainer extends StatelessWidget {
 }
 
 class RetryWidget extends StatelessWidget {
-  const RetryWidget({
+  AppTheme theme = sl<ThemeCubit>().globalAppTheme;
+   RetryWidget({
     Key? key,
     required this.onTap,
   }) : super(key: key);
@@ -226,15 +231,15 @@ class RetryWidget extends StatelessWidget {
         height: 30,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.grey.withOpacity(0.5),
+          color: theme.grey.withOpacity(0.5),
         ),
         child: InkWell(
           onTap: () {
             onTap.call();
           },
-          child: const Icon(
+          child:  Icon(
             Icons.settings_backup_restore,
-            color: Colors.white,
+            color: theme.white,
           ),
         ),
       ),
@@ -252,6 +257,7 @@ class LoadingWidget extends StatelessWidget {
   final Function() onTap;
   @override
   Widget build(BuildContext context) {
+    AppTheme theme =sl<ThemeCubit>().globalAppTheme;
     return Positioned(
       bottom: 2,
       right: 2,
@@ -260,13 +266,13 @@ class LoadingWidget extends StatelessWidget {
         height: 30,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.grey.withOpacity(0.5),
+          color: theme.grey.withOpacity(0.5),
         ),
         child: Stack(
           fit: StackFit.expand,
           children: [
             CircularProgressIndicator(
-              color: Colors.blue,
+              color: theme.accent2,
               value: value,
               strokeWidth: 3,
             ),
@@ -283,10 +289,10 @@ class LoadingWidget extends StatelessWidget {
                 onPressed: () {
                   onTap.call();
                 },
-                child: const Center(
+                child:  Center(
                     child: Icon(
                   Icons.clear,
-                  color: Colors.white,
+                  color: theme.reserveDarkScaffold,
                 )),
               ),
             ),
@@ -298,7 +304,8 @@ class LoadingWidget extends StatelessWidget {
 }
 
 class RemoveWidget extends StatelessWidget {
-  const RemoveWidget({
+  AppTheme theme  = sl<ThemeCubit>().globalAppTheme;
+   RemoveWidget({
     Key? key,
     required this.onTap,
   }) : super(key: key);
@@ -313,15 +320,15 @@ class RemoveWidget extends StatelessWidget {
         height: 30,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.grey.withOpacity(0.5),
+          color: theme.grey.withOpacity(0.5),
         ),
         child: InkWell(
           onTap: () {
             onTap.call();
           },
-          child: const Icon(
+          child:  Icon(
             Icons.clear,
-            color: Colors.white,
+            color: theme.reserveDarkScaffold,
           ),
         ),
       ),

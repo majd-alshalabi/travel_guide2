@@ -12,6 +12,7 @@ import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
+import 'package:travel_guide/feature/account/presentation/my_profile_page/presentation/my_profile_page.dart';
 import 'package:travel_guide/feature/add_places/presentation/add_places.dart';
 import 'package:travel_guide/feature/details_page/presentation/page/details_activity_screen.dart';
 import 'package:travel_guide/feature/details_page/presentation/page/details_region.dart';
@@ -60,12 +61,12 @@ class searchWithNotifications extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.black, width: 1),
+                  border: Border.all(color: theme.reserveDarkScaffold, width: 1),
                 ),
                 child: Text(
                   AppLocalizations.of(context)?.translate('To Where') ?? "",
                   style: StylesText.newDefaultTextStyle
-                      .copyWith(color: Colors.black),
+                      .copyWith(color: theme.reserveDarkScaffold),
                 ),
               ),
             ),
@@ -78,6 +79,7 @@ class searchWithNotifications extends StatelessWidget {
               icon: Icon(
                 Icons.notifications,
                 size: 25,
+                color: theme.accent2,
               ),
               color: theme.reserveDarkScaffold,
               onPressed: () {},
@@ -153,7 +155,7 @@ class ListOfPlaces extends StatelessWidget {
                   Text(
                     regions[index].name ?? "",
                     style: StylesText.newDefaultTextStyle
-                        .copyWith(color: Colors.black),
+                        .copyWith(color: theme.reserveDarkScaffold),
                   ),
                 ],
               ),
@@ -282,12 +284,15 @@ class DrawerHome extends StatelessWidget {
             color: theme.accent2,
             child: Center(
               child: ListTile(
-                leading: TravelGuideUserAvatar(
-                  width: 13.w,
-                  imageUrl: ImagesApp.imagesUserAvatarUserAvatarImage,
+                leading: InkWell(
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile(),)),
+                  child: TravelGuideUserAvatar(
+                    width: 13.w,
+                    imageUrl: ImagesApp.imagesUserAvatarUserAvatarImage,
+                  ),
                 ),
                 title: Text(
-                  AppSettings().identity?.name ?? "login",
+                  AppSettings().identity?.name ?? AppLocalizations.of(context)?.translate('login')??"",
                   style: StylesText.newDefaultTextStyle.copyWith(
                     color: theme.darkThemeForScafold,
                   ),
@@ -322,7 +327,7 @@ class DrawerHome extends StatelessWidget {
                 color: theme.black,
               ),
               title: Text(
-                "add place",
+                AppLocalizations.of(context)?.translate('add_places')??"",
                 style: StylesText.newDefaultTextStyle.copyWith(
                   color: theme.black,
                 ),
@@ -361,7 +366,7 @@ class DrawerHome extends StatelessWidget {
             ),
             title: Text(
               AppSettings().identity?.guide == UserType.guide
-                  ? "chats"
+                  ? AppLocalizations.of(context)?.translate('chat')??""
                   : AppLocalizations.of(context)?.translate('guides') ?? "",
               style: StylesText.newDefaultTextStyle.copyWith(
                 color: theme.black,

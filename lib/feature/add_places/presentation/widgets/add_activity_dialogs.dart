@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
@@ -72,10 +73,10 @@ class _AddCityDialogState extends State<AddCityDialog> {
                       type: TextInputType.text,
                       color: Colors.black,
                       controllerName: controller,
-                      label: "name",
+                      label: AppLocalizations.of(context)?.translate('Name') ?? "",
                       valedate: (String val) {
                         if (val.isEmpty) {
-                          return "field must not be empty";
+                          return AppLocalizations.of(context)?.translate('field_must_not_be_empty');
                         }
                       },
                     ),
@@ -91,7 +92,7 @@ class _AddCityDialogState extends State<AddCityDialog> {
                       ),
                       child: TextButton(
                         child: Text(
-                          "Add",
+                          AppLocalizations.of(context)?.translate('add')??"",
                           style: StylesText.newDefaultTextStyle
                               .copyWith(color: Colors.white),
                         ),
@@ -180,10 +181,10 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
                           type: TextInputType.text,
                           color: Colors.black,
                           controllerName: controller,
-                          label: "name",
+                          label: AppLocalizations.of(context)?.translate('Name')??"",
                           valedate: (String val) {
                             if (val.isEmpty) {
-                              return "field must not be empty";
+                              return AppLocalizations.of(context)?.translate('field_must_not_be_empty')??"";
                             }
                           },
                         ),
@@ -214,7 +215,7 @@ class _AddRegionDialogState extends State<AddRegionDialog> {
                           ),
                           child: TextButton(
                             child: Text(
-                              "Add",
+                              AppLocalizations.of(context)?.translate('add')??"",
                               style: StylesText.newDefaultTextStyle
                                   .copyWith(color: Colors.white),
                             ),
