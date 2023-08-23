@@ -9,8 +9,8 @@ import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
 import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
-import 'package:travel_guide/feature/account/presentation/chat_page/presentation/cubits/chat_main_cubit/chat_main_bloc.dart';
-import 'package:travel_guide/feature/account/presentation/chat_page/presentation/services/chat_service/chat_service.dart';
+import 'package:travel_guide/feature/chat_page/presentation/cubits/chat_main_cubit/chat_main_bloc.dart';
+import 'package:travel_guide/feature/chat_page/presentation/services/chat_service/chat_service.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:uuid/uuid.dart';
 
@@ -51,7 +51,8 @@ class _ChatPageState extends State<ChatPage> {
       FirebaseMessageModel(
         message: textMessage.text,
         id: textMessage.id,
-        receiverId: widget.guide.id.toString() + "guide",
+        receiverId:
+            widget.guide.id.toString() + (widget.guide.type?.name ?? ""),
         type: 1,
         senderId: (AppSettings().identity?.serverId.toString() ?? "") +
             (AppSettings().identity?.guide.toString() ?? ""),
@@ -96,10 +97,16 @@ class _ChatPageState extends State<ChatPage> {
                 onSendPressed: _handleSendPressed,
                 showUserAvatars: true,
                 showUserNames: true,
+                avatarBuilder: (userId) {
+                  return TravelGuideUserAvatar(
+                    imageUrl: widget.guide.image ?? "",
+                    width: 8.w,
+                  );
+                },
                 user: _user,
                 theme: DarkChatTheme(
-                  emptyChatPlaceholderTextStyle:StylesText.newDefaultTextStyle
-                      .copyWith(color: Colors.white) ,
+                  emptyChatPlaceholderTextStyle: StylesText.newDefaultTextStyle
+                      .copyWith(color: Colors.white),
                   inputTextStyle: StylesText.newDefaultTextStyle,
                   dateDividerTextStyle: StylesText.newDefaultTextStyle
                       .copyWith(color: Colors.white),

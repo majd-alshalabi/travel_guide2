@@ -5,6 +5,7 @@ import 'package:travel_guide/feature/add_places/data/models/remote/get_activity_
 import 'package:travel_guide/feature/home_page/data/models/remote/activity_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/book_mark_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/comment_models.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/get_list_of_user.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/rate_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/regions_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
@@ -21,6 +22,18 @@ class HomeRemoteDataSource {
       ),
     );
     return Future.value(AddRateResponseModel.fromJson(res));
+  }
+
+  Future<GetListOfUserResponseModel> getListOfUser(
+      GetListOfUserParamsModel params) async {
+    final res = await networkServices.post(
+      RemoteDataBundle(
+        body: params.toJson(),
+        networkPath: NetworkConfigurations.kGetListOfUser,
+        urlParams: <String, String>{},
+      ),
+    );
+    return Future.value(GetListOfUserResponseModel.fromJson(res));
   }
 
   Future<AddGuideRateResponseModel> addGuideRate(

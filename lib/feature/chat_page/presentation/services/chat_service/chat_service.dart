@@ -10,6 +10,7 @@ import 'package:travel_guide/feature/home_page/data/models/remote/activity_model
 class ChatService {
   final DatabaseReference messagesRef =
       FirebaseDatabase.instance.ref('messages');
+
   StreamSubscription? streamSubscription;
   final AdminModel user;
   StreamController<ChatEvent> chatStream =
