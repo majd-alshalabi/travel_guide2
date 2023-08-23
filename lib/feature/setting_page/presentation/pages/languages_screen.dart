@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
+import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
@@ -25,14 +26,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
       backgroundColor: theme.darkThemeForScafold,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: theme.black),
-        title: Text(
-          AppLocalizations.of(context)?.translate('Languages_Setting') ?? "",
-          style: StylesText.newTextStyleForAppBar.copyWith(color: theme.black),
-        ),
-        backgroundColor: theme.darkAndWhiteForAppBar,
-      ),
+      appBar:CustomAppBar(title: AppLocalizations.of(context)?.translate('Languages_Setting') ?? "",),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -61,6 +55,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
                   height: 30.0,
                   valueFontSize: 10.0,
                   toggleSize: 30.0,
+                  activeColor: theme.accent2,
                   value: statusOfLanguages,
                   borderRadius: 20.0,
                   padding: 8.0,

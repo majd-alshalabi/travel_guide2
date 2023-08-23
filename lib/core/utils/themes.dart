@@ -206,7 +206,8 @@ final appThemeData = {
           // scroll over color
           accent2: const Color(0xff5bc91a),
           greyWeak: const Color(0xff909f9c),
-          error: Colors.red.shade900, grey: Colors.grey.shade400,
+          error: Colors.red.shade900,
+          grey: Colors.grey.shade400,
           red: Colors.red.shade700,
         ),
 };

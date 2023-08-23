@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
@@ -30,7 +31,7 @@ class GuideProfile extends StatelessWidget {
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.37,
                   decoration: BoxDecoration(
-                    color: Colors.blueGrey,
+                    gradient: Constant.primaryBodyColor,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -94,7 +95,7 @@ class GuideProfile extends StatelessWidget {
                           },
                           child: Icon(
                             Icons.comment_bank_outlined,
-                            color: theme.black,
+                            color: theme.accent2,
                           ),
                         ),
                       )
@@ -113,7 +114,7 @@ class GuideProfile extends StatelessWidget {
                       Text(
                         "gender : ",
                         style: StylesText.newDefaultTextStyle
-                            .copyWith(color: Colors.black, fontSize: 18),
+                            .copyWith(color: theme.accent2, fontSize: 18),
                       ),
                       SizedBox(
                         height: 1.h,
@@ -141,7 +142,7 @@ class GuideProfile extends StatelessWidget {
                       Text(
                         "Age : ",
                         style: StylesText.newDefaultTextStyle
-                            .copyWith(color: Colors.black, fontSize: 18),
+                            .copyWith(color: theme.accent2, fontSize: 18),
                       ),
                       SizedBox(
                         height: 1.h,
@@ -169,7 +170,7 @@ class GuideProfile extends StatelessWidget {
                       Text(
                         "years Of Experience : ",
                         style: StylesText.newDefaultTextStyle
-                            .copyWith(color: Colors.black, fontSize: 18),
+                            .copyWith(color: theme.accent2, fontSize: 18),
                       ),
                       SizedBox(
                         height: 1.h,
@@ -197,7 +198,7 @@ class GuideProfile extends StatelessWidget {
                       Text(
                         "bio : ",
                         style: StylesText.newDefaultTextStyle
-                            .copyWith(color: Colors.black, fontSize: 18),
+                            .copyWith(color: theme.accent2, fontSize: 18),
                       ),
                       SizedBox(
                         height: 1.h,

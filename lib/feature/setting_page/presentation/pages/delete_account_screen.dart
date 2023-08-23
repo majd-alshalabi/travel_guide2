@@ -23,17 +23,9 @@ class DeleteAccount extends StatelessWidget {
           size: 50.0,
         ),
       ),
-      child:        Scaffold(
+      child: Scaffold(
         backgroundColor: theme.darkThemeForScafold,
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: theme.black),
-          title: Text(
-            AppLocalizations.of(context)?.translate('delete_Account') ?? "",
-            style:
-            StylesText.newTextStyleForAppBar.copyWith(color: theme.black),
-          ),
-          backgroundColor: theme.darkAndWhiteForAppBar,
-        ),
+        appBar: CustomAppBar(title:  AppLocalizations.of(context)?.translate('delete_Account') ?? "",),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Padding(
@@ -63,7 +55,7 @@ class DeleteAccount extends StatelessWidget {
                         },
                         borderColor: theme.greyWeak,
                         textStyleForButton: StylesText.defaultTextStyle
-                            .copyWith(color: theme.reserveDarkScaffold),
+                            .copyWith(color: theme.darkThemeForScafold),
                       ),
                     ),
                   ],

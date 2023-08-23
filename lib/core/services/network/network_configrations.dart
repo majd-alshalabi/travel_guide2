@@ -25,7 +25,7 @@ class NetworkConfigurations {
   static const kGetComment = 'getComment';
   static const kChangePassword = 'change_password';
   static const kUploadImage = 'for_guide/addimages';
-  static const String BaseUrl = "http://192.168.43.85:8000/api/";
+  static const String BaseUrl = "http://192.168.151.52:8000/api/";
   static const String kWitherAppId = "7f8fd17f502345ec0ab3434b76213e1d";
   static const Map<String, String> BaseHeaders = {
     "accept": "application/json, */* ,charset=UTF-8",

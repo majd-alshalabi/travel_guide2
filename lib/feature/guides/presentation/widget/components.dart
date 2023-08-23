@@ -59,7 +59,7 @@ class GuideItem extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios_rounded,
               size: 20,
-              color: theme.reserveDarkScaffold,
+              color: theme.accent2,
             )
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:travel_guide/app_localizations.dart';
+import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
@@ -192,7 +193,7 @@ class UserProfile extends StatelessWidget {
                         text: AppLocalizations.of(context)?.translate("edit") ??
                             '',
                         height: height * 0.07,
-                        buttonColor: theme.mainAppColor,
+                        buttonColor: Constant.primaryBodyColor,
                         onPress: () {
                           showModalBottomSheet(
                             shape: RoundedRectangleBorder(
