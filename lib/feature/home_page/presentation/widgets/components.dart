@@ -14,6 +14,7 @@ import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/account/data/models/remote/login_model.dart';
 import 'package:travel_guide/feature/account/presentation/my_profile_page/presentation/my_profile_page.dart';
 import 'package:travel_guide/feature/add_places/presentation/add_places.dart';
+import 'package:travel_guide/feature/details_page/presentation/cubits/book_mark_cubit/book_mark_cubit.dart';
 import 'package:travel_guide/feature/details_page/presentation/page/details_activity_screen.dart';
 import 'package:travel_guide/feature/details_page/presentation/page/details_region.dart';
 import 'package:travel_guide/feature/favorite_page/presentation/screen/favorite_page.dart';
@@ -61,7 +62,8 @@ class searchWithNotifications extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: theme.reserveDarkScaffold, width: 1),
+                  border:
+                      Border.all(color: theme.reserveDarkScaffold, width: 1),
                 ),
                 child: Text(
                   AppLocalizations.of(context)?.translate('To Where') ?? "",
@@ -231,16 +233,36 @@ class ListActivity extends StatelessWidget {
                         Positioned(
                             top: 10,
                             right: 10,
-                            child: LikeButton(
-                              animationDuration: Duration(milliseconds: 300),
-                              size: 20,
-                              circleColor: CircleColor(
-                                  start: Color(0xffffffff),
-                                  end: Color(0xffffffff)),
-                              bubblesColor: BubblesColor(
-                                dotPrimaryColor: Color(0xff33b5e5),
-                                dotSecondaryColor: Color(0xff0099cc),
-                              ),
+                            child: BlocBuilder<BookMarkCubit, BookMarkState>(
+                              buildWhen: (previous, current) {
+                                if (current is AddToBookMarkLoaded &&
+                                    activities[index].id == current.id) {
+                                  activities[index].bookmarked = current.added;
+                                  return true;
+                                }
+                                return false;
+                              },
+                              builder: (context, state) {
+                                return LikeButton(
+                                  isLiked: activities[index].bookmarked,
+                                  onTap: (isLiked) async {
+                                    context.read<BookMarkCubit>().addToBookMark(
+                                          activities[index].id ?? -1,
+                                        );
+                                    return true;
+                                  },
+                                  animationDuration:
+                                      Duration(milliseconds: 300),
+                                  size: 20,
+                                  circleColor: CircleColor(
+                                      start: Color(0xffffffff),
+                                      end: Color(0xffffffff)),
+                                  bubblesColor: BubblesColor(
+                                    dotPrimaryColor: Color(0xff33b5e5),
+                                    dotSecondaryColor: Color(0xff0099cc),
+                                  ),
+                                );
+                              },
                             ))
                       ],
                     ),
@@ -285,14 +307,20 @@ class DrawerHome extends StatelessWidget {
             child: Center(
               child: ListTile(
                 leading: InkWell(
-                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile(),)),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserProfile(),
+                      )),
                   child: TravelGuideUserAvatar(
                     width: 13.w,
                     imageUrl: ImagesApp.imagesUserAvatarUserAvatarImage,
                   ),
                 ),
                 title: Text(
-                  AppSettings().identity?.name ?? AppLocalizations.of(context)?.translate('login')??"",
+                  AppSettings().identity?.name ??
+                      AppLocalizations.of(context)?.translate('login') ??
+                      "",
                   style: StylesText.newDefaultTextStyle.copyWith(
                     color: theme.darkThemeForScafold,
                   ),
@@ -327,7 +355,7 @@ class DrawerHome extends StatelessWidget {
                 color: theme.black,
               ),
               title: Text(
-                AppLocalizations.of(context)?.translate('add_places')??"",
+                AppLocalizations.of(context)?.translate('add_places') ?? "",
                 style: StylesText.newDefaultTextStyle.copyWith(
                   color: theme.black,
                 ),
@@ -366,7 +394,7 @@ class DrawerHome extends StatelessWidget {
             ),
             title: Text(
               AppSettings().identity?.guide == UserType.guide
-                  ? AppLocalizations.of(context)?.translate('chat')??""
+                  ? AppLocalizations.of(context)?.translate('chat') ?? ""
                   : AppLocalizations.of(context)?.translate('guides') ?? "",
               style: StylesText.newDefaultTextStyle.copyWith(
                 color: theme.black,

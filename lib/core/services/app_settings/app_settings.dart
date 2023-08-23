@@ -20,6 +20,8 @@ class AppSettings {
   String fcmToken = '';
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   StreamController controller = StreamController<LocationEvent>.broadcast();
+  StreamController<LikeEvent> likeStream =
+      StreamController<LikeEvent>.broadcast();
   Future<LatLng?> getCurrentLocation() async {
     Location location = new Location();
 
@@ -65,4 +67,13 @@ class NearByLocationEvent extends LocationEvent {
   final List<ActivityRemoteModel> list;
 
   NearByLocationEvent(this.list);
+}
+
+abstract class LikeEvent {}
+
+class ToggleLike extends LikeEvent {
+  final int id;
+  final bool added;
+
+  ToggleLike(this.id, this.added);
 }

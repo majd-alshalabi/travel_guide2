@@ -26,7 +26,7 @@ class NetworkConfigurations {
   static const kGetComment = 'getComment';
   static const kChangePassword = 'change_password';
   static const kUploadImage = 'for_guide/addimages';
-  static const String BaseUrl = "http://192.168.110.52:8000/api/";
+  static const String BaseUrl = "http://192.168.43.85:8000/api/";
   // static const String BaseUrl =
   //     "https://unnerved-committee.000webhostapp.com/api/";
   static const String kWitherAppId = "7f8fd17f502345ec0ab3434b76213e1d";
