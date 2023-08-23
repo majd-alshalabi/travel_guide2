@@ -51,7 +51,23 @@
   "Username_must_be_not_Empty": "Username must be not Empty",
   "Edit_Your_Name": "Edit Your Name",
   "Submit": "Submit",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "since":"Since  :  ",
+  "bio": "Bio : ",
+  "age": "Age  : ",
+  "gender": "Gender : ",
+  "Sign_up": "Sign_up",
+  "Welcome_pleas": "Welcome pleas enter your Name , email and password  to create your account ",
+  "email": "ُEmail",
+  "password_length": "password length must be 8 at least",
+  "password": "Password",
+  "Register": "Register",
+  "comments": "Comments"
+
+
+
+
+
 
 
 

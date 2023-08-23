@@ -40,10 +40,8 @@ class _CommentPageState extends State<CommentPage> {
           CommentCubit()..getCommentForCurrentPost(widget.activityId),
       child: Builder(builder: (context) {
         return Scaffold(
-          appBar: AppBar(
-            iconTheme: IconThemeData(color: theme.white),
-            elevation: 0,
-            title: Text("reviews"),
+          appBar: CustomAppBar(
+            title:AppLocalizations.of(context)?.translate('comments')??"" ,
           ),
           body: BlocListener(
             listener: (context, state) {

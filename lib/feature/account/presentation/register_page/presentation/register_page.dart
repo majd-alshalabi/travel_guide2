@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
@@ -75,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "Sign up",
+                            AppLocalizations.of(context)?.translate('Sign_up')??"",
                             style: StylesText.textStyleForTitle,
                           ),
                         ),
@@ -83,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 8,
                         ),
                         Text(
-                          "Welcome pleas enter your Name , email and password  to create your account ",
+                          AppLocalizations.of(context)?.translate('Welcome_pleas')??"",
                           style: StylesText.newDefaultTextStyle
                               .copyWith(color: theme.greyWeak),
                         ),
@@ -93,10 +94,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           prefix: const Icon(Icons.person),
                           color: theme.reserveDarkScaffold,
                           controllerName: usernameController,
-                          label: "name",
+                          label: AppLocalizations.of(context)?.translate('Name')??"",
                           valedate: (val) {
                             if ((val?.length ?? 0) < 3) {
-                              return "user name must be at least three character";
+                              return AppLocalizations.of(context)?.translate('Username_must_be_not_Empty')??"";
                             }
                             return null;
                           },
@@ -107,10 +108,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           prefix: const Icon(Icons.email),
                           color: theme.reserveDarkScaffold,
                           controllerName: emailController,
-                          label: "email",
+                          label: AppLocalizations.of(context)?.translate('email')??"",
                           valedate: (val) {
                             if (val?.isEmpty ?? true) {
-                              return "email must not be empty";
+                              return AppLocalizations.of(context)?.translate('field_must_not_be_empty')??"";
                             }
                             return null;
                           },
@@ -121,10 +122,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           prefix: const Icon(Icons.password_rounded),
                           color: theme.reserveDarkScaffold,
                           controllerName: passwordController,
-                          label: "password",
+                          label: AppLocalizations.of(context)?.translate('password')??"",
                           valedate: (val) {
                             if ((val?.length ?? 0) < 8) {
-                              return "password length must be 8 at least";
+                              return AppLocalizations.of(context)?.translate('password_length')??"";
                             }
                             return null;
                           },
@@ -133,7 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 30,
                         ),
                         CustomBottom(
-                          text: "Register",
+                          text: AppLocalizations.of(context)?.translate('Register')??"",
                           height: 50,
                           buttonColor: Constant.primaryBodyColor,
                           onPress: () {

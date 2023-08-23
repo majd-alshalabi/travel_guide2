@@ -23,6 +23,7 @@ class CreateActivityAttachmentSection extends StatelessWidget {
   final bool smallSize;
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Column(
       children: [
         GestureDetector(
@@ -49,7 +50,7 @@ class CreateActivityAttachmentSection extends StatelessWidget {
                   child: Text(
                     AppLocalizations.of(context)?.translate('Upload_Image')??"",
                     style: StylesText.newDefaultTextStyle
-                        .copyWith(color: Colors.black),
+                        .copyWith(color:theme.reserveDarkScaffold),
                   ),
                 ),
               ],

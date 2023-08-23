@@ -67,7 +67,7 @@ class LocationInformation extends StatelessWidget {
           height: 30,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: theme.mainAppColor,
+            color: theme.accent2,
           ),
           child: Text(
             type,
@@ -273,7 +273,7 @@ class CircleIconsDetails extends StatelessWidget {
         return function();
       },
       child: CircleAvatar(
-        backgroundColor: theme.white.withOpacity(0.6),
+        backgroundColor: theme.reserveDarkScaffold.withOpacity(0.6),
         child: widget,
         foregroundColor: color,
       ),
@@ -326,6 +326,7 @@ class PopupDialog extends StatelessWidget {
                   AppLocalizations.of(context)?.translate("could see") ?? '',
                   style: StylesText.textStyleForTitle.copyWith(
                     fontSize: 25,
+                    color: theme.reserveDarkScaffold
                   ),
                 ),
                 Image.asset(
