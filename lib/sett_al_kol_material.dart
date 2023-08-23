@@ -65,7 +65,6 @@ class _SettAlKolMaterialAppState extends State<SettAlKolMaterialApp>
                             (allLocales, supportedLocales) {
                           if (context.read<MainCubit>().language ==
                               Language.english) {
-                            print("Asdgdsgsd");
                             return const Locale('en', 'US');
                           }
                           return const Locale('ar', 'AR');
