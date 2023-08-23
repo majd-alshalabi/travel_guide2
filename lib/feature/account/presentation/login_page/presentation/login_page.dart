@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
@@ -31,9 +32,9 @@ class _LoginPageState extends State<LoginPage> {
     final AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return LoaderOverlay(
       useDefaultLoading: false,
-      overlayWidget: const Center(
+      overlayWidget:  Center(
         child: SpinKitSpinningLines(
-          color: Colors.white,
+          color: theme.darkThemeForScafold,
           size: 50.0,
         ),
       ),
@@ -59,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               }
             },
             child: Scaffold(
+              backgroundColor: theme.darkThemeForScafold,
               body: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(22.0),
@@ -81,14 +83,14 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           "Happy to see you again!!! please enter your email and password to login to your account.",
                           style: StylesText.newDefaultTextStyle
-                              .copyWith(color: Colors.grey),
+                              .copyWith(color: theme.greyWeak),
                         ),
                         const SizedBox(
                           height: 30,
                         ),
                         CustomTextField(
                           type: TextInputType.text,
-                          prefix: const Icon(Icons.email),
+                          prefix:  Icon(Icons.email ,color: theme.greyWeak,),
                           color: theme.greyWeak,
                           controllerName: emailController,
                           label: "email",
@@ -104,8 +106,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         CustomTextField(
                           type: TextInputType.text,
-                          prefix: const Icon(Icons.password_rounded),
-                          color: Colors.black,
+                          prefix:  Icon(Icons.password_rounded, color: theme.greyWeak,),
+                          color: theme.reserveDarkScaffold,
                           controllerName: passwordController,
                           label: "password",
                           valedate: (val) {
@@ -138,14 +140,14 @@ class _LoginPageState extends State<LoginPage> {
                         CustomBottom(
                             text: "Login",
                             height: 50,
-                            buttonColor: const Color(0xffDE7254),
+                            buttonColor: Constant.primaryBodyColor,
                             onPress: () {
                               context.read<LoginCubit>().login(
                                     email: emailController.text,
                                     password: passwordController.text,
                                   );
                             },
-                            borderColor: const Color(0xffDE7254),
+                            borderColor: theme.darkThemeForScafold,
                             textStyleForButton: StylesText.textStyleForButton),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.25,
@@ -156,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                             Text(
                               "Don’t have an account?",
                               style: StylesText.newDefaultTextStyle
-                                  .copyWith(color: Colors.black),
+                                  .copyWith(color: theme.reserveDarkScaffold),
                             ),
                             TextButton(
                               onPressed: () {
@@ -170,7 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: Text(
                                 "Sign up",
                                 style: StylesText.newDefaultTextStyle
-                                    .copyWith(color: Colors.grey),
+                                    .copyWith(color: theme.accent2),
                               ),
                             )
                           ],

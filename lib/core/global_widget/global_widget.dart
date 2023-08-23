@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:travel_guide/app_localizations.dart';
+import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/app_images.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/services/network/network_configrations.dart';
@@ -58,7 +59,7 @@ class CustomTextField extends StatelessWidget {
 }
 
 class CustomBottom extends StatelessWidget {
-  final Color buttonColor;
+  final Gradient buttonColor;
   final double height;
   final String text;
   final Function onPress;
@@ -84,7 +85,7 @@ class CustomBottom extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           border: Border.all(color: borderColor, width: 3),
-          color: buttonColor,
+          gradient: buttonColor,
           borderRadius: BorderRadius.circular(50.0),
         ),
         child: Center(
@@ -307,9 +308,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return AppBar(
-      backgroundColor: theme.accent2,
+      flexibleSpace: Container(
+        decoration: BoxDecoration(
+          gradient: Constant.primaryBodyColor
+        ),
+      ),
       title: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.only(top: 20),
         child: Text(
           title,
           style: StylesText.newTextStyleForAppBar.copyWith(
@@ -318,23 +323,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: theme.darkThemeForScafold,
+        statusBarColor: theme.accent2,
       ),
       leading: showBackButton && Navigator.of(context).canPop()
-          ? IconButton(
-              color: theme.reserveDarkScaffold,
-              iconSize: 20,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon:  Icon(Icons.arrow_back_ios_new ,color: theme.reserveDarkScaffold,),
-            )
+          ? Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: IconButton(
+                color: theme.darkThemeForScafold,
+                iconSize: 20,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon:  Icon(Icons.arrow_back_ios_new ,color: theme.darkThemeForScafold,),
+              ),
+          )
           : null,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(50);
+  Size get preferredSize => const Size.fromHeight(70);
 }
 
 class CustomText extends StatelessWidget {

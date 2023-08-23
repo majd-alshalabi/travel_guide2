@@ -34,7 +34,7 @@ class ItemBuilderSetting extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(
                     icon,
-                    color: notActive ? Colors.grey : theme.blue,
+                    color: notActive ? theme.accent2 : theme.accent2,
                   ),
                 ),
                 Padding(
@@ -48,13 +48,13 @@ class ItemBuilderSetting extends StatelessWidget {
                           title,
                           style: StylesText.newDefaultTextStyle.copyWith(
                             fontSize: 20,
-                            color: notActive ? Colors.grey : theme.black,
+                            color: notActive ? theme.grey : theme.black,
                           ),
                         ),
                         Text(
                           description,
                           style: StylesText.defaultTextStyle
-                              .copyWith(fontSize: 14, color: theme.greyWeak),
+                              .copyWith(fontSize: 14, color: theme.accent2),
                         ),
                       ],
                     ),
@@ -63,7 +63,7 @@ class ItemBuilderSetting extends StatelessWidget {
                 const Spacer(),
                 Icon(
                   Icons.arrow_forward_ios_outlined,
-                  color: notActive ? Colors.grey : theme.blue,
+                  color: notActive ? Colors.grey : theme.accent2,
                 ),
               ],
             ),

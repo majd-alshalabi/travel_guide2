@@ -44,7 +44,7 @@ class GuidesPage extends StatelessWidget {
                       child: Text(
                         "error while loading",
                         style: StylesText.newDefaultTextStyle
-                            .copyWith(color: Colors.black),
+                            .copyWith(color: theme.reserveDarkScaffold),
                       ),
                     );
                   } else if (context.read<GuidesCubit>().guides.isEmpty) {
@@ -55,7 +55,7 @@ class GuidesPage extends StatelessWidget {
                         Text(
                           "there is not guide currently",
                           style: StylesText.newDefaultTextStyle
-                              .copyWith(color: Colors.black),
+                              .copyWith(color: theme.reserveDarkScaffold),
                         ),
                         InkWell(
                           onTap: () =>
@@ -63,7 +63,7 @@ class GuidesPage extends StatelessWidget {
                           child: Text(
                             "try again",
                             style: StylesText.newDefaultTextStyle
-                                .copyWith(color: Colors.blue),
+                                .copyWith(color: theme.reserveDarkScaffold),
                           ),
                         ),
                       ],

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
+import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/feature/setting_page/presentation/pages/delete_account_screen.dart';
@@ -30,15 +31,7 @@ class _SettingPageState extends State<SettingPage> {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
         backgroundColor: theme.darkThemeForScafold,
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: theme.black),
-          backgroundColor: theme.darkAndWhiteForAppBar,
-          title: Text(
-            AppLocalizations.of(context)?.translate('My_Setting') ?? "",
-            style:
-                StylesText.newTextStyleForAppBar.copyWith(color: theme.black),
-          ),
-        ),
+        appBar: CustomAppBar(title: AppLocalizations.of(context)?.translate('My_Setting') ?? "",),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

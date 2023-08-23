@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
+import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
@@ -28,15 +29,8 @@ class _ModeColorScreenState extends State<ModeColorScreen> {
     return
       Scaffold(
       backgroundColor: theme.darkThemeForScafold,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: theme.black),
-        title: Text(
-          AppLocalizations.of(context)?.translate('Color_Mode_App_Setting') ??
-              "",
-          style: StylesText.newTextStyleForAppBar.copyWith(color: theme.black),
-        ),
-        backgroundColor: theme.darkAndWhiteForAppBar,
-      ),
+      appBar: CustomAppBar(title:    AppLocalizations.of(context)?.translate('Color_Mode_App_Setting') ??
+          "",),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Padding(
@@ -66,6 +60,7 @@ class _ModeColorScreenState extends State<ModeColorScreen> {
                     width: 80.0,
                     height: 30.0,
                     valueFontSize: 10.0,
+                    activeColor: theme.accent2,
                     toggleSize: 20.0,
                     value: statusOfMode,
                     borderRadius: 20.0,

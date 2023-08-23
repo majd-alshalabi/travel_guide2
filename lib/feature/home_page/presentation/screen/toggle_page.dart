@@ -84,10 +84,9 @@ class _TogglePageState extends State<TogglePage> {
           ),
         ),
         bottomNavigationBar: AnimatedNotchBottomBar(
-          /// Provide NotchBottomBarController
           notchBottomBarController: _controller,
-          color: theme.reserveDarkScaffold,
-          notchColor: theme.reserveDarkScaffold,
+          color: theme.accent2,
+          notchColor: theme.accent2,
           showShadow: false,
           removeMargins: false,
           itemLabelStyle: StylesText.newDefaultTextStyle
@@ -101,7 +100,7 @@ class _TogglePageState extends State<TogglePage> {
                 color: Colors.white,
               ),
               activeItem: Icon(
-                Icons.home,
+                Icons.home_filled,
                 color: theme.white,
               ),
               itemLabel: 'text',

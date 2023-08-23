@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
+import 'package:travel_guide/core/utils/themes.dart';
 import 'package:travel_guide/core/utils/utils.dart';
 import 'package:travel_guide/feature/account/presentation/register_page/presentation/blocs/register_cubit/register_cubit.dart';
 import 'package:travel_guide/feature/home_page/presentation/screen/toggle_page.dart';
+import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
+import 'package:travel_guide/injection.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -26,11 +30,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme  = sl<ThemeCubit>().globalAppTheme;
     return LoaderOverlay(
       useDefaultLoading: false,
-      overlayWidget: const Center(
+      overlayWidget:  Center(
         child: SpinKitSpinningLines(
-          color: Colors.white,
+          color: theme.darkThemeForScafold,
           size: 50.0,
         ),
       ),
@@ -56,6 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
               }
             },
             child: Scaffold(
+              backgroundColor:  theme.darkThemeForScafold,
               body: Padding(
                 padding: const EdgeInsets.all(13.0),
                 child: SingleChildScrollView(
@@ -79,13 +85,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         Text(
                           "Welcome pleas enter your Name , email and password  to create your account ",
                           style: StylesText.newDefaultTextStyle
-                              .copyWith(color: Colors.grey),
+                              .copyWith(color: theme.greyWeak),
                         ),
                         const SizedBox(height: 30),
                         CustomTextField(
                           type: TextInputType.text,
                           prefix: const Icon(Icons.person),
-                          color: Colors.black,
+                          color: theme.reserveDarkScaffold,
                           controllerName: usernameController,
                           label: "name",
                           valedate: (val) {
@@ -99,7 +105,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         CustomTextField(
                           type: TextInputType.text,
                           prefix: const Icon(Icons.email),
-                          color: Colors.black,
+                          color: theme.reserveDarkScaffold,
                           controllerName: emailController,
                           label: "email",
                           valedate: (val) {
@@ -113,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         CustomTextField(
                           type: TextInputType.text,
                           prefix: const Icon(Icons.password_rounded),
-                          color: Colors.black,
+                          color: theme.reserveDarkScaffold,
                           controllerName: passwordController,
                           label: "password",
                           valedate: (val) {
@@ -129,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         CustomBottom(
                           text: "Register",
                           height: 50,
-                          buttonColor: const Color(0xffDE7254),
+                          buttonColor: Constant.primaryBodyColor,
                           onPress: () {
                             if (formKey.currentState!.validate()) {
                               context.read<RegisterCubit>().register(
@@ -139,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   );
                             }
                           },
-                          borderColor: const Color(0xffDE7254),
+                          borderColor: theme.darkThemeForScafold,
                           textStyleForButton: StylesText.textStyleForButton,
                         ),
                       ],

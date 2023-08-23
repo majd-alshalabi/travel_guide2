@@ -7,9 +7,8 @@ class Constant {
   static LinearGradient primaryBodyColor = const LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFFBDC3C7), Color(0xFF2c3e50)],
+    colors: [Color(0xFFC7F800), Color(0xFF078513)],
   );
-
 
   static List<String> type = [
     "restaurant",

@@ -279,14 +279,14 @@ class DrawerHome extends StatelessWidget {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Drawer(
       width: 50.w,
-      backgroundColor: theme.greyWeak,
+      backgroundColor: theme.darkThemeForScafold,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           Container(
             height: 13.h,
             padding: EdgeInsets.only(top: 3.h),
-            color: theme.white,
+            color: theme.accent2,
             child: Center(
               child: ListTile(
                 leading: TravelGuideUserAvatar(
@@ -296,7 +296,7 @@ class DrawerHome extends StatelessWidget {
                 title: Text(
                   AppSettings().identity?.name ?? "login",
                   style: StylesText.newDefaultTextStyle.copyWith(
-                    color: theme.black,
+                    color: theme.darkThemeForScafold,
                   ),
                 ),
                 onTap: () {},
