@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +16,8 @@ class AppLocalizations {
   }
 
   static Future<AppLocalizations> load(Locale locale) async {
-    String jsonString = await rootBundle.loadString('lang/${locale.languageCode}.json');
+    String jsonString =
+        await rootBundle.loadString('lang/${locale.languageCode}.json');
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     _localizationStrings =
         jsonMap.map((key, value) => MapEntry(key, value.toString()));
@@ -29,13 +29,14 @@ class AppLocalizations {
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate =
-  _AppLocalizationsDelegate();
+      _AppLocalizationsDelegate();
 
   String? translate(String key) {
     return _localizationStrings[key];
   }
 
-  static Future<void> changeLanguage(BuildContext context, Locale newLocale) async {
+  static Future<void> changeLanguage(
+      BuildContext context, Locale newLocale) async {
     final appLocalization = AppLocalizations.of(context);
     if (appLocalization == null) return;
 
@@ -44,12 +45,13 @@ class AppLocalizations {
   }
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
   bool isSupported(Locale locale) {
-    return ['en', 'nl'].contains(locale.languageCode.toLowerCase());
+    return ['en', 'ar'].contains(locale.languageCode.toLowerCase());
   }
 
   @override

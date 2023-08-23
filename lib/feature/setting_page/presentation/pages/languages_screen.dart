@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
 import 'package:travel_guide/core/utils/themes.dart';
+import 'package:travel_guide/feature/main_page/presentation/blocs/main_cubit/main_cubit.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
 
@@ -26,7 +28,10 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
     AppTheme theme = sl<ThemeCubit>().globalAppTheme;
     return Scaffold(
       backgroundColor: theme.darkThemeForScafold,
-      appBar:CustomAppBar(title: AppLocalizations.of(context)?.translate('Languages_Setting') ?? "",),
+      appBar: CustomAppBar(
+        title:
+            AppLocalizations.of(context)?.translate('Languages_Setting') ?? "",
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -34,7 +39,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-                AppLocalizations.of(context)?.translate('Languages') ?? "",
+              AppLocalizations.of(context)?.translate('Languages') ?? "",
               style: StylesText.newDefaultTextStyle
                   .copyWith(fontSize: 20, color: theme.greyWeak),
             ),
@@ -44,8 +49,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
             Row(
               children: [
                 Text(
-                  AppLocalizations.of(context)?.translate('Arabic') ??
-                      "",
+                  AppLocalizations.of(context)?.translate('Arabic') ?? "",
                   style:
                       StylesText.defaultTextStyle.copyWith(color: theme.black),
                 ),
@@ -66,15 +70,16 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
                       if (val == true) {
                         AppLocalizations.changeLanguage(
                           context,
-                          const Locale('nl', "NL"),
+                          const Locale('ar', "AR"),
                         );
+                        context.read<MainCubit>().changeLanguage("ar");
                       } else {
                         AppLocalizations.changeLanguage(
                           context,
                           const Locale('en', "US"),
                         );
+                        context.read<MainCubit>().changeLanguage("en");
                       }
-
                     });
                   },
                 ),

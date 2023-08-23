@@ -7,7 +7,6 @@ import 'package:travel_guide/core/constants/app_constant.dart';
 import 'package:travel_guide/core/constants/enums.dart';
 import 'package:travel_guide/core/services/app_settings/app_settings.dart';
 import 'package:travel_guide/feature/account/presentation/splash_screen/screen/splash_screen.dart';
-import 'package:travel_guide/feature/home_page/presentation/blocs/home_cubit/home_cubit.dart';
 import 'package:travel_guide/feature/main_page/presentation/blocs/main_cubit/main_cubit.dart';
 import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 import 'package:travel_guide/injection.dart';
@@ -24,7 +23,6 @@ class _SettAlKolMaterialAppState extends State<SettAlKolMaterialApp>
   @override
   void initState() {
     AppSettings().appState = AppState.foreground;
-    sl<HomeCubit>().getCurrentLanguage();
     super.initState();
   }
 
@@ -46,50 +44,58 @@ class _SettAlKolMaterialAppState extends State<SettAlKolMaterialApp>
               value: sl<ThemeCubit>()..getCurrentTheme(),
             ),
             BlocProvider(
-              create: (context) => MainCubit(),
+              create: (context) => MainCubit()..getCurrentLanguage(),
             ),
           ],
           child: Builder(builder: (context) {
-            return BlocBuilder<ThemeCubit, ThemeState>(
+            return BlocBuilder<MainCubit, MainState>(
               builder: (context, state) {
-                if (state is ThemeLoadedState) {
-                  return MaterialApp(
-                    navigatorKey: AppSettings().navigatorKey,
-                    supportedLocales: const [
-                      Locale('en', 'US'), // English (United States)
-                      Locale('ar', 'AR'), // Dutch (Netherlands)
-                    ],
-                    localeListResolutionCallback:
-                        (allLocales, supportedLocales) {
-                      if (sl<HomeCubit>().language == Language.english) {
-                        return const Locale('en', 'US');
-                      }
-                      return const Locale('ar', 'AR');
-                    },
-                    localizationsDelegates: const [
-                      AppLocalizations.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                    ],
-                    localeResolutionCallback: (locale, supportedLocales) {
-                      for (var supportedLocale in supportedLocales) {
-                        if (supportedLocale.languageCode ==
-                                locale?.languageCode &&
-                            supportedLocale.countryCode ==
-                                locale?.countryCode) {
-                          return supportedLocale;
-                        }
-                      }
-                      return supportedLocales.first;
-                    },
-                    debugShowCheckedModeBanner: false,
-                    title: AppConstant.appName,
-                    theme: state.theme,
-                    home: SplashScreen(),
-                  );
-                }
-                return const Offstage();
+                return BlocBuilder<ThemeCubit, ThemeState>(
+                  builder: (context, state) {
+                    if (context.read<MainCubit>().language == null)
+                      return const Offstage();
+                    if (state is ThemeLoadedState) {
+                      return MaterialApp(
+                        navigatorKey: AppSettings().navigatorKey,
+                        supportedLocales: const [
+                          Locale('en', 'US'), // English (United States)
+                          Locale('ar', 'AR'), // Dutch (Netherlands)
+                        ],
+                        localeListResolutionCallback:
+                            (allLocales, supportedLocales) {
+                          if (context.read<MainCubit>().language ==
+                              Language.english) {
+                            print("Asdgdsgsd");
+                            return const Locale('en', 'US');
+                          }
+                          return const Locale('ar', 'AR');
+                        },
+                        localizationsDelegates: const [
+                          AppLocalizations.delegate,
+                          GlobalMaterialLocalizations.delegate,
+                          GlobalCupertinoLocalizations.delegate,
+                          GlobalWidgetsLocalizations.delegate,
+                        ],
+                        localeResolutionCallback: (locale, supportedLocales) {
+                          for (var supportedLocale in supportedLocales) {
+                            if (supportedLocale.languageCode ==
+                                    locale?.languageCode &&
+                                supportedLocale.countryCode ==
+                                    locale?.countryCode) {
+                              return supportedLocale;
+                            }
+                          }
+                          return supportedLocales.first;
+                        },
+                        debugShowCheckedModeBanner: false,
+                        title: AppConstant.appName,
+                        theme: state.theme,
+                        home: SplashScreen(),
+                      );
+                    }
+                    return const Offstage();
+                  },
+                );
               },
             );
           }),
