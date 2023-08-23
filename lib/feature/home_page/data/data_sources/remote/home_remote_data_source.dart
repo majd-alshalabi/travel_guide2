@@ -8,6 +8,7 @@ import 'package:travel_guide/feature/home_page/data/models/remote/comment_models
 import 'package:travel_guide/feature/home_page/data/models/remote/get_list_of_user.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/rate_models.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/regions_model.dart';
+import 'package:travel_guide/feature/home_page/data/models/remote/search_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/top_guide_model.dart';
 import 'package:travel_guide/feature/home_page/data/models/remote/wether_api.dart';
 
@@ -70,6 +71,17 @@ class HomeRemoteDataSource {
       ),
     );
     return Future.value(AddCommentResponseModel.fromJson(res));
+  }
+
+  Future<SearchResponseModel> search(SearchParamsModel params) async {
+    final res = await networkServices.post(
+      RemoteDataBundle(
+        body: params.toJson(),
+        networkPath: NetworkConfigurations.kSearch,
+        urlParams: <String, String>{},
+      ),
+    );
+    return Future.value(SearchResponseModel.fromJson(res));
   }
 
   Future<List<CommentModel>?> getAllComment(GetCommentParamsModel model) async {

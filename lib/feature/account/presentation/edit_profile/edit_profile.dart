@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travel_guide/app_localizations.dart';
 import 'package:travel_guide/core/constants/styles.dart';
 import 'package:travel_guide/core/global_widget/global_widget.dart';
-
-import '../../../../core/utils/themes.dart';
-import '../../../other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
+import 'package:travel_guide/core/utils/themes.dart';
+import 'package:travel_guide/feature/other_feature/theme/presentation/blocs/theme_bloc/theme_cubit.dart';
 
 class EditNameWidget extends StatefulWidget {
   const EditNameWidget({Key? key}) : super(key: key);
@@ -40,7 +39,8 @@ class _EditNameWidgetState extends State<EditNameWidget> {
                       color: Colors.black12,
                       controllerName: editNameController,
                       label: AppLocalizations.of(context)
-                              ?.translate('Edit_Your_Name') ?? "",
+                              ?.translate('Edit_Your_Name') ??
+                          "",
                       valedate: (String val) {
                         if (val.isEmpty) {
                           return AppLocalizations.of(context)
