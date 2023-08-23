@@ -43,7 +43,8 @@ class _TogglePageState extends State<TogglePage> {
   final List<Widget> bottomBarPages = [
     HomePage(),
     MapScreen(
-      gesture: true, onTap: (argument) {  },
+      gesture: true,
+      onTap: (argument) {},
     ),
   ];
 
@@ -89,8 +90,10 @@ class _TogglePageState extends State<TogglePage> {
           notchColor: theme.accent2,
           showShadow: false,
           removeMargins: false,
-          itemLabelStyle: StylesText.newDefaultTextStyle
-              .copyWith(fontSize: 14, color: theme.darkThemeForScafold),
+          itemLabelStyle: StylesText.newDefaultTextStyle.copyWith(
+            fontSize: 14,
+            color: Colors.white,
+          ),
           bottomBarWidth: double.infinity,
           durationInMilliSeconds: 200,
           bottomBarItems: [
@@ -103,7 +106,7 @@ class _TogglePageState extends State<TogglePage> {
                 Icons.home_filled,
                 color: theme.white,
               ),
-              itemLabel: 'text',
+              itemLabel: 'home',
             ),
             BottomBarItem(
               inActiveItem: Icon(
@@ -114,7 +117,7 @@ class _TogglePageState extends State<TogglePage> {
                 Icons.location_searching,
                 color: theme.white,
               ),
-              itemLabel: 'text',
+              itemLabel: 'map',
             ),
           ],
           onTap: (index) {
