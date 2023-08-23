@@ -98,7 +98,7 @@ class ActivityRemoteModel {
   double? longitude;
   int? adminId;
   int? guideId;
-  int? rating;
+  double? rating;
   List<Images>? urls;
   RegionModel? region;
   CityModel? city;
@@ -135,7 +135,12 @@ class ActivityRemoteModel {
     longitude = json['longitude'];
     adminId = json['admin_id'];
     guideId = json['guide_id'];
-    rating = json['rating'];
+    try {
+      rating = json['rating'] as double;
+      if (rating == null) rating = 0;
+    } catch (e) {
+      rating = 0;
+    }
     if (json['urls'] != null) {
       urls = <Images>[];
       json['urls'].forEach((v) {

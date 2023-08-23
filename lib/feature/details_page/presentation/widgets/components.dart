@@ -49,51 +49,56 @@ class LocationInformation extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        imageIcons(
-          image: ImagesApp.imagesGreyLocation,
+        Row(
+          children: [
+            imageIcons(
+              image: ImagesApp.imagesGreyLocation,
+            ),
+            SizedBox(width: 10),
+            Text(
+              name,
+              style:
+                  StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
+            ),
+          ],
         ),
-        Text(
-          name,
-          style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
-        ),
-        20.w,
         Container(
-          width: 100,
+          padding: EdgeInsets.symmetric(horizontal: 4),
+          alignment: Alignment.center,
           height: 30,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: theme.mainAppColor,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                type,
-                style: StylesText.newDefaultTextStyle
-                    .copyWith(color: Colors.white),
+          child: Text(
+            type,
+            style: StylesText.newDefaultTextStyle.copyWith(color: Colors.white),
+          ),
+        ),
+        Row(
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RatingApp(
+                        activityId: activityId,
+                      ),
+                    ));
+              },
+              child: imageIcons(
+                image: ImagesApp.star,
               ),
-            ],
-          ),
-        ),
-        20.w,
-        InkWell(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RatingApp(
-                    activityId: activityId,
-                  ),
-                ));
-          },
-          child: imageIcons(
-            image: ImagesApp.star,
-          ),
-        ),
-        Text(
-          rate,
-          style: StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
-        ),
+            ),
+            SizedBox(width: 10),
+            Text(
+              rate,
+              style:
+                  StylesText.newDefaultTextStyle.copyWith(color: Colors.black),
+            ),
+          ],
+        )
       ],
     );
   }
